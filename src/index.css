@@ -1,0 +1,361 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+
+  body {
+    min-width: 0;
+    overflow-x: clip;
+    @apply bg-[#FCFAF5] text-[#242424] antialiased font-sans;
+  }
+}
+
+/* Global full-width standard across entire site */
+.site-section,
+.site-header,
+.site-footer {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Medical & Royal Gold glass styling */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.glass-panel-gold {
+  background: rgba(255, 253, 245, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+}
+
+.glass-panel-navy {
+  background: rgba(10, 19, 34, 0.90);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+/* Golden Emblem Gradients */
+.gold-gradient-bg {
+  background: linear-gradient(135deg, #B88E1F 0%, #E5BE4A 50%, #C59822 100%);
+}
+
+.gold-gradient-dark {
+  background: linear-gradient(135deg, #0A1322 0%, #152033 100%);
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #B88E1F 0%, #E5BE4A 45%, #936E14 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtle-grid,
+.subtle-gold-grid {
+  background-size: 44px 44px;
+  background-image: 
+    linear-gradient(to right, rgba(212, 175, 55, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(212, 175, 55, 0.07) 1px, transparent 1px);
+}
+
+/* Button with gold luster */
+.btn-gold {
+  background: linear-gradient(135deg, #C59822 0%, #E5BE4A 45%, #B88E1F 100%);
+  color: #17120B;
+  font-weight: 800;
+  box-shadow: 0 4px 18px -2px rgba(212, 175, 55, 0.40);
+  transition: all 0.3s ease;
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #D4AF37 0%, #F5D36B 45%, #C59822 100%);
+  box-shadow: 0 6px 24px -2px rgba(212, 175, 55, 0.55);
+  transform: translateY(-1px);
+}
+
+.btn-gold:active {
+  transform: scale(0.98);
+}
+
+/* ==========================================================================
+   Hero Animated Logo Keyframes & Styles (100% Transparent Background)
+   ========================================================================== */
+
+@keyframes emblem-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-9px) rotate(0.6deg);
+  }
+}
+
+@keyframes emblem-aura-pulse {
+  0%, 100% {
+    transform: scale(0.93);
+    opacity: 0.65;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 0.95;
+  }
+}
+
+@keyframes emblem-ring-pulse-1 {
+  0% {
+    transform: scale(0.82);
+    opacity: 0.45;
+  }
+  65% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(1.18);
+    opacity: 0;
+  }
+}
+
+@keyframes emblem-ring-pulse-2 {
+  0% {
+    transform: scale(0.88);
+    opacity: 0.35;
+  }
+  60% {
+    opacity: 0.15;
+  }
+  100% {
+    transform: scale(1.26);
+    opacity: 0;
+  }
+}
+
+@keyframes emblem-ring-rotate-cw {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes emblem-ring-rotate-ccw {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes emblem-particle-float {
+  0% {
+    transform: translate(0, 0) scale(0.6);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.85;
+  }
+  75% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(var(--p-dx, 10px), var(--p-dy, -36px)) scale(1.1);
+    opacity: 0;
+  }
+}
+
+@keyframes emblem-shimmer-sweep {
+  0% {
+    transform: translateX(-150%) rotate(25deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.7;
+  }
+  32% {
+    transform: translateX(150%) rotate(25deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(150%) rotate(25deg);
+    opacity: 0;
+  }
+}
+
+.animate-emblem-float {
+  animation: emblem-float 6s ease-in-out infinite;
+}
+
+.animate-emblem-aura {
+  animation: emblem-aura-pulse 7s ease-in-out infinite;
+}
+
+.animate-emblem-pulse-1 {
+  animation: emblem-ring-pulse-1 4.2s cubic-bezier(0.2, 0.8, 0.4, 1) infinite;
+}
+
+.animate-emblem-pulse-2 {
+  animation: emblem-ring-pulse-2 4.2s cubic-bezier(0.2, 0.8, 0.4, 1) 2.1s infinite;
+}
+
+.animate-emblem-rotate-cw {
+  animation: emblem-ring-rotate-cw 80s linear infinite;
+}
+
+.animate-emblem-rotate-ccw {
+  animation: emblem-ring-rotate-ccw 95s linear infinite;
+}
+
+.animate-emblem-shimmer {
+  animation: emblem-shimmer-sweep 7s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   Mobile-Friendly Ambient & Pulsing Glow Keyframes (Active without cursor hover)
+   ========================================================================== */
+
+@keyframes mobile-glow-gold {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(201, 149, 36, 0.4), 0 0 4px rgba(245, 231, 191, 0.3);
+    border-color: rgba(201, 149, 36, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(201, 149, 36, 0.8), 0 0 8px rgba(255, 255, 255, 0.6);
+    border-color: rgba(201, 149, 36, 0.95);
+  }
+}
+
+@keyframes mobile-glow-rose {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(244, 63, 94, 0.4), 0 0 3px rgba(251, 113, 133, 0.3);
+    border-color: rgba(244, 63, 94, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 22px rgba(244, 63, 94, 0.85), 0 0 8px rgba(255, 255, 255, 0.7);
+    border-color: rgba(244, 63, 94, 0.95);
+  }
+}
+
+@keyframes mobile-glow-card {
+  0%, 100% {
+    box-shadow: 0 6px 20px -2px rgba(201, 149, 36, 0.12);
+    border-color: rgba(201, 149, 36, 0.35);
+  }
+  50% {
+    box-shadow: 0 8px 30px -2px rgba(201, 149, 36, 0.25);
+    border-color: rgba(201, 149, 36, 0.65);
+  }
+}
+
+@keyframes mobile-aura-drop {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(201, 149, 36, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 18px rgba(201, 149, 36, 0.8));
+  }
+}
+
+.mobile-glow-gold {
+  animation: mobile-glow-gold 3s ease-in-out infinite;
+}
+
+.mobile-glow-rose {
+  animation: mobile-glow-rose 2.4s ease-in-out infinite;
+}
+
+.mobile-glow-card {
+  animation: mobile-glow-card 4.5s ease-in-out infinite;
+}
+
+.mobile-glow-aura {
+  animation: mobile-aura-drop 3.5s ease-in-out infinite;
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .animate-emblem-float,
+  .animate-emblem-aura,
+  .animate-emblem-pulse-1,
+  .animate-emblem-pulse-2,
+  .animate-emblem-rotate-cw,
+  .animate-emblem-rotate-ccw,
+  .animate-emblem-shimmer,
+  .animate-marquee-ltr,
+  .mobile-glow-gold,
+  .mobile-glow-rose,
+  .mobile-glow-card,
+  .mobile-glow-aura {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* ==========================================================================
+   Google Reviews Marquee Animation (Continuous Left to Right)
+   ========================================================================== */
+
+@keyframes marquee-left-to-right {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0%, 0, 0);
+  }
+}
+
+.animate-marquee-ltr {
+  display: flex;
+  width: max-content;
+  animation: marquee-left-to-right 45s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-ltr:hover,
+.animate-marquee-ltr-paused {
+  animation-play-state: paused !important;
+}
+
