@@ -260,16 +260,16 @@ export const Footer = () => {
           </ScrollStaggerItem>
         </ScrollStagger>
 
-        {/* Bottom copyright, emergency link & Win Win technologies credit */}
+        {/* Bottom copyright, emergency link & WinWin credit */}
         <ScrollReveal direction="up" delay={0.1}>
           <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/75">
             <p className="text-white/80">© {currentYear} Brain Spine & Neuro Clinic, Vizianagaram. All rights reserved.</p>
             
-            {/* Powered by Win Win technologies - Vibrant Mobile Glow */}
+            {/* Powered by WinWin - Vibrant Mobile Glow */}
             <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/95 border border-amber-400/50 text-white shadow-[0_0_18px_rgba(201,149,36,0.4)] mobile-glow-gold">
               <span className="text-white/85 font-medium">Powered by</span>
               <span className="font-extrabold text-amber-300 tracking-wide drop-shadow-[0_0_10px_rgba(201,149,36,0.85)]">
-                Win Win technologies
+                WinWin
               </span>
             </div>
 
