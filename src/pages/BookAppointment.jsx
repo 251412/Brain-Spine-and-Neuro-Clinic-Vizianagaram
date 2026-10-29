@@ -7,6 +7,7 @@ import {
   Phone, 
   Mail, 
   Stethoscope, 
+  Activity,
   FileText, 
   ShieldCheck, 
   CheckCircle2, 
@@ -28,12 +29,13 @@ export const BookAppointment = () => {
   const { settings, doctors, specialities, addAppointment } = useClinicData();
   const [searchParams] = useSearchParams();
 
-  // Form State
+  // Form State with selectedDoctor and department
   const [formData, setFormData] = useState({
     fullName: '',
     phone: '',
     email: '',
-    specialityOrDoctor: '',
+    selectedDoctor: 'Dr. Reddi Sankara Rao',
+    department: 'Neurosurgery',
     preferredDate: '',
     preferredTime: 'Morning (09:00 AM - 01:00 PM)',
     reason: '',
@@ -50,17 +52,31 @@ export const BookAppointment = () => {
     const specParam = searchParams.get('speciality');
     const treatParam = searchParams.get('treatment');
 
-    if (treatParam) {
-      setFormData((prev) => ({ 
-        ...prev, 
-        specialityOrDoctor: specParam ? `${specParam} • ${treatParam}` : treatParam,
-        reason: prev.reason || `Consultation request for ${treatParam}`
-      }));
-    } else if (docParam) {
-      setFormData((prev) => ({ ...prev, specialityOrDoctor: docParam }));
-    } else if (specParam) {
-      setFormData((prev) => ({ ...prev, specialityOrDoctor: specParam }));
-    }
+    setFormData((prev) => {
+      let nextDoctor = prev.selectedDoctor || 'Dr. Reddi Sankara Rao';
+      let nextDept = prev.department || 'Neurosurgery';
+      let nextReason = prev.reason;
+
+      if (docParam) {
+        nextDoctor = docParam;
+      }
+      if (specParam) {
+        nextDept = specParam;
+      }
+      if (treatParam) {
+        nextReason = nextReason || `Consultation request for ${treatParam}`;
+        if (specParam) {
+          nextDept = specParam;
+        }
+      }
+
+      return {
+        ...prev,
+        selectedDoctor: nextDoctor,
+        department: nextDept,
+        reason: nextReason
+      };
+    });
   }, [searchParams]);
 
   // Validation
@@ -84,8 +100,12 @@ export const BookAppointment = () => {
       }
     }
 
-    if (!formData.specialityOrDoctor) {
-      newErrors.specialityOrDoctor = t.appointment.validation.specialityRequired;
+    if (!formData.selectedDoctor) {
+      newErrors.selectedDoctor = language === 'te' ? 'దయచేసి డాక్టర్‌ను ఎంచుకోండి.' : 'Please select a doctor.';
+    }
+
+    if (!formData.department) {
+      newErrors.department = language === 'te' ? 'దయచేసి విభాగాన్ని ఎంచుకోండి.' : 'Please select a department.';
     }
 
     if (!formData.preferredDate) {
@@ -128,56 +148,58 @@ export const BookAppointment = () => {
 
     setIsSubmitting(true);
 
-    const waNum = settings.whatsappNumber ? settings.whatsappNumber.replace(/[^0-9]/g, '') : '919347455187';
+    const waNum = settings.whatsappNumber ? settings.whatsappNumber.replace(/[^0-9]/g, '') : '919908981669';
     const cleanWaNum = waNum.startsWith('91') ? waNum : `91${waNum}`;
 
-    const formattedMessage = `Hello, I would like to request an appointment at Brain, Spine & Neuro Clinic, Vizianagaram.
+    const formattedMessage = `🏥 *New Appointment Request*
+*Clinic:* Brain, Spine & Neuro Clinic, Vizianagaram
 
-Patient Name: ${formData.fullName.trim()}
-Contact Number: ${formData.phone.trim()}
-Preferred Date: ${formData.preferredDate}
-Preferred Time: ${formData.preferredTime}
-Reason for Consultation: ${formData.reason.trim() || 'General Neurological Evaluation'}
+👤 *Patient Name:* ${formData.fullName.trim()}
+📞 *Phone Number:* ${formData.phone.trim()}
+👨‍⚕️ *Selected Doctor:* ${formData.selectedDoctor}
+🩺 *Department:* ${formData.department}
+📅 *Preferred Date:* ${formData.preferredDate}
+⏰ *Preferred Time:* ${formData.preferredTime}
+📝 *Reason for Visit:* ${formData.reason.trim() || 'General Neurological / Spine Consultation'}
 
-Please let me know the available appointment slot and confirm my booking.
-
-Thank you.`;
+Please confirm the appointment slot availability. Thank you!`;
 
     const waUrl = `https://wa.me/${cleanWaNum}?text=${encodeURIComponent(formattedMessage)}`;
 
-    setTimeout(() => {
-      const createdRecord = addAppointment({
-        fullName: formData.fullName.trim(),
-        phone: formData.phone.trim(),
-        email: formData.email.trim() || null,
-        specialityOrDoctor: formData.specialityOrDoctor,
-        preferredDate: formData.preferredDate,
-        preferredTime: formData.preferredTime,
-        reason: formData.reason.trim() || null,
-        consentGiven: true
-      });
+    const createdRecord = addAppointment({
+      fullName: formData.fullName.trim(),
+      phone: formData.phone.trim(),
+      email: formData.email.trim() || null,
+      selectedDoctor: formData.selectedDoctor,
+      department: formData.department,
+      specialityOrDoctor: `${formData.department} - ${formData.selectedDoctor}`,
+      preferredDate: formData.preferredDate,
+      preferredTime: formData.preferredTime,
+      reason: formData.reason.trim() || null,
+      consentGiven: true
+    });
 
-      // Open WhatsApp click-to-chat in new tab/app
-      window.open(waUrl, '_blank', 'noopener,noreferrer');
+    // Open WhatsApp click-to-chat immediately for mobile & desktop compatibility
+    window.open(waUrl, '_blank', 'noopener,noreferrer');
 
-      setIsSubmitting(false);
-      setSubmittedAppointment({
-        ...createdRecord,
-        waUrl
-      });
+    setIsSubmitting(false);
+    setSubmittedAppointment({
+      ...createdRecord,
+      waUrl
+    });
 
-      // Reset form
-      setFormData({
-        fullName: '',
-        phone: '',
-        email: '',
-        specialityOrDoctor: '',
-        preferredDate: '',
-        preferredTime: 'Morning (09:00 AM - 01:00 PM)',
-        reason: '',
-        consent: false
-      });
-    }, 500);
+    // Reset form
+    setFormData({
+      fullName: '',
+      phone: '',
+      email: '',
+      selectedDoctor: 'Dr. Reddi Sankara Rao',
+      department: 'Neurosurgery',
+      preferredDate: '',
+      preferredTime: 'Morning (09:00 AM - 01:00 PM)',
+      reason: '',
+      consent: false
+    });
   };
 
   const todayStr = new Date().toISOString().split('T')[0];
@@ -275,85 +297,78 @@ Thank you.`;
                 )}
               </div>
 
-              {/* Email (Optional) */}
+              {/* Selected Doctor */}
               <div className="space-y-1.5">
-                <label htmlFor="email" className="block text-xs font-semibold text-slate-700">
-                  {t.appointment.email}
-                </label>
-                <div className="relative">
-                  <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder={t.appointment.emailPlaceholder}
-                    disabled={isSubmitting}
-                    className={`w-full pl-10 pr-4 py-2.5 rounded-xl border text-sm text-slate-800 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 transition-all ${
-                      errors.email
-                        ? 'border-rose-400 focus:ring-rose-200'
-                        : 'border-slate-300 focus:ring-amber-200 focus:border-amber-500'
-                    }`}
-                  />
-                </div>
-                {errors.email && (
-                  <p className="text-xs text-rose-600 flex items-center gap-1 mt-1">
-                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-                    <span>{errors.email}</span>
-                  </p>
-                )}
-              </div>
-
-              {/* Speciality or Doctor */}
-              <div className="space-y-1.5">
-                <label htmlFor="specialityOrDoctor" className="block text-xs font-semibold text-slate-700">
-                  {t.appointment.specialityOrDoctor} <span className="text-rose-500">*</span>
+                <label htmlFor="selectedDoctor" className="block text-xs font-semibold text-slate-700">
+                  {t.appointment.selectedDoctor || (language === 'te' ? 'ఎంచుకున్న డాక్టర్' : 'Selected Doctor')} <span className="text-rose-500">*</span>
                 </label>
                 <div className="relative">
                   <Stethoscope className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
                   <select
-                    id="specialityOrDoctor"
-                    name="specialityOrDoctor"
-                    value={formData.specialityOrDoctor}
+                    id="selectedDoctor"
+                    name="selectedDoctor"
+                    value={formData.selectedDoctor}
                     onChange={handleChange}
                     disabled={isSubmitting}
                     className={`w-full pl-10 pr-4 py-2.5 rounded-xl border text-sm text-slate-800 bg-white focus:outline-none focus:ring-2 transition-all ${
-                      errors.specialityOrDoctor
+                      errors.selectedDoctor
                         ? 'border-rose-400 focus:ring-rose-200 bg-rose-50/20'
                         : 'border-slate-300 focus:ring-amber-200 focus:border-amber-500'
                     }`}
                   >
-                    <option value="">-- {t.appointment.selectSpecialityOrDoctor} --</option>
-                    <optgroup label="Consultant Specialists">
-                      {doctors.map((doc) => (
-                        <option key={doc.id} value={doc.nameEn}>
-                          {language === 'te' ? `${doc.nameTe} (${doc.titleTe})` : `${doc.nameEn} - ${doc.titleEn}`}
-                        </option>
-                      ))}
-                    </optgroup>
-                    <optgroup label={language === 'te' ? 'క్లినికల్ విభాగాలు' : 'Clinical Specialities'}>
-                      {specialities.map((spec) => (
-                        <option key={spec.id} value={spec.nameEn}>
-                          {language === 'te' ? spec.nameTe : spec.nameEn}
-                        </option>
-                      ))}
-                    </optgroup>
-                    <optgroup label={language === 'te' ? 'ప్రత్యేక శస్త్రచికిత్సలు & చికిత్సలు' : 'Specialized Procedures & Surgeries'}>
-                      {specialities.flatMap((spec) => 
-                        (spec.treatmentsList || []).map((t) => (
-                          <option key={`${spec.id}-${t.id}`} value={`${spec.nameEn} • ${t.nameEn}`}>
-                            {language === 'te' ? `${t.nameTe} (${spec.nameEn})` : `${t.nameEn} (${spec.nameEn})`}
-                          </option>
-                        ))
-                      )}
-                    </optgroup>
+                    <option value="">-- {t.appointment.selectDoctor || (language === 'te' ? 'డాక్టర్‌ను ఎంచుకోండి' : 'Select Doctor')} --</option>
+                    {doctors.map((doc) => (
+                      <option key={doc.id} value={doc.nameEn}>
+                        {language === 'te' ? `${doc.nameTe} (${doc.titleTe})` : `${doc.nameEn} - ${doc.titleEn}`}
+                      </option>
+                    ))}
+                    {!doctors.some(d => d.nameEn === 'Dr. Reddi Sankara Rao') && (
+                      <option value="Dr. Reddi Sankara Rao">Dr. Reddi Sankara Rao - MCh Neurosurgery</option>
+                    )}
                   </select>
                 </div>
-                {errors.specialityOrDoctor && (
+                {errors.selectedDoctor && (
                   <p className="text-xs text-rose-600 flex items-center gap-1 mt-1">
                     <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-                    <span>{errors.specialityOrDoctor}</span>
+                    <span>{errors.selectedDoctor}</span>
+                  </p>
+                )}
+              </div>
+
+              {/* Department */}
+              <div className="space-y-1.5">
+                <label htmlFor="department" className="block text-xs font-semibold text-slate-700">
+                  {t.appointment.department || (language === 'te' ? 'క్లినికల్ విభాగం / స్పెషాలిటీ' : 'Department / Clinical Speciality')} <span className="text-rose-500">*</span>
+                </label>
+                <div className="relative">
+                  <Activity className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+                  <select
+                    id="department"
+                    name="department"
+                    value={formData.department}
+                    onChange={handleChange}
+                    disabled={isSubmitting}
+                    className={`w-full pl-10 pr-4 py-2.5 rounded-xl border text-sm text-slate-800 bg-white focus:outline-none focus:ring-2 transition-all ${
+                      errors.department
+                        ? 'border-rose-400 focus:ring-rose-200 bg-rose-50/20'
+                        : 'border-slate-300 focus:ring-amber-200 focus:border-amber-500'
+                    }`}
+                  >
+                    <option value="">-- {t.appointment.selectDepartment || (language === 'te' ? 'విభాగాన్ని ఎంచుకోండి' : 'Select Department')} --</option>
+                    {specialities.map((spec) => (
+                      <option key={spec.id} value={spec.nameEn}>
+                        {language === 'te' ? spec.nameTe : spec.nameEn}
+                      </option>
+                    ))}
+                    <option value="General Outpatient Consultation">
+                      {language === 'te' ? 'సాధారణ ఓపీ సంప్రదింపులు' : 'General Outpatient Consultation'}
+                    </option>
+                  </select>
+                </div>
+                {errors.department && (
+                  <p className="text-xs text-rose-600 flex items-center gap-1 mt-1">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                    <span>{errors.department}</span>
                   </p>
                 )}
               </div>
@@ -409,6 +424,36 @@ Thank you.`;
                   </select>
                 </div>
               </div>
+
+              {/* Email (Optional) */}
+              <div className="space-y-1.5 sm:col-span-2">
+                <label htmlFor="email" className="block text-xs font-semibold text-slate-700">
+                  {t.appointment.email}
+                </label>
+                <div className="relative">
+                  <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder={t.appointment.emailPlaceholder}
+                    disabled={isSubmitting}
+                    className={`w-full pl-10 pr-4 py-2.5 rounded-xl border text-sm text-slate-800 bg-white placeholder-slate-400 focus:outline-none focus:ring-2 transition-all ${
+                      errors.email
+                        ? 'border-rose-400 focus:ring-rose-200'
+                        : 'border-slate-300 focus:ring-amber-200 focus:border-amber-500'
+                    }`}
+                  />
+                </div>
+                {errors.email && (
+                  <p className="text-xs text-rose-600 flex items-center gap-1 mt-1">
+                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
+                    <span>{errors.email}</span>
+                  </p>
+                )}
+              </div>
             </div>
 
             {/* Reason for Visit */}
@@ -456,24 +501,24 @@ Thank you.`;
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full sm:w-auto px-8 py-3.5 rounded-xl font-black text-sm bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 shadow-lg shadow-amber-500/25 disabled:opacity-60 disabled:cursor-not-allowed transition-all transform active:scale-95 flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-xl font-black text-sm bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 shadow-lg shadow-amber-500/25 disabled:opacity-60 disabled:cursor-not-allowed transition-all transform active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
               >
                 {isSubmitting ? (
                   <>
                     <span className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
-                    <span>Preparing WhatsApp Request...</span>
+                    <span>{language === 'te' ? 'వాట్సాప్ అభ్యర్థన సిద్ధమవుతోంది...' : 'Preparing WhatsApp Request...'}</span>
                   </>
                 ) : (
                   <>
                     <Calendar className="w-4 h-4" />
-                    <span>Request Appointment via WhatsApp</span>
+                    <span>{language === 'te' ? 'వాట్సాప్ ద్వారా అపాయింట్‌మెంట్ బుక్ చేయండి' : 'Book Appointment via WhatsApp'}</span>
                   </>
                 )}
               </button>
               <p className="text-xs text-slate-500">
                 {language === 'te' 
-                  ? 'సమర్పించిన తర్వాత, అపాయింట్‌మెంట్ వివరాలతో వాట్సాప్ ఓపెన్ అవుతుంది. దయచేసి క్లినిక్ నిర్ధారణ కొరకు మెసేజ్ పంపండి.' 
-                  : 'Submitting will open WhatsApp with your prefilled appointment request to send to our clinic desk for confirmation.'}
+                  ? 'సమర్పించిన తర్వాత, మీ పూర్తి వివరాలతో (+91 99089 81669) వాట్సాప్ ఓపెన్ అవుతుంది.' 
+                  : 'Submitting will immediately open WhatsApp (+91 99089 81669) with your patient details pre-filled.'}
               </p>
             </div>
           </form>
@@ -562,17 +607,31 @@ Thank you.`;
                 <span className="font-mono font-bold text-amber-800">{submittedAppointment.id}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-500">Patient:</span>
-                <span className="font-semibold">{submittedAppointment.fullName}</span>
+                <span className="text-slate-500">{language === 'te' ? 'రోగి పేరు' : 'Patient Name'}:</span>
+                <span className="font-semibold text-slate-900">{submittedAppointment.fullName}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-500">Specialist:</span>
-                <span className="font-semibold">{submittedAppointment.specialityOrDoctor}</span>
+                <span className="text-slate-500">{language === 'te' ? 'ఫోన్ నంబర్' : 'Phone'}:</span>
+                <span className="font-semibold text-slate-900">{submittedAppointment.phone}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-500">Preferred Slot:</span>
-                <span className="font-semibold">{submittedAppointment.preferredDate} ({submittedAppointment.preferredTime})</span>
+                <span className="text-slate-500">{language === 'te' ? 'డాక్టర్' : 'Doctor'}:</span>
+                <span className="font-semibold text-amber-800">{submittedAppointment.selectedDoctor}</span>
               </div>
+              <div className="flex justify-between">
+                <span className="text-slate-500">{language === 'te' ? 'విభాగం' : 'Department'}:</span>
+                <span className="font-semibold text-slate-900">{submittedAppointment.department}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-slate-500">{language === 'te' ? 'తేదీ & సమయం' : 'Date & Time'}:</span>
+                <span className="font-semibold text-slate-900">{submittedAppointment.preferredDate} ({submittedAppointment.preferredTime})</span>
+              </div>
+              {submittedAppointment.reason && (
+                <div className="flex justify-between">
+                  <span className="text-slate-500">{language === 'te' ? 'కారణం' : 'Reason'}:</span>
+                  <span className="font-semibold text-slate-900 line-clamp-1">{submittedAppointment.reason}</span>
+                </div>
+              )}
             </div>
 
             {/* Action Buttons */}
@@ -582,10 +641,10 @@ Thank you.`;
                   href={submittedAppointment.waUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full text-center py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-xs shadow-md shadow-amber-500/20 transition-all flex items-center justify-center gap-1.5"
+                  className="w-full text-center py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-black text-xs shadow-md shadow-emerald-500/20 transition-all flex items-center justify-center gap-2"
                 >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                  <span>Re-open WhatsApp Chat</span>
+                  <ExternalLink className="w-4 h-4" />
+                  <span>{language === 'te' ? 'వాట్సాప్ తెరవండి (+91 99089 81669)' : 'Open WhatsApp (+91 99089 81669)'}</span>
                 </a>
               )}
 

@@ -21,7 +21,7 @@ export const initialClinicSettings = {
   phone: "9908981669",
   phoneFormatted: "+91 99089 81669",
   phoneVerified: true,
-  whatsappNumber: "+91 93474 55187",
+  whatsappNumber: "+91 99089 81669",
   whatsappVerified: true,
   emergencyPhone: "9908981669 / 9281400151 / 9281400152",
   emergencyPhoneVerified: true,

@@ -127,50 +127,48 @@ export const TreatmentAppointmentModal = ({
       ? 'Gumchi Junction Clinic (Main Clinic, Vizianagaram)'
       : 'Bobbili Branch Clinic (Opp RTC Complex)';
 
-    const waNum = settings.whatsappNumber ? settings.whatsappNumber.replace(/[^0-9]/g, '') : '919347455187';
+    const waNum = settings.whatsappNumber ? settings.whatsappNumber.replace(/[^0-9]/g, '') : '919908981669';
     const cleanWaNum = waNum.startsWith('91') ? waNum : `91${waNum}`;
 
-    const formattedMessage = `*New Appointment Request: ${treatment.nameEn}*
-Brain Spine & Neuro Clinic
+    const formattedMessage = `🏥 *New Appointment Request*
+*Clinic:* Brain, Spine & Neuro Clinic (${branchLabel})
 
 👤 *Patient Name:* ${formData.fullName.trim()}
-📞 *Mobile:* ${formData.phone.trim()}
-🏥 *Selected Clinic:* ${branchLabel}
-🩺 *Speciality:* ${speciality?.nameEn || 'Neurosurgery'}
-🔬 *Specific Treatment:* ${treatment.nameEn}
+📞 *Phone Number:* ${formData.phone.trim()}
+👨‍⚕️ *Selected Doctor:* Dr. Reddi Sankara Rao (Chief Brain & Spine Surgeon)
+🩺 *Department:* ${speciality?.nameEn || 'Neurosurgery'}
+🔬 *Selected Procedure / Treatment:* ${treatment.nameEn}
 📅 *Preferred Date:* ${formData.preferredDate}
-⏰ *Preferred Slot:* ${formData.preferredTime}
-📝 *Symptoms / Medical Notes:* ${formData.reason.trim() || 'Consultation & Clinical Evaluation'}
+⏰ *Preferred Time:* ${formData.preferredTime}
+📝 *Reason for Visit:* ${formData.reason.trim() || `Consultation & Evaluation for ${treatment.nameEn}`}
 
-Please confirm the slot availability and doctor schedule. Thank you.`;
+Please confirm my appointment slot availability. Thank you!`;
 
     const waUrl = `https://wa.me/${cleanWaNum}?text=${encodeURIComponent(formattedMessage)}`;
 
-    setTimeout(() => {
-      const createdRecord = addAppointment({
-        fullName: formData.fullName.trim(),
-        phone: formData.phone.trim(),
-        email: formData.email.trim() || null,
-        specialityOrDoctor: `${speciality?.nameEn || 'Neurosurgery'} • ${treatment.nameEn}`,
-        preferredDate: formData.preferredDate,
-        preferredTime: formData.preferredTime,
-        preferredBranch: formData.preferredBranch,
-        treatmentId: treatment.id,
-        treatmentName: treatment.nameEn,
-        reason: formData.reason.trim() || null,
-        consentGiven: true
-      });
+    const createdRecord = addAppointment({
+      fullName: formData.fullName.trim(),
+      phone: formData.phone.trim(),
+      email: formData.email.trim() || null,
+      specialityOrDoctor: `${speciality?.nameEn || 'Neurosurgery'} • ${treatment.nameEn}`,
+      preferredDate: formData.preferredDate,
+      preferredTime: formData.preferredTime,
+      preferredBranch: formData.preferredBranch,
+      treatmentId: treatment.id,
+      treatmentName: treatment.nameEn,
+      reason: formData.reason.trim() || null,
+      consentGiven: true
+    });
 
-      // Open WhatsApp click-to-chat
-      window.open(waUrl, '_blank', 'noopener,noreferrer');
+    // Open WhatsApp click-to-chat immediately for mobile & desktop compatibility
+    window.open(waUrl, '_blank', 'noopener,noreferrer');
 
-      setIsSubmitting(false);
-      setSubmittedAppointment({
-        ...createdRecord,
-        waUrl,
-        branchLabel
-      });
-    }, 400);
+    setIsSubmitting(false);
+    setSubmittedAppointment({
+      ...createdRecord,
+      waUrl,
+      branchLabel
+    });
   };
 
   const handleResetAndClose = () => {

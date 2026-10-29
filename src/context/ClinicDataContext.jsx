@@ -13,7 +13,7 @@ import {
 const ClinicDataContext = createContext(null);
 
 const STORAGE_KEYS = {
-  SETTINGS: 'bsn_clinic_settings_v4',
+  SETTINGS: 'bsn_clinic_settings_v5',
   DOCTORS: 'bsn_clinic_doctors_v1',
   SPECIALITIES: 'bsn_clinic_specialities_v3',
   GALLERY: 'bsn_clinic_gallery_v2',

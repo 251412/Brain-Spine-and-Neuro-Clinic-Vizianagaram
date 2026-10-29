@@ -20,7 +20,7 @@ export const WhatsAppWidget = () => {
   const [customMessage, setCustomMessage] = useState('');
 
   // Clean WhatsApp phone number (strip spaces, dashes, plus)
-  const rawNumber = settings.whatsappNumber ? settings.whatsappNumber.replace(/[^0-9]/g, '') : '919347455187';
+  const rawNumber = settings.whatsappNumber ? settings.whatsappNumber.replace(/[^0-9]/g, '') : '919908981669';
   const cleanNumber = rawNumber.startsWith('91') ? rawNumber : `91${rawNumber}`;
 
   // Predefined quick inquiry templates
