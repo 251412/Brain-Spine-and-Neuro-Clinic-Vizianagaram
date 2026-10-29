@@ -180,10 +180,10 @@ export const Navbar = () => {
 
             <Link
               to="/appointment"
-              className="sm:hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 text-slate-950 border border-amber-300/80 mobile-glow-gold active:scale-95 whitespace-nowrap"
+              className="sm:hidden inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-black bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 text-slate-950 border border-amber-300/80 mobile-glow-gold active:scale-95 whitespace-nowrap"
             >
               <Calendar className="w-3.5 h-3.5 text-slate-950" />
-              <span>{language === 'te' ? 'బుకింగ్' : 'Book'}</span>
+              <span>{language === 'te' ? 'అపాయింట్‌మెంట్' : 'Appointment'}</span>
             </Link>
 
             <button

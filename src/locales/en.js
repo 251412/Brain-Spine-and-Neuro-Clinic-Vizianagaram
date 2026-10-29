@@ -11,7 +11,7 @@ export const en = {
     blog: "Health Blog",
     contact: "Contact Us",
     admin: "Admin Demo",
-    bookNow: "Book Appointment",
+    bookNow: "Appointment",
     emergencyHelpline: "24/7 Helpline: 108 / 9908981669",
     callNow: "Call Clinic",
     language: "Language",
