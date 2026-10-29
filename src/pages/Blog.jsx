@@ -5,13 +5,25 @@ import {
   Clock, 
   User, 
   ArrowRight, 
-  BookOpen 
+  BookOpen,
+  ExternalLink,
+  Sparkles,
+  CheckCircle2
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useClinicData } from '../context/ClinicDataContext';
 import { SeoHelmet } from '../components/SeoHelmet';
 import { PageHero } from '../components/PageHero';
 import { ScrollReveal, ScrollStagger, ScrollStaggerItem } from '../components/ScrollReveal';
+
+// Dedicated SVG for official Instagram Camera Logo
+const InstagramIcon = ({ className = "w-5 h-5" }) => (
+  <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+  </svg>
+);
+
+const instagramProfileUrl = "https://www.instagram.com/drreddisankararao99";
 
 export const Blog = () => {
   const { language, t } = useLanguage();
@@ -55,7 +67,79 @@ export const Blog = () => {
         bgImage="/images/facility-ot.jpg"
       />
 
-      <div className="w-full px-4 sm:px-6 lg:px-10 xl:px-14 py-12 sm:py-16 space-y-10">
+      <div className="w-full px-4 sm:px-6 lg:px-10 xl:px-14 py-12 sm:py-16 space-y-12">
+
+        {/* ========================================================= */}
+        {/* DR. REDDI SANKARA RAO INSTAGRAM PROFILE CARD             */}
+        {/* ========================================================= */}
+        <ScrollReveal direction="up" delay={0.05}>
+          <section className="bg-gradient-to-br from-white via-amber-50/30 to-purple-50/20 rounded-3xl p-6 sm:p-8 border-2 border-amber-200/80 shadow-md shadow-amber-500/5 relative overflow-hidden">
+            {/* Ambient Background Glow */}
+            <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-pink-500/10 via-purple-500/10 to-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+
+            {/* Profile Header Card */}
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
+                {/* Doctor Avatar with Instagram Story Gradient Ring */}
+                <div className="relative group shrink-0">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] p-[3px] shadow-md group-hover:scale-105 transition-transform duration-300">
+                    <img 
+                      src="/images/dr-reddi-sankara-rao.jpg" 
+                      alt="Dr. Reddi Sankara Rao - Neurosurgeon" 
+                      className="w-full h-full rounded-full object-cover bg-white"
+                      loading="lazy"
+                    />
+                  </div>
+                  {/* Verified Camera Badge */}
+                  <div className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-gradient-to-tr from-[#833ab4] to-[#fd1d1d] text-white flex items-center justify-center shadow-md border-2 border-white">
+                    <InstagramIcon className="w-3.5 h-3.5" />
+                  </div>
+                </div>
+
+                {/* Profile Details */}
+                <div className="space-y-1.5">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+                      Dr. Reddi Sankara Rao
+                    </h2>
+                    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-900 border border-amber-300">
+                      <CheckCircle2 className="w-3 h-3 text-amber-600" />
+                      <span>{language === 'te' ? 'ధృవీకరించబడిన న్యూరో సర్జన్' : 'Chief Neurosurgeon'}</span>
+                    </span>
+                  </div>
+
+                  <a 
+                    href={instagramProfileUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-extrabold text-[#bc1888] hover:text-[#dc2743] transition-colors"
+                  >
+                    <span>@drreddisankararao99</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+
+                  <p className="text-xs sm:text-sm text-slate-600 max-w-2xl font-medium leading-relaxed">
+                    {language === 'te'
+                      ? 'డాక్టర్ రెడ్డి శంకర రావు గారి అధికారిక ఇన్‌స్టాగ్రామ్ పేజీ. మెదడు మరియు వెన్నెముక ఆరోగ్య సూచనలు, సర్జరీ విశేషాలు, స్ట్రోక్ అవగాహన మరియు పేషెంట్ రికవరీ రీల్స్ కోసం ఫాలో అవ్వండి.'
+                      : 'Official Instagram profile of Dr. Reddi Sankara Rao (MCh Neurosurgery). Follow for weekly neurological health tips, surgical insights, stroke golden hour awareness, and recovery stories.'}
+                  </p>
+                </div>
+              </div>
+
+              {/* Follow Button */}
+              <a
+                href={instagramProfileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto shrink-0 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045] hover:opacity-95 text-white font-black text-xs sm:text-sm flex items-center justify-center gap-2.5 shadow-md shadow-pink-500/25 active:scale-95 transition-all group"
+              >
+                <InstagramIcon className="w-4 h-4 transition-transform group-hover:scale-110" />
+                <span>{language === 'te' ? 'ఇన్‌స్టాగ్రామ్‌లో ఫాలో అవ్వండి' : 'Follow on Instagram'}</span>
+                <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+              </a>
+            </div>
+          </section>
+        </ScrollReveal>
 
         {/* Search & Category Filter Toolbar */}
         <ScrollReveal direction="up" delay={0.05}>
@@ -160,6 +244,40 @@ export const Blog = () => {
             })}
           </ScrollStagger>
         )}
+
+        {/* Instagram Follow Callout Banner */}
+        <ScrollReveal direction="up" distance={20}>
+          <div className="rounded-3xl p-6 sm:p-8 bg-gradient-to-r from-slate-900 via-purple-950 to-slate-900 text-white border border-purple-500/30 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] flex items-center justify-center shrink-0 shadow-lg shadow-pink-500/20">
+                <InstagramIcon className="w-7 h-7 text-white" />
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-lg sm:text-xl font-bold">
+                  {language === 'te' 
+                    ? 'డాక్టర్ రెడ్డి శంకర రావు గారిని ఇన్‌స్టాగ్రామ్‌లో ఫాలో అవ్వండి' 
+                    : 'Stay Connected with Dr. Reddi Sankara Rao on Instagram'}
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-300">
+                  {language === 'te'
+                    ? 'రోజూ కొత్త న్యూరో సర్జరీ & వెన్నెముక ఆరోగ్య వీడియోలు, చిట్కాలు: @drreddisankararao99'
+                    : 'Watch weekly educational reels on brain health, spine care, and surgical recovery: @drreddisankararao99'}
+                </p>
+              </div>
+            </div>
+
+            <a
+              href={instagramProfileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 px-6 py-3.5 rounded-xl font-black text-xs sm:text-sm bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045] hover:opacity-95 text-white flex items-center gap-2 shadow-lg shadow-pink-500/20 active:scale-95 transition-all"
+            >
+              <InstagramIcon className="w-4 h-4 text-white" />
+              <span>{language === 'te' ? 'ఇన్‌స్టాగ్రామ్‌లో చూడండి' : 'Follow @drreddisankararao99'}</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </ScrollReveal>
       </div>
     </div>
   );

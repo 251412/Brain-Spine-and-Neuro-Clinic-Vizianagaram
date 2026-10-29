@@ -14,7 +14,6 @@ import { useLanguage } from '../context/LanguageContext';
 import { useClinicData } from '../context/ClinicDataContext';
 import { SeoHelmet } from '../components/SeoHelmet';
 import { VerificationBadge } from '../components/VerificationBadge';
-import { ClinicLocationCard } from '../components/ClinicLocationCard';
 import { OurLocationsSection } from '../components/OurLocationsSection';
 import { PageHero } from '../components/PageHero';
 import { ScrollReveal, ScrollStagger, ScrollStaggerItem } from '../components/ScrollReveal';
@@ -33,7 +32,6 @@ export const ContactUs = () => {
 
   const [statusMessage, setStatusMessage] = useState('');
   const [isSending, setIsSending] = useState(false);
-  const [contactBranch, setContactBranch] = useState('gumchi-junction');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -220,171 +218,111 @@ export const ContactUs = () => {
           </div>
         </ScrollReveal>
 
-        {/* Contact Form and Map Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          {/* Interactive Contact Form (Demo) */}
-          <div className="lg:col-span-7">
-            <ScrollReveal direction="left" distance={28}>
-              <div className="bg-white rounded-3xl p-6 sm:p-10 border-2 border-amber-200/70 shadow-lg shadow-amber-500/5 space-y-6">
-                <div>
-                  <h2 className="text-xl font-bold text-slate-900">
-                    {t.contact.getInTouchTitle}
-                  </h2>
-                  <p className="text-xs text-slate-500 mt-1">
-                    Have a clinical question or require a second opinion? Send us a message (Frontend Demo).
-                  </p>
+        {/* Interactive Contact Form (Demo) */}
+        <div className="max-w-3xl mx-auto w-full">
+          <ScrollReveal direction="up" distance={28}>
+            <div className="bg-white rounded-3xl p-6 sm:p-10 border-2 border-amber-200/70 shadow-lg shadow-amber-500/5 space-y-6">
+              <div>
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
+                  {t.contact.getInTouchTitle}
+                </h2>
+                <p className="text-xs sm:text-sm text-slate-500 mt-1">
+                  Have a clinical question or require a second opinion? Send us a message (Frontend Demo).
+                </p>
+              </div>
+
+              {statusMessage && (
+                <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0" />
+                  <span>{statusMessage}</span>
                 </div>
+              )}
 
-                {statusMessage && (
-                  <div className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0" />
-                    <span>{statusMessage}</span>
-                  </div>
-                )}
-
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1">
-                      <label className="block text-xs font-semibold text-slate-700">{t.contact.formName} *</label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={formState.name}
-                        onChange={handleChange}
-                        required
-                        placeholder="e.g. Anand Varma"
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-500"
-                      />
-                    </div>
-
-                    <div className="space-y-1">
-                      <label className="block text-xs font-semibold text-slate-700">{t.contact.formPhone} *</label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={formState.phone}
-                        onChange={handleChange}
-                        required
-                        placeholder="e.g. 9876543210"
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-500"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-1">
-                      <label className="block text-xs font-semibold text-slate-700">{t.contact.formEmail}</label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formState.email}
-                        onChange={handleChange}
-                        placeholder="e.g. user@example.com"
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-500"
-                      />
-                    </div>
-
-                    <div className="space-y-1">
-                      <label className="block text-xs font-semibold text-slate-700">{t.contact.formSubject}</label>
-                      <input
-                        type="text"
-                        name="subject"
-                        value={formState.subject}
-                        onChange={handleChange}
-                        placeholder="e.g. Spine Surgery Second Opinion"
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-500"
-                      />
-                    </div>
-                  </div>
-
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1">
-                    <label className="block text-xs font-semibold text-slate-700">{t.contact.formMessage} *</label>
-                    <textarea
-                      name="message"
-                      rows="4"
-                      value={formState.message}
+                    <label className="block text-xs font-semibold text-slate-700">{t.contact.formName} *</label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formState.name}
                       onChange={handleChange}
                       required
-                      placeholder="Describe your enquiry..."
-                      className="w-full p-3.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-500"
+                      placeholder="e.g. Anand Varma"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-500"
                     />
                   </div>
 
-                  <button
-                    type="submit"
-                    disabled={isSending}
-                    className="px-8 py-3.5 rounded-xl font-black text-sm bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 shadow-lg shadow-amber-500/25 flex items-center justify-center gap-2 transition-all active:scale-95 disabled:opacity-50"
-                  >
-                    {isSending ? (
-                      <span>Sending Demo Message...</span>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4" />
-                        <span>{t.contact.sendBtn}</span>
-                      </>
-                    )}
-                  </button>
-                </form>
-              </div>
-            </ScrollReveal>
-          </div>
+                  <div className="space-y-1">
+                    <label className="block text-xs font-semibold text-slate-700">{t.contact.formPhone} *</label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formState.phone}
+                      onChange={handleChange}
+                      required
+                      placeholder="e.g. 9876543210"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-500"
+                    />
+                  </div>
+                </div>
 
-          {/* Location Card and Interactive Map Column */}
-          <div className="lg:col-span-5 space-y-6">
-            <ScrollReveal direction="right" distance={28}>
-              {/* The Interactive Clinic Branch Card */}
-              <ClinicLocationCard 
-                initialBranch={contactBranch}
-                onSelectBranch={(id) => setContactBranch(id)}
-              />
-            </ScrollReveal>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="block text-xs font-semibold text-slate-700">{t.contact.formEmail}</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formState.email}
+                      onChange={handleChange}
+                      placeholder="e.g. user@example.com"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-500"
+                    />
+                  </div>
 
-            {/* Embedded Google Maps Container */}
-            <ScrollReveal direction="up" distance={24} delay={0.1}>
-              <div className="bg-white rounded-3xl p-6 border-2 border-amber-200/70 shadow-md shadow-amber-500/5 space-y-4">
-                <h3 className="font-bold text-slate-900 text-base flex items-center justify-between">
-                  <span className="flex items-center gap-2">
-                    <MapPin className="w-5 h-5 text-amber-600" />
-                    <span>Google Maps Directions</span>
-                  </span>
-                  <span className="text-xs font-bold text-amber-900 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200">
-                    {contactBranch === 'gumchi-junction' ? 'Vizianagaram – 535002' : 'Bobbili'}
-                  </span>
-                </h3>
+                  <div className="space-y-1">
+                    <label className="block text-xs font-semibold text-slate-700">{t.contact.formSubject}</label>
+                    <input
+                      type="text"
+                      name="subject"
+                      value={formState.subject}
+                      onChange={handleChange}
+                      placeholder="e.g. Spine Surgery Second Opinion"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-500"
+                    />
+                  </div>
+                </div>
 
-                <div className="relative rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 h-64 shadow-inner">
-                  <iframe
-                    key={contactBranch}
-                    title={`${contactBranch} - Google Maps Location`}
-                    src={
-                      contactBranch === 'gumchi-junction'
-                        ? "https://maps.google.com/maps?q=Gumchi+Junction,+Sankaramatam+Road,+Kota+Junction,+Vizianagaram+535002,+Andhra+Pradesh,+India&t=&z=16&ie=UTF8&iwloc=&output=embed"
-                        : "https://maps.google.com/maps?q=Opp+RTC+Complex+Ingate,+beside+Choudhary+Bar+%26+Restaurant,+Bobbili,+Andhra+Pradesh,+India&t=&z=16&ie=UTF8&iwloc=&output=embed"
-                    }
-                    className="w-full h-full border-0"
-                    loading="lazy"
-                    aria-hidden="false"
+                <div className="space-y-1">
+                  <label className="block text-xs font-semibold text-slate-700">{t.contact.formMessage} *</label>
+                  <textarea
+                    name="message"
+                    rows="4"
+                    value={formState.message}
+                    onChange={handleChange}
+                    required
+                    placeholder="Describe your enquiry..."
+                    className="w-full p-3.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-200 focus:border-amber-500"
                   />
                 </div>
 
-                <div className="text-xs text-slate-600 space-y-1.5 pt-1">
-                  <div>
-                    <strong className="text-slate-800">Branch:</strong> {contactBranch === 'gumchi-junction' ? 'Gumchi Junction Clinic (Main)' : 'Bobbili Branch'}
-                  </div>
-                  <div>
-                    <strong className="text-slate-800">Address:</strong> {contactBranch === 'gumchi-junction' 
-                      ? 'Gumchi Junction, Sankaramatam Road (Kota Junction), Vizianagaram – 535002' 
-                      : 'Opp RTC Complex Ingate, beside Choudhary Bar & Restaurant, Bobbili'}
-                  </div>
-                  <div>
-                    <strong className="text-slate-800">Helpline:</strong> <a href={`tel:${contactBranch === 'gumchi-junction' ? '9908981669' : '9951142275'}`} className="font-black text-amber-700 hover:text-amber-900 underline">{contactBranch === 'gumchi-junction' ? '9908981669' : '9951142275'}</a>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-          </div>
-
+                <button
+                  type="submit"
+                  disabled={isSending}
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-xl font-black text-sm bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 shadow-lg shadow-amber-500/25 flex items-center justify-center gap-2 transition-all active:scale-95 disabled:opacity-50"
+                >
+                  {isSending ? (
+                    <span>Sending Demo Message...</span>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      <span>{t.contact.sendBtn}</span>
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
+          </ScrollReveal>
         </div>
 
         {/* Dedicated "Our Locations" Section featuring 2 Clinic Cards and Interactive Map */}
