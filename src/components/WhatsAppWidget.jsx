@@ -19,9 +19,8 @@ export const WhatsAppWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [customMessage, setCustomMessage] = useState('');
 
-  // Clean WhatsApp phone number (strip spaces, dashes, plus)
-  const rawNumber = settings.whatsappNumber ? settings.whatsappNumber.replace(/[^0-9]/g, '') : '919908981669';
-  const cleanNumber = rawNumber.startsWith('91') ? rawNumber : `91${rawNumber}`;
+  // Clean WhatsApp phone number - strictly official number +91 99089 81669
+  const cleanNumber = '919908981669';
 
   // Predefined quick inquiry templates
   const quickOptions = [
@@ -66,7 +65,12 @@ export const WhatsAppWidget = () => {
         : 'Hello Brain Spine & Neuro Clinic, I would like to enquire about a clinical consultation.'
     );
     const whatsappUrl = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(textToSend)}`;
-    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+    if (isMobile) {
+      window.location.href = whatsappUrl;
+    } else {
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    }
     setIsOpen(false);
   };
 

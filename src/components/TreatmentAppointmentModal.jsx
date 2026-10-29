@@ -127,8 +127,8 @@ export const TreatmentAppointmentModal = ({
       ? 'Gumchi Junction Clinic (Main Clinic, Vizianagaram)'
       : 'Bobbili Branch Clinic (Opp RTC Complex)';
 
-    const waNum = settings.whatsappNumber ? settings.whatsappNumber.replace(/[^0-9]/g, '') : '919908981669';
-    const cleanWaNum = waNum.startsWith('91') ? waNum : `91${waNum}`;
+    // Strictly route directly to clinic's official WhatsApp: +91 99089 81669
+    const cleanWaNum = '919908981669';
 
     const formattedMessage = `🏥 *New Appointment Request*
 *Clinic:* Brain, Spine & Neuro Clinic (${branchLabel})
@@ -160,8 +160,13 @@ Please confirm my appointment slot availability. Thank you!`;
       consentGiven: true
     });
 
-    // Open WhatsApp click-to-chat immediately for mobile & desktop compatibility
-    window.open(waUrl, '_blank', 'noopener,noreferrer');
+    // Seamless launch on both mobile devices & desktop
+    const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+    if (isMobile) {
+      window.location.href = waUrl;
+    } else {
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
+    }
 
     setIsSubmitting(false);
     setSubmittedAppointment({

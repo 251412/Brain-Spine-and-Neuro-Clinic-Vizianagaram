@@ -13,7 +13,7 @@ import {
 const ClinicDataContext = createContext(null);
 
 const STORAGE_KEYS = {
-  SETTINGS: 'bsn_clinic_settings_v5',
+  SETTINGS: 'bsn_clinic_settings_v6',
   DOCTORS: 'bsn_clinic_doctors_v1',
   SPECIALITIES: 'bsn_clinic_specialities_v3',
   GALLERY: 'bsn_clinic_gallery_v2',
@@ -23,6 +23,11 @@ const STORAGE_KEYS = {
 
 export const ClinicDataProvider = ({ children }) => {
   const [settings, setSettingsState] = useState(() => {
+    // Purge outdated settings from previous sessions to prevent stale numbers
+    ['bsn_clinic_settings_v1', 'bsn_clinic_settings_v2', 'bsn_clinic_settings_v3', 'bsn_clinic_settings_v4', 'bsn_clinic_settings_v5'].forEach((k) => {
+      try { localStorage.removeItem(k); } catch (_) {}
+    });
+
     const saved = localStorage.getItem(STORAGE_KEYS.SETTINGS);
     if (!saved) return initialClinicSettings;
     try {
@@ -31,11 +36,12 @@ export const ClinicDataProvider = ({ children }) => {
         ...initialClinicSettings, 
         ...parsed, 
         address: initialClinicSettings.address,
-        phone: initialClinicSettings.phone,
+        phone: "9908981669",
+        phoneFormatted: "+91 99089 81669",
         email: initialClinicSettings.email,
         emergencyPhone: initialClinicSettings.emergencyPhone,
         consultingHours: initialClinicSettings.consultingHours,
-        whatsappNumber: initialClinicSettings.whatsappNumber,
+        whatsappNumber: "+91 99089 81669",
         branchName: initialClinicSettings.branchName
       };
     } catch {
