@@ -8,7 +8,8 @@ import {
   CheckCircle2, 
   PhoneCall, 
   ExternalLink,
-  Mail
+  Mail,
+  MessageCircle
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useClinicData } from '../context/ClinicDataContext';
@@ -127,13 +128,24 @@ export const ContactUs = () => {
                 </p>
               </div>
 
-              <a
-                href={`tel:${settings.phone ? settings.phone.replace(/[^0-9]/g, '') : '9908981669'}`}
-                className="inline-flex items-center gap-1.5 text-xs font-black text-slate-950 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 hover:from-amber-400 hover:to-amber-500 px-3.5 py-2.5 rounded-xl transition-all shadow-md shadow-amber-500/25"
-              >
-                <PhoneCall className="w-3.5 h-3.5" />
-                <span>Click to Call ({settings.phone})</span>
-              </a>
+              <div className="flex flex-col gap-2 pt-1">
+                <a
+                  href={`tel:${settings.phone ? settings.phone.replace(/[^0-9]/g, '') : '9908981669'}`}
+                  className="inline-flex items-center justify-center gap-1.5 text-xs font-black text-slate-950 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 hover:from-amber-400 hover:to-amber-500 px-3.5 py-2.5 rounded-xl transition-all shadow-md shadow-amber-500/25"
+                >
+                  <PhoneCall className="w-3.5 h-3.5" />
+                  <span>Click to Call ({settings.phone})</span>
+                </a>
+                <a
+                  href="https://wa.me/919908981669"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 px-3.5 py-2 rounded-xl transition-all"
+                >
+                  <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>WhatsApp: +91 99089 81669</span>
+                </a>
+              </div>
             </div>
           </ScrollStaggerItem>
 

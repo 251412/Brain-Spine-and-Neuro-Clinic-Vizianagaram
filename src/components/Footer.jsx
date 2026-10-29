@@ -6,7 +6,8 @@ import {
   Mail, 
   Clock, 
   ShieldCheck, 
-  Calendar 
+  Calendar,
+  MessageCircle
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useClinicData } from '../context/ClinicDataContext';
@@ -159,6 +160,25 @@ export const Footer = () => {
                       <span className="text-slate-500">/</span>
                       <a href="tel:9281400152" className="hover:text-amber-200 hover:underline">9281400152</a>
                     </div>
+                  </div>
+                </div>
+
+                {/* WhatsApp */}
+                <div className="flex items-start gap-2.5 text-xs text-slate-300">
+                  <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-semibold text-white block">
+                      {language === 'te' ? 'అధికారిక వాట్సాప్' : 'Official WhatsApp'}
+                    </span>
+                    <a
+                      href="https://wa.me/919908981669"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-bold text-emerald-400 hover:text-emerald-300 transition-colors inline-flex items-center gap-1.5"
+                    >
+                      <span>+91 99089 81669</span>
+                      <span className="text-[10px] bg-emerald-950/80 text-emerald-300 px-1.5 py-0.5 rounded border border-emerald-500/30">Chat</span>
+                    </a>
                   </div>
                 </div>
 
