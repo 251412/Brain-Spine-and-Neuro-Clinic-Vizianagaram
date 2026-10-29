@@ -9,19 +9,23 @@ import {
   AlertCircle, 
   HelpCircle, 
   FileCheck,
-  Stethoscope
+  Stethoscope,
+  Sparkles
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useClinicData } from '../context/ClinicDataContext';
 import { SeoHelmet } from '../components/SeoHelmet';
 import { PageHero } from '../components/PageHero';
 import { ScrollReveal } from '../components/ScrollReveal';
+import { TreatmentCard } from '../components/TreatmentCard';
+import { TreatmentAppointmentModal } from '../components/TreatmentAppointmentModal';
 
 export const SpecialityDetail = () => {
   const { id } = useParams();
   const { language, t } = useLanguage();
   const { specialities } = useClinicData();
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
+  const [bookingTreatment, setBookingTreatment] = useState(null);
 
   const speciality = specialities.find((s) => s.id === id);
 
@@ -55,6 +59,7 @@ export const SpecialityDetail = () => {
   const title = language === 'te' ? speciality.nameTe : speciality.nameEn;
   const shortDesc = language === 'te' ? speciality.shortDescTe : speciality.shortDescEn;
   const education = language === 'te' ? speciality.patientEducationTe : speciality.patientEducationEn;
+  const richTreatments = speciality.treatmentsList || [];
 
   return (
     <div className="min-h-screen bg-[#FCFAF5]">
@@ -116,43 +121,76 @@ export const SpecialityDetail = () => {
           </div>
         </ScrollReveal>
 
-        {/* Conditions Addressed & Available Treatments Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Conditions Addressed */}
-          <ScrollReveal direction="left" delay={0.08} className="h-full">
-            <div className="bg-white rounded-3xl p-8 border border-amber-200/60 shadow-xs space-y-4 h-full">
-              <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-amber-600" />
-                <span>{t.specialities.conditionsAddressed}</span>
-              </h2>
-              <ul className="space-y-3 text-sm text-slate-700">
-                {conditions.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 shrink-0" />
-                    <span className="leading-relaxed">{item}</span>
-                  </li>
-                ))}
-              </ul>
+        {/* Conditions Addressed */}
+        <ScrollReveal direction="up" delay={0.08}>
+          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-amber-200/70 shadow-xs space-y-4">
+            <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+              <CheckCircle className="w-5 h-5 text-amber-600" />
+              <span>{t.specialities.conditionsAddressed}</span>
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {conditions.map((item, idx) => (
+                <div key={idx} className="flex items-start gap-2.5 p-3 rounded-xl bg-amber-50/50 border border-amber-200/60 text-xs sm:text-sm text-slate-700">
+                  <span className="w-2 h-2 rounded-full bg-amber-500 mt-1.5 shrink-0" />
+                  <span className="leading-snug font-medium">{item}</span>
+                </div>
+              ))}
             </div>
-          </ScrollReveal>
+          </div>
+        </ScrollReveal>
 
-          {/* Available Treatments */}
-          <ScrollReveal direction="right" delay={0.08} className="h-full">
-            <div className="bg-white rounded-3xl p-8 border border-amber-200/60 shadow-xs space-y-4 h-full">
-              <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-                <FileCheck className="w-5 h-5 text-amber-600" />
-                <span>{t.specialities.treatmentInfo}</span>
+        {/* Specialized Treatments & Procedures Showcase */}
+        <div className="space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold uppercase tracking-wider mb-2">
+                <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+                <span>{language === 'te' ? 'ప్రత్యేక శస్త్రచికిత్సలు' : 'Specialized Procedures'}</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+                {language === 'te' ? `${title} పరిధిలోని చికిత్సా విధానాలు` : `Surgical & Clinical Procedures under ${speciality.nameEn}`}
               </h2>
-              <ul className="space-y-3 text-sm text-slate-700">
-                {treatments.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 shrink-0" />
-                    <span className="leading-relaxed">{item}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
-          </ScrollReveal>
+
+            <span className="text-xs font-bold px-3 py-1.5 rounded-full bg-slate-900 text-amber-300 self-start sm:self-auto">
+              {richTreatments.length} {language === 'te' ? 'చికిత్సలు అందుబాటులో ఉన్నాయి' : 'Procedures Available'}
+            </span>
+          </div>
+
+          {richTreatments.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {richTreatments.map((treatment) => (
+                <TreatmentCard
+                  key={treatment.id}
+                  treatment={treatment}
+                  speciality={speciality}
+                  onBook={(treat) => setBookingTreatment(treat)}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {treatments.map((item, idx) => (
+                <div key={idx} className="p-4 rounded-2xl bg-white border border-amber-200/80 shadow-xs flex items-center justify-between gap-4">
+                  <span className="text-sm font-semibold text-slate-800">{item}</span>
+                  <button
+                    type="button"
+                    onClick={() => setBookingTreatment({
+                      id: `treat-${idx}`,
+                      nameEn: item,
+                      nameTe: item,
+                      descEn: `Consultation and evaluation for ${item}.`,
+                      descTe: `${item} కొరకు ప్రత్యేక సంప్రదింపులు.`,
+                      category: speciality.nameEn
+                    })}
+                    className="px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-slate-950 hover:bg-amber-400 transition-colors shrink-0"
+                  >
+                    {language === 'te' ? 'బుక్ చేయండి' : 'Book'}
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Patient Educational Guide */}
@@ -236,6 +274,14 @@ export const SpecialityDetail = () => {
           </div>
         </ScrollReveal>
       </div>
+
+      {/* Treatment Booking Modal */}
+      <TreatmentAppointmentModal
+        isOpen={Boolean(bookingTreatment)}
+        onClose={() => setBookingTreatment(null)}
+        treatment={bookingTreatment}
+        speciality={speciality}
+      />
     </div>
   );
 };

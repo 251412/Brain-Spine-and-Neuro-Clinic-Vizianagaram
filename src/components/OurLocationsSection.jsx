@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   MapPin, 
   Phone, 
@@ -13,13 +13,22 @@ import { useLanguage } from '../context/LanguageContext';
 import { useClinicData } from '../context/ClinicDataContext';
 import { ScrollReveal, ScrollStagger, ScrollStaggerItem } from './ScrollReveal';
 
-export const OurLocationsSection = ({ className = '', id = 'locations' }) => {
+export const OurLocationsSection = ({ 
+  className = '', 
+  id = 'locations',
+  badgeText,
+  title,
+  subtitle,
+  defaultSelectedId = 'gumchi-junction'
+}) => {
   const { language } = useLanguage();
   const { clinicLocations } = useClinicData();
 
   // State: selected clinic ID ('gumchi-junction' or 'bobbili-branch')
-  const [selectedClinicId, setSelectedClinicId] = useState('gumchi-junction');
+  const [selectedClinicId, setSelectedClinicId] = useState(defaultSelectedId);
   const [isMapLoading, setIsMapLoading] = useState(false);
+  const [mapMode, setMapMode] = useState('route'); // 'route' or 'location'
+  const mapContainerRef = useRef(null);
 
   // Fallback data if context is not yet loaded
   const locations = clinicLocations && clinicLocations.length > 0 ? clinicLocations : [
@@ -77,10 +86,13 @@ export const OurLocationsSection = ({ className = '', id = 'locations' }) => {
   const bobbiliBranch = locations.find(loc => loc.id === 'bobbili-branch') || locations[1] || locations[0];
   const activeLocation = locations.find(loc => loc.id === selectedClinicId) || mainClinic;
 
-  const handleSelectClinic = (id) => {
+  const handleSelectClinic = (id, shouldScroll = true) => {
     if (id !== selectedClinicId) {
       setIsMapLoading(true);
       setSelectedClinicId(id);
+    }
+    if (shouldScroll && mapContainerRef.current) {
+      mapContainerRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   };
 
@@ -103,20 +115,26 @@ export const OurLocationsSection = ({ className = '', id = 'locations' }) => {
             {/* Pill Badge */}
             <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-100/80 text-amber-900 text-xs font-bold border border-amber-300/80 shadow-xs">
               <MapPin className="w-3.5 h-3.5 text-amber-600" />
-              <span>{language === 'te' ? 'మా క్లినిక్ లొకేషన్లు' : 'Our Locations'}</span>
+              <span>{badgeText || (language === 'te' ? 'మా క్లినిక్ లొకేషన్లు' : 'Our Locations')}</span>
             </div>
 
             {/* Heading */}
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
-              <span>{language === 'te' ? 'మా క్లినిక్స్ ' : 'Our '}</span>
-              <span className="text-amber-600">{language === 'te' ? '(Our Clinics)' : 'Clinics'}</span>
-            </h2>
+            {title ? (
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
+                {title}
+              </h2>
+            ) : (
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
+                <span>{language === 'te' ? 'మా క్లినిక్స్ ' : 'Our '}</span>
+                <span className="text-amber-600">{language === 'te' ? '(Our Clinics)' : 'Clinics'}</span>
+              </h2>
+            )}
 
             {/* Subtitle */}
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-medium">
-              {language === 'te' 
+              {subtitle || (language === 'te' 
                 ? 'మా అనుకూలమైన క్లినిక్ లొకేషన్లలో మమ్మల్ని సంప్రదించండి' 
-                : 'Visit us at our convenient clinic locations'}
+                : 'Visit us at our convenient clinic locations')}
             </p>
 
             {/* 3 Small Highlights Bar */}
@@ -192,7 +210,7 @@ export const OurLocationsSection = ({ className = '', id = 'locations' }) => {
                 <img 
                   src={mainClinic.image} 
                   alt={mainClinic.nameEn} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
                 {/* Main Clinic Badge on top-left of image */}
@@ -265,22 +283,38 @@ export const OurLocationsSection = ({ className = '', id = 'locations' }) => {
                 <span>{language === 'te' ? 'ఇప్పుడే కాల్ చేయండి (Call Now)' : 'Call Now'}</span>
               </a>
 
-              {/* View on Map Button */}
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleSelectClinic('gumchi-junction');
-                }}
-                className={`w-full py-2.5 px-4 rounded-xl font-semibold text-xs sm:text-sm border transition-all flex items-center justify-center gap-1.5 active:scale-98 ${
-                  selectedClinicId === 'gumchi-junction'
-                    ? 'border-amber-500 bg-amber-50 text-amber-900 font-bold'
-                    : 'border-amber-200 text-amber-800 hover:bg-amber-50/80'
-                }`}
-              >
-                <MapPin className="w-4 h-4 text-amber-600" />
-                <span>{language === 'te' ? 'మ్యాప్‌లో చూడండి →' : 'View on Map →'}</span>
-              </button>
+              {/* View on Map & Route Action Grid */}
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleSelectClinic('gumchi-junction', true);
+                  }}
+                  className={`w-full py-2.5 px-3 rounded-xl font-bold text-xs border transition-all flex items-center justify-center gap-1.5 active:scale-98 ${
+                    selectedClinicId === 'gumchi-junction'
+                      ? 'border-amber-500 bg-amber-50 text-amber-900 shadow-xs ring-2 ring-amber-300'
+                      : 'border-amber-200 text-amber-800 hover:bg-amber-50/80'
+                  }`}
+                  title={language === 'te' ? 'మ్యాప్‌లో లొకేషన్ చూడండి' : 'View Location on Map'}
+                >
+                  <MapPin className="w-4 h-4 text-amber-600 shrink-0" />
+                  <span className="truncate">{language === 'te' ? 'లొకేషన్ మ్యాప్' : 'View on Map'}</span>
+                </button>
+
+                <a
+                  href={mainClinic.directionsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="w-full py-2.5 px-3 rounded-xl font-bold text-xs bg-slate-900 hover:bg-slate-800 text-amber-400 hover:text-amber-300 border border-slate-700 transition-all flex items-center justify-center gap-1.5 active:scale-98 shadow-xs"
+                  title={language === 'te' ? 'గూగుల్ మ్యాప్స్‌లో రూట్ చూడండి' : 'Get Driving Route in Google Maps'}
+                >
+                  <Navigation className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span className="truncate">{language === 'te' ? 'రూట్ చూడండి' : 'Get Route'}</span>
+                  <ExternalLink className="w-3 h-3 text-amber-400 shrink-0" />
+                </a>
+              </div>
             </div>
           </div>
           </ScrollStaggerItem>
@@ -290,7 +324,7 @@ export const OurLocationsSection = ({ className = '', id = 'locations' }) => {
           {/* ======================================================= */}
           <ScrollStaggerItem className="h-full">
             <div 
-              onClick={() => handleSelectClinic('bobbili-branch')}
+              onClick={() => handleSelectClinic('bobbili-branch', true)}
               className={`bg-white rounded-3xl p-5 sm:p-6 border-2 transition-all duration-300 flex flex-col justify-between cursor-pointer group h-full ${
                 selectedClinicId === 'bobbili-branch'
                   ? 'border-amber-500 shadow-xl shadow-amber-500/20 ring-4 ring-amber-400/25'
@@ -303,7 +337,7 @@ export const OurLocationsSection = ({ className = '', id = 'locations' }) => {
                 <img 
                   src={bobbiliBranch.image} 
                   alt={bobbiliBranch.nameEn} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
                 {/* Branch Clinic Badge on top-left of image */}
@@ -376,22 +410,38 @@ export const OurLocationsSection = ({ className = '', id = 'locations' }) => {
                 <span>{language === 'te' ? 'ఇప్పుడే కాల్ చేయండి (Call Now)' : 'Call Now'}</span>
               </a>
 
-              {/* View on Map Button */}
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleSelectClinic('bobbili-branch');
-                }}
-                className={`w-full py-2.5 px-4 rounded-xl font-semibold text-xs sm:text-sm border transition-all flex items-center justify-center gap-1.5 active:scale-98 ${
-                  selectedClinicId === 'bobbili-branch'
-                    ? 'border-amber-500 bg-amber-50 text-amber-900 font-bold'
-                    : 'border-amber-200 text-amber-800 hover:bg-amber-50/80'
-                }`}
-              >
-                <MapPin className="w-4 h-4 text-amber-600" />
-                <span>{language === 'te' ? 'మ్యాప్‌లో చూడండి →' : 'View on Map →'}</span>
-              </button>
+              {/* View on Map & Route Action Grid */}
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleSelectClinic('bobbili-branch', true);
+                  }}
+                  className={`w-full py-2.5 px-3 rounded-xl font-bold text-xs border transition-all flex items-center justify-center gap-1.5 active:scale-98 ${
+                    selectedClinicId === 'bobbili-branch'
+                      ? 'border-amber-500 bg-amber-50 text-amber-900 shadow-xs ring-2 ring-amber-300'
+                      : 'border-amber-200 text-amber-800 hover:bg-amber-50/80'
+                  }`}
+                  title={language === 'te' ? 'మ్యాప్‌లో లొకేషన్ చూడండి' : 'View Location on Map'}
+                >
+                  <MapPin className="w-4 h-4 text-amber-600 shrink-0" />
+                  <span className="truncate">{language === 'te' ? 'లొకేషన్ మ్యాప్' : 'View on Map'}</span>
+                </button>
+
+                <a
+                  href={bobbiliBranch.directionsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="w-full py-2.5 px-3 rounded-xl font-bold text-xs bg-slate-900 hover:bg-slate-800 text-amber-400 hover:text-amber-300 border border-slate-700 transition-all flex items-center justify-center gap-1.5 active:scale-98 shadow-xs"
+                  title={language === 'te' ? 'గూగుల్ మ్యాప్స్‌లో రూట్ చూడండి' : 'Get Driving Route in Google Maps'}
+                >
+                  <Navigation className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span className="truncate">{language === 'te' ? 'రూట్ చూడండి' : 'Get Route'}</span>
+                  <ExternalLink className="w-3 h-3 text-amber-400 shrink-0" />
+                </a>
+              </div>
             </div>
           </div>
           </ScrollStaggerItem>
@@ -400,16 +450,19 @@ export const OurLocationsSection = ({ className = '', id = 'locations' }) => {
           {/* PANEL 3: INTERACTIVE GOOGLE MAP WITH SWITCHER CONTROLS  */}
           {/* ======================================================= */}
           <ScrollStaggerItem className="h-full md:col-span-2 lg:col-span-1">
-            <div className="bg-white rounded-3xl p-5 sm:p-6 border-2 border-[#E8D6A5] shadow-xl shadow-[#C99524]/10 flex flex-col justify-between space-y-4 h-full">
+            <div 
+              ref={mapContainerRef}
+              className="bg-white rounded-3xl p-5 sm:p-6 border-2 border-[#E8D6A5] shadow-xl shadow-[#C99524]/10 flex flex-col justify-between space-y-4 h-full scroll-mt-24"
+            >
             
             {/* Map Top Bar: Heading + Switcher Pills */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-[#E8D6A5]/50">
               <div>
                 <h3 className="text-lg sm:text-xl font-black text-[#242424] tracking-tight">
-                  {language === 'te' ? 'ఇంటరాక్టివ్ మ్యాప్' : 'Interactive Clinic Map'}
+                  {language === 'te' ? 'ఇంటరాక్టివ్ క్లినిక్ మ్యాప్ & రూట్' : 'Interactive Clinic Map & Route'}
                 </h3>
                 <p className="text-xs text-[#686868] font-medium">
-                  {language === 'te' ? 'లొకేషన్ మార్చడానికి క్రింది బటన్ నొక్కండి' : 'Select a clinic location to switch map marker'}
+                  {language === 'te' ? 'క్లినిక్ ఎంచుకుని లైవ్ రూట్ చూడండి' : 'Select clinic to view transit directions'}
                 </p>
               </div>
 
@@ -417,7 +470,7 @@ export const OurLocationsSection = ({ className = '', id = 'locations' }) => {
               <div className="inline-flex items-center gap-1 p-1 bg-[#FCFAF5] rounded-2xl border border-[#E8D6A5] self-start sm:self-auto shadow-2xs">
                 <button
                   type="button"
-                  onClick={() => handleSelectClinic('gumchi-junction')}
+                  onClick={() => handleSelectClinic('gumchi-junction', false)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
                     selectedClinicId === 'gumchi-junction'
                       ? 'bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 text-slate-950 shadow-xs'
@@ -430,7 +483,7 @@ export const OurLocationsSection = ({ className = '', id = 'locations' }) => {
                 </button>
                 <button
                   type="button"
-                  onClick={() => handleSelectClinic('bobbili-branch')}
+                  onClick={() => handleSelectClinic('bobbili-branch', false)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
                     selectedClinicId === 'bobbili-branch'
                       ? 'bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 text-slate-950 shadow-xs'
@@ -444,6 +497,40 @@ export const OurLocationsSection = ({ className = '', id = 'locations' }) => {
               </div>
             </div>
 
+            {/* Map Mode Selector: Route Navigation vs Location Marker */}
+            <div className="flex items-center justify-between gap-2 px-1 py-1 bg-amber-50/50 rounded-xl border border-amber-200/50">
+              <span className="text-[11px] font-bold text-amber-900 flex items-center gap-1.5 pl-1">
+                <Navigation className="w-3.5 h-3.5 text-amber-600" />
+                <span>{language === 'te' ? 'మ్యాప్ ప్రదర్శన:' : 'Map Display:'}</span>
+              </span>
+              <div className="inline-flex items-center gap-1">
+                <button
+                  type="button"
+                  onClick={() => setMapMode('route')}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
+                    mapMode === 'route'
+                      ? 'bg-amber-500 text-slate-950 shadow-xs'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
+                  }`}
+                >
+                  <Navigation className="w-3 h-3" />
+                  <span>{language === 'te' ? 'రూట్ మ్యాప్' : 'Route Map'}</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMapMode('location')}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
+                    mapMode === 'location'
+                      ? 'bg-amber-500 text-slate-950 shadow-xs'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
+                  }`}
+                >
+                  <MapPin className="w-3 h-3" />
+                  <span>{language === 'te' ? 'లొకేషన్ పిన్' : 'Location Pin'}</span>
+                </button>
+              </div>
+            </div>
+
             {/* Map Canvas with Floating Info Overlay Card */}
             <div className="relative rounded-2xl overflow-hidden border border-[#E8D6A5] bg-slate-100 min-h-[380px] sm:min-h-[430px] flex-1 shadow-inner">
               
@@ -452,16 +539,18 @@ export const OurLocationsSection = ({ className = '', id = 'locations' }) => {
                 <div className="absolute inset-0 bg-white/70 backdrop-blur-xs flex items-center justify-center z-20 transition-opacity">
                   <div className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-white shadow-lg border border-[#E8D6A5] text-xs font-bold text-[#A87512]">
                     <Loader2 className="w-4 h-4 animate-spin text-[#C99524]" />
-                    <span>Loading Clinic Location...</span>
+                    <span>Loading Clinic Location & Route...</span>
                   </div>
                 </div>
               )}
 
               {/* Dynamic Google Maps Embed Iframe */}
               <iframe
-                key={activeLocation.id}
-                title={`${activeLocation.nameEn} - Google Maps Location`}
-                src={activeLocation.embedUrl}
+                key={`${activeLocation.id}-${mapMode}`}
+                title={`${activeLocation.nameEn} - Google Maps Location & Route`}
+                src={mapMode === 'route' 
+                  ? `https://maps.google.com/maps?daddr=${encodeURIComponent(activeLocation.mapQuery)}&output=embed`
+                  : activeLocation.embedUrl}
                 onLoad={() => setIsMapLoading(false)}
                 className="w-full h-full min-h-[380px] sm:min-h-[430px] border-0"
                 loading="lazy"
@@ -469,7 +558,7 @@ export const OurLocationsSection = ({ className = '', id = 'locations' }) => {
               />
 
               {/* Floating Clinic Info Overlay (Futuristic Medical HUD Style) */}
-              <div className="absolute top-3 left-3 right-3 sm:right-auto sm:max-w-[300px] bg-white/95 backdrop-blur-md rounded-2xl p-3.5 sm:p-4 border-2 border-[#E8D6A5] shadow-xl text-slate-900 z-10 space-y-2 transition-all">
+              <div className="absolute top-3 left-3 right-3 sm:right-auto sm:max-w-[320px] bg-white/95 backdrop-blur-md rounded-2xl p-3.5 sm:p-4 border-2 border-[#E8D6A5] shadow-xl text-slate-900 z-10 space-y-2 transition-all">
                 <div className="flex items-start justify-between gap-2">
                   <div className="pr-1 space-y-0.5">
                     {/* Glowing Live Location Beacon */}
@@ -484,9 +573,7 @@ export const OurLocationsSection = ({ className = '', id = 'locations' }) => {
                     </div>
 
                     <h4 className="font-black text-xs sm:text-sm text-[#242424] leading-tight">
-                      {activeLocation.id === 'gumchi-junction' 
-                        ? 'Gumchi Junction Clinic' 
-                        : 'Bobbili Branch Clinic'}
+                      {language === 'te' ? activeLocation.nameTe : activeLocation.nameEn}
                     </h4>
                     <p className="text-[11px] text-[#686868] leading-tight line-clamp-2">
                       {language === 'te' ? activeLocation.addressTe : activeLocation.addressEn}
@@ -498,11 +585,11 @@ export const OurLocationsSection = ({ className = '', id = 'locations' }) => {
                     href={activeLocation.directionsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="shrink-0 flex flex-col items-center justify-center px-2.5 py-2 rounded-xl bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 text-slate-950 font-black shadow-sm transition-transform active:scale-95 group/dir"
-                    title="Get Directions on Google Maps"
+                    className="shrink-0 flex flex-col items-center justify-center px-3 py-2 rounded-xl bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 text-slate-950 font-black shadow-sm transition-transform active:scale-95 group/dir"
+                    title={language === 'te' ? 'గూగుల్ మ్యాప్స్‌లో రూట్ తెరవండి' : 'Get Directions on Google Maps'}
                   >
                     <Navigation className="w-4 h-4 text-slate-950 group-hover/dir:scale-110 transition-transform" />
-                    <span className="text-[10px] font-extrabold mt-0.5">Directions</span>
+                    <span className="text-[10px] font-extrabold mt-0.5">{language === 'te' ? 'రూట్' : 'Route'}</span>
                   </a>
                 </div>
 
@@ -520,6 +607,24 @@ export const OurLocationsSection = ({ className = '', id = 'locations' }) => {
                 </div>
               </div>
 
+            </div>
+
+            {/* Live Navigation CTA Banner */}
+            <div className="pt-1">
+              <a
+                href={activeLocation.directionsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3 px-4 rounded-2xl bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md shadow-amber-500/20 active:scale-98 transition-all"
+              >
+                <Navigation className="w-4 h-4 text-slate-950" />
+                <span>
+                  {language === 'te' 
+                    ? `గూగుల్ మ్యాప్స్‌లో లైవ్ రూట్ నావిగేషన్ ప్రారంభించండి →` 
+                    : `Get Live GPS Route on Google Maps →`}
+                </span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
             </div>
 
             {/* Graceful Fallback Direct Map Link */}

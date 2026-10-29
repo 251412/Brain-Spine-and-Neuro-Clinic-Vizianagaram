@@ -15,7 +15,7 @@ const ClinicDataContext = createContext(null);
 const STORAGE_KEYS = {
   SETTINGS: 'bsn_clinic_settings_v4',
   DOCTORS: 'bsn_clinic_doctors_v1',
-  SPECIALITIES: 'bsn_clinic_specialities_v2',
+  SPECIALITIES: 'bsn_clinic_specialities_v3',
   GALLERY: 'bsn_clinic_gallery_v2',
   BLOG: 'bsn_clinic_blog_v2',
   APPOINTMENTS: 'bsn_clinic_appointments_v1'
@@ -63,7 +63,15 @@ export const ClinicDataProvider = ({ children }) => {
       const parsed = JSON.parse(saved);
       return initialSpecialities.map(initSpec => {
         const found = parsed.find(p => p.id === initSpec.id);
-        return found ? { ...initSpec, ...found, status: 'verified', image: found.image || initSpec.image } : { ...initSpec, status: 'verified' };
+        return found ? { 
+          ...initSpec, 
+          ...found, 
+          status: 'verified', 
+          image: found.image || initSpec.image,
+          treatmentsList: initSpec.treatmentsList,
+          treatmentsEn: initSpec.treatmentsEn,
+          treatmentsTe: initSpec.treatmentsTe
+        } : { ...initSpec, status: 'verified' };
       });
     } catch {
       return initialSpecialities;

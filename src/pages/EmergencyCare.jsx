@@ -18,6 +18,7 @@ import { useClinicData } from '../context/ClinicDataContext';
 import { SeoHelmet } from '../components/SeoHelmet';
 import { VerificationBadge } from '../components/VerificationBadge';
 import { PageHero } from '../components/PageHero';
+import { OurLocationsSection } from '../components/OurLocationsSection';
 import { ScrollReveal, ScrollStagger, ScrollStaggerItem } from '../components/ScrollReveal';
 
 export const EmergencyCare = () => {
@@ -171,7 +172,7 @@ export const EmergencyCare = () => {
                 <div className="flex items-center justify-between">
                   <span className="font-bold text-slate-900 text-sm flex items-center gap-2">
                     <PhoneCall className="w-4 h-4 text-amber-600" />
-                    <span>Clinic Direct Emergency Phone Line</span>
+                    <span>{language === 'te' ? 'క్లినిక్ అత్యవసర ఫోన్ లైన్' : 'Clinic Direct Emergency Phone Line'}</span>
                   </span>
                   <VerificationBadge isVerified={true} variant="compact" />
                 </div>
@@ -179,10 +180,12 @@ export const EmergencyCare = () => {
                   href={`tel:${settings.phone ? settings.phone.replace(/[^0-9]/g, '') : '9908981669'}`}
                   className="text-lg font-black text-amber-700 hover:text-amber-900 block tracking-wide"
                 >
-                  {settings.emergencyPhone}
+                  {settings.emergencyPhone || '9908981669'}
                 </a>
                 <p className="text-xs text-slate-600 font-medium">
-                  24×7 Emergency Dispatch and Urgent Clinical Assistance in Vizianagaram.
+                  {language === 'te' 
+                    ? 'విజయనగరంలో 24×7 అత్యవసర సంప్రదింపులు మరియు క్లినికల్ సహాయం.' 
+                    : '24×7 Emergency Dispatch and Urgent Clinical Assistance in Vizianagaram.'}
                 </p>
               </div>
 
@@ -190,7 +193,7 @@ export const EmergencyCare = () => {
                 <div className="flex items-center justify-between">
                   <span className="font-bold text-slate-900 text-sm flex items-center gap-2">
                     <MapPin className="w-4 h-4 text-amber-600" />
-                    <span>Main Clinic Transit & Physical Address</span>
+                    <span>{language === 'te' ? 'ప్రధాన క్లినిక్ చిరునామా' : 'Main Clinic Transit & Physical Address'}</span>
                   </span>
                   <VerificationBadge isVerified={true} variant="compact" />
                 </div>
@@ -198,16 +201,27 @@ export const EmergencyCare = () => {
                   {settings.address}
                 </p>
                 <a
-                  href={settings.googleMapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#emergency-clinic-locations"
                   className="inline-block text-xs font-bold text-amber-800 hover:text-amber-950 pt-1 underline"
                 >
-                  View Exact Map Location & Directions →
+                  {language === 'te' ? 'క్రింద మ్యాప్‌లో లొకేషన్ & రూట్ చూడండి ↓' : 'View Location & Driving Route Below ↓'}
                 </a>
               </div>
             </div>
           </section>
+        </ScrollReveal>
+
+        {/* 24×7 Emergency Clinic Locations & Interactive Route Map */}
+        <ScrollReveal direction="up" distance={24}>
+          <OurLocationsSection 
+            id="emergency-clinic-locations"
+            className="rounded-3xl border border-amber-200/80 shadow-md bg-white"
+            badgeText={language === 'te' ? '24×7 అత్యవసర క్లినిక్ కేంద్రాలు & రూట్' : '24×7 Emergency Clinic Centers & Transit Route'}
+            title={language === 'te' ? 'మా క్లినిక్ కేంద్రాలు & గూగుల్ మ్యాప్స్ రూట్' : 'Emergency Clinic Locations & Google Maps Route'}
+            subtitle={language === 'te' 
+              ? 'తక్షణ అత్యవసర సహాయం కొరకు మీ సమీప క్లినిక్‌ను ఎంచుకోండి. "రూట్ చూడండి" క్లిక్ చేయగానే గూగుల్ మ్యాప్స్‌లో లైవ్ డైరెక్షన్స్ కనిపిస్తాయి.' 
+              : 'Select your nearest clinic for urgent transit. Click "Get Route" or "View on Map" to view live turn-by-turn navigation.'}
+          />
         </ScrollReveal>
       </div>
     </div>

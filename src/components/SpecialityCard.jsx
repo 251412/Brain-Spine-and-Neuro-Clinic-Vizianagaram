@@ -37,11 +37,13 @@ export const SpecialityCard = ({ speciality }) => {
   const IconComponent = iconMap[speciality.iconName] || Brain;
   const cardImage = speciality.image || fallbackImages[speciality.id] || '/images/speciality-neurology.webp';
 
+  const treatmentCount = speciality.treatmentsList?.length || 0;
+
   return (
     <div className="group relative bg-white rounded-3xl overflow-hidden border-2 border-amber-200/80 shadow-md shadow-amber-500/10 hover:shadow-2xl hover:shadow-amber-500/30 hover:border-amber-500 transition-all duration-300 flex flex-col justify-between">
       <div>
-        {/* Card Header Image with overlays */}
-        <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-900">
+        {/* Card Header Image with overlays - Clickable to Detail Page */}
+        <Link to={`/specialities/${speciality.id}`} className="block relative h-48 sm:h-52 w-full overflow-hidden bg-slate-900 cursor-pointer">
           <img
             src={cardImage}
             alt={language === 'te' ? speciality.nameTe : speciality.nameEn}
@@ -57,22 +59,36 @@ export const SpecialityCard = ({ speciality }) => {
               <span>{language === 'te' ? 'క్లినికల్ విభాగం' : 'Clinical Focus'}</span>
             </span>
           </div>
-        </div>
 
-        {/* Floating Icon badge overlapping the image seam (placed OUTSIDE overflow-hidden so it is never clipped) */}
+          {/* Treatment Count Badge on top right */}
+          {treatmentCount > 0 && (
+            <div className="absolute top-3.5 right-3.5 z-10">
+              <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-amber-500 text-slate-950 text-[11px] font-black shadow-md">
+                {treatmentCount} {language === 'te' ? 'చికిత్సలు' : 'Procedures'}
+              </span>
+            </div>
+          )}
+        </Link>
+
+        {/* Floating Icon badge overlapping the image seam */}
         <div className="relative px-6 -mt-7 z-20 flex items-center justify-between pointer-events-none">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 via-yellow-400 to-amber-600 p-[2.5px] shadow-[0_0_18px_rgba(201,149,36,0.45)] group-hover:scale-110 group-hover:shadow-[0_0_26px_rgba(201,149,36,0.7)] transition-all duration-300 pointer-events-auto">
+          <Link 
+            to={`/specialities/${speciality.id}`}
+            className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 via-yellow-400 to-amber-600 p-[2.5px] shadow-[0_0_18px_rgba(201,149,36,0.45)] group-hover:scale-110 group-hover:shadow-[0_0_26px_rgba(201,149,36,0.7)] transition-all duration-300 pointer-events-auto block"
+          >
             <div className="w-full h-full rounded-[13px] bg-white flex items-center justify-center text-amber-700 group-hover:bg-gradient-to-br group-hover:from-amber-500 group-hover:via-yellow-400 group-hover:to-amber-600 group-hover:text-slate-950 transition-all duration-300">
               <IconComponent className="w-7 h-7 stroke-[2.3]" />
             </div>
-          </div>
+          </Link>
         </div>
 
         {/* Card Content Body */}
         <div className="p-6 pt-3">
-          <h3 className="text-lg font-bold text-slate-900 group-hover:text-amber-800 transition-colors">
-            {language === 'te' ? speciality.nameTe : speciality.nameEn}
-          </h3>
+          <Link to={`/specialities/${speciality.id}`} className="block group-hover:text-amber-800 transition-colors">
+            <h3 className="text-lg font-bold text-slate-900 group-hover:text-amber-800 transition-colors">
+              {language === 'te' ? speciality.nameTe : speciality.nameEn}
+            </h3>
+          </Link>
 
           <p className="text-slate-600 text-sm mt-2 leading-relaxed line-clamp-2">
             {language === 'te' ? speciality.shortDescTe : speciality.shortDescEn}
@@ -100,7 +116,7 @@ export const SpecialityCard = ({ speciality }) => {
           to={`/specialities/${speciality.id}`}
           className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-800 hover:text-amber-950 group-hover:translate-x-1 transition-all"
         >
-          <span>{t.common.learnMore}</span>
+          <span>{language === 'te' ? 'వివరాలు & చికిత్సలు చూడండి' : 'Learn More & Treatments'}</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </Link>
 

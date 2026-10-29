@@ -48,8 +48,15 @@ export const BookAppointment = () => {
   useEffect(() => {
     const docParam = searchParams.get('doctor');
     const specParam = searchParams.get('speciality');
+    const treatParam = searchParams.get('treatment');
 
-    if (docParam) {
+    if (treatParam) {
+      setFormData((prev) => ({ 
+        ...prev, 
+        specialityOrDoctor: specParam ? `${specParam} • ${treatParam}` : treatParam,
+        reason: prev.reason || `Consultation request for ${treatParam}`
+      }));
+    } else if (docParam) {
       setFormData((prev) => ({ ...prev, specialityOrDoctor: docParam }));
     } else if (specParam) {
       setFormData((prev) => ({ ...prev, specialityOrDoctor: specParam }));
@@ -325,12 +332,21 @@ Thank you.`;
                         </option>
                       ))}
                     </optgroup>
-                    <optgroup label="Clinical Specialities (Proposed)">
+                    <optgroup label={language === 'te' ? 'క్లినికల్ విభాగాలు' : 'Clinical Specialities'}>
                       {specialities.map((spec) => (
                         <option key={spec.id} value={spec.nameEn}>
                           {language === 'te' ? spec.nameTe : spec.nameEn}
                         </option>
                       ))}
+                    </optgroup>
+                    <optgroup label={language === 'te' ? 'ప్రత్యేక శస్త్రచికిత్సలు & చికిత్సలు' : 'Specialized Procedures & Surgeries'}>
+                      {specialities.flatMap((spec) => 
+                        (spec.treatmentsList || []).map((t) => (
+                          <option key={`${spec.id}-${t.id}`} value={`${spec.nameEn} • ${t.nameEn}`}>
+                            {language === 'te' ? `${t.nameTe} (${spec.nameEn})` : `${t.nameEn} (${spec.nameEn})`}
+                          </option>
+                        ))
+                      )}
                     </optgroup>
                   </select>
                 </div>

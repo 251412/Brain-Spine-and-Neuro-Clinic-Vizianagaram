@@ -1,3 +1,5 @@
+import { treatmentsBySpeciality } from './treatmentsData';
+
 export const initialClinicSettings = {
   clinicName: "Brain Spine & Neuro Clinic",
   branchName: "Gumchi Junction Clinic",
@@ -265,19 +267,18 @@ export const initialSpecialities = [
       "మయస్థీనియా గ్రావిస్ మరియు కండరాల బలహీనత",
       "తలతిరుగుడు (వెర్టిగో) మరియు సమతుల్యత లోపాలు"
     ],
+    treatmentsList: treatmentsBySpeciality["neurology"] || [],
     treatmentsEn: [
-      "Diagnostic video-EEG and neurophysiological mapping",
-      "Botulinum toxin therapy for chronic migraine & dystonia",
-      "Neuro-immunological infusions and targeted therapies",
-      "Cognitive rehabilitation and memory management",
-      "Comprehensive nerve conduction studies (NCS/EMG)"
+      "Epilepsy Surgery",
+      "Deep Brain Stimulation (DBS)",
+      "Trigeminal Neuralgia Surgery",
+      "Intraoperative Neuromonitoring"
     ],
     treatmentsTe: [
-      "వీడియో-ఈఈజీ (EEG) మరియు న్యూరో ఫిజియోలాజికల్ పరీక్షలు",
-      "మైగ్రేన్ మరియు డిస్టోనియా కొరకు బోటులినమ్ థెరపీ",
-      "న్యూరో-ఇమ్యునోలాజికల్ చికిత్సా విధానాలు",
-      "జ్ఞాపకశక్తి పునరుద్ధరణ మరియు కౌన్సెలింగ్",
-      "నెర్వ్ కండక్షన్ స్టడీస్ (NCS/EMG పరీక్షలు)"
+      "ఎపిలెప్సీ సర్జరీ (మూర్ఛ శస్త్రచికిత్స)",
+      "డీప్ బ్రెయిన్ స్టిమ్యులేషన్ (DBS)",
+      "ట్రైజెమినల్ న్యూరాల్జియా సర్జరీ",
+      "ఇంట్రాఆపరేటివ్ న్యూరోమానిటరింగ్ (IONM)"
     ],
     patientEducationEn: "Neurological evaluations start with an in-depth clinical neurological exam: testing cranial nerves, reflexes, gait, and sensory pathways. Many neurological symptoms improve significantly with early lifestyle changes and timely medication.",
     patientEducationTe: "న్యూరో పరీక్షలలో మొదటిగా రోగి నాడీ ప్రతిచర్యలు, సమతుల్యత మరియు దృష్టిని క్షుణ్ణంగా పరిశీలిస్తారు. ప్రారంభ దశలోనే గుర్తించినప్పుడు చాలా నాడీ సమస్యలను మందులు మరియు సరైన జీవనశైలితో నియంత్రించవచ్చు.",
@@ -319,19 +320,34 @@ export const initialSpecialities = [
       "ట్రైజెమినల్ న్యూరాల్జియా (ముఖంలో తీవ్రమైన విద్యుత్ వంటి నొప్పి)",
       "కియారీ మాల్‌ఫార్మేషన్ సమస్యలు"
     ],
+    treatmentsList: treatmentsBySpeciality["neurosurgery"] || [],
     treatmentsEn: [
-      "Microsurgical clipping and vascular decompression",
-      "Endoscopic third ventriculostomy (ETV) and VP shunts",
-      "Image-guided stereotactic craniotomies",
-      "Emergency intracranial hematoma evacuation",
-      "Minimally invasive keyhole cranial approaches"
+      "Brain Tumor Surgery",
+      "Glioma Surgery",
+      "Meningioma Surgery",
+      "Pituitary Adenoma Surgery",
+      "Acoustic Neuroma Surgery",
+      "Aneurysm Surgery",
+      "Arteriovenous Malformation (AVM) Surgery",
+      "Craniotomy",
+      "Burr Hole Surgery",
+      "Neuroendoscopic Surgery",
+      "Awake Craniotomy",
+      "Frameless Stereotactic Surgery"
     ],
     treatmentsTe: [
-      "మైక్రోసర్జికల్ క్లిప్పింగ్ మరియు నాడీ డీకంప్రెషన్",
-      "ఎండోస్కోపిక్ మూడవ వెంట్రిక్యులోస్టోమీ (ETV) మరియు షంట్స్",
-      "న్యూరో-నావిగేషన్ సహాయంతో క్రేనియోటమీ",
-      "అత్యవసర హెమటోమా తొలగింపు శస్త్రచికిత్సలు",
-      "కీహోల్ మెదడు శస్త్రచికిత్సలు"
+      "బ్రెయిన్ ట్యూమర్ సర్జరీ (మెదడు కణితి శస్త్రచికిత్స)",
+      "గ్లియోమా సర్జరీ",
+      "మెనింజియోమా సర్జరీ",
+      "పిట్యూటరీ ఎడినోమా సర్జరీ",
+      "ఎకౌస్టిక్ న్యూరోమా సర్జరీ",
+      "అనూరిజమ్ సర్జరీ (క్లిప్పింగ్)",
+      "ఆర్టీరియోవీనస్ మాల్‌ఫార్మేషన్ (AVM) సర్జరీ",
+      "క్రేనియోటమీ",
+      "బర్ హోల్ సర్జరీ (చిన్న రంధ్రం శస్త్రచికిత్స)",
+      "న్యూరోఎండోస్కోపిక్ సర్జరీ",
+      "అవేక్ క్రేనియోటమీ",
+      "ఫ్రేమ్‌లెస్ స్టీరియోటాక్టిక్ సర్జరీ"
     ],
     patientEducationEn: "Neurosurgery has evolved dramatically. Modern neuro-navigation works like real-time GPS for the brain, allowing neurosurgeons to operate through incisions of only a few centimeters while preserving healthy neurological tissue.",
     patientEducationTe: "ఆధునిక న్యూరో సర్జరీలో నావిగేషన్ పరికరాలు జీపీఎస్ లా పనిచేస్తాయి. దీని ద్వారా కేవలం చిన్న కోతతో సురక్షితంగా మరియు పక్కనున్న సున్నితమైన మెదడు కణాలకు హాని కలగకుండా ఆపరేషన్ చేస్తారు.",
@@ -367,19 +383,40 @@ export const initialSpecialities = [
       "సర్వైకల్ స్పాండిలోసిస్ మరియు మెడ నొప్పి",
       "వెన్నెముక పగుళ్లు మరియు ఆస్టియోపోరోసిస్ నొప్పులు"
     ],
+    treatmentsList: treatmentsBySpeciality["spine-care"] || [],
     treatmentsEn: [
-      "Targeted transforaminal epidural nerve root injections",
-      "Micro-lumbar discectomy (gold standard keyhole relief)",
-      "Minimally Invasive Spine Surgery (MISS) and tubular retractor surgery",
-      "Artificial cervical disc replacement",
-      "Spinal stabilization and instrumented fusion when indicated"
+      "Lumbar Discectomy",
+      "Cervical Discectomy",
+      "Thoracic Discectomy",
+      "Laminectomy",
+      "Laminoplasty",
+      "Spinal Fusion",
+      "Vertebroplasty",
+      "Kyphoplasty",
+      "Spinal Cord Decompression",
+      "Spinal Tumor Surgery",
+      "Scoliosis Surgery",
+      "Spinal Trauma Surgery",
+      "Minimally Invasive Spine Surgery",
+      "Tethered Spinal Cord Release",
+      "Syrinx Drainage"
     ],
     treatmentsTe: [
-      "ట్రాన్స్‌ఫోరామినల్ ఎపిడ్యూరల్ నరాల ఇంజెక్షన్లు",
-      "మైక్రో లంబార్ డిసెక్టమీ (చిన్న కోతతో డిస్క్ తొలగింపు)",
+      "లంబార్ డిసెక్టమీ (నడుము స్లిప్ డిస్క్ సర్జరీ)",
+      "సర్వైకల్ డిసెక్టమీ (మెడ డిస్క్ శస్త్రచికిత్స)",
+      "థొరాసిక్ డిసెక్టమీ (వీపు డిస్క్ సర్జరీ)",
+      "లామినెక్టమీ (నరాల గొట్టం విప్పార్చే సర్జరీ)",
+      "లామినోప్లాస్టీ (మెడ వెన్నెముక రీకన్‌స్ట్రక్షన్)",
+      "స్పైనల్ ఫ్యూజన్ (వెన్నెముక స్థిరీకరణ)",
+      "వెర్టిబ్రోప్లాస్టీ (ఎముక సిమెంట్ ఇంజెక్షన్)",
+      "కైఫోప్లాస్టీ (బెలూన్ వెర్టిబ్రోప్లాస్టీ)",
+      "స్పైనల్ కార్డ్ డీకంప్రెషన్",
+      "స్పైనల్ ట్యూమర్ సర్జరీ (వెన్నెముక కణితి చికిత్స)",
+      "స్కోలియోసిస్ సర్జరీ (వంకర వెన్నెముక సరిచేసే సర్జరీ)",
+      "స్పైనల్ ట్రామా సర్జరీ (వెన్నెముక ప్రమాద చికిత్స)",
       "మినిమల్లీ ఇన్వాసివ్ స్పైన్ సర్జరీ (MISS)",
-      "ఆర్టిఫిషియల్ సర్వైకల్ డిస్క్ రీప్లేస్‌మెంట్",
-      "వెన్నెముక స్టెబిలైజేషన్ మరియు ఫ్యూజన్ సర్జరీ"
+      "టెథర్డ్ స్పైనల్ కార్డ్ రిలీజ్",
+      "సిరింక్స్ డ్రైనేజ్ (సిరింగోమైలియా చికిత్స)"
     ],
     patientEducationEn: "Over 90% of back pain and slip disc episodes resolve with conservative medical therapy, focused physical rehabilitation, and ergonomic adjustments. Surgery is only considered when severe nerve compression persists or progressive weakness occurs.",
     patientEducationTe: "90% కంటే ఎక్కువ నడుము నొప్పులు మరియు స్లిప్ డిస్క్ సమస్యలు సరైన మందులు, వ్యాయామం మరియు భంగిమ మార్పులతో నయమవుతాయి. తీవ్రమైన నరాల ఒత్తిడి లేదా బలహీనత ఉన్నప్పుడే సర్జరీ అవసరమవుతుంది.",
@@ -415,19 +452,16 @@ export const initialSpecialities = [
       "కెరోటిడ్ రక్తనాళాల పూడికలు",
       "స్ట్రోక్ తర్వాతి కండరాల బిగుతు మరియు మాట లోపం"
     ],
+    treatmentsList: treatmentsBySpeciality["stroke-care"] || [],
     treatmentsEn: [
-      "Emergency IV thrombolysis eligibility protocols (within window)",
-      "Mechanical thrombectomy candidacy evaluation",
-      "Antiplatelet, anticoagulation, and lipid optimization",
-      "Carotid endarterectomy and stenting evaluation",
-      "Multidisciplinary speech, occupational, and physical rehabilitation"
+      "Aneurysm Surgery",
+      "Arteriovenous Malformation (AVM) Surgery",
+      "Brain Hemorrhage Surgery / Burr Hole Surgery"
     ],
     treatmentsTe: [
-      "అత్యవసర ఐవీ త్రాంబోలైసిస్ ఇంజెక్షన్ పద్ధతులు (గోల్డెన్ అవర్ లోపు)",
-      "మెకానికల్ త్రాంబెక్టమీ పరిశీలన",
-      "రక్తం పలుచబడే మందులు మరియు కొలెస్ట్రాల్ నియంత్రణ",
-      "కెరోటిడ్ స్టెంటింగ్ మరియు శస్త్రచికిత్స అంచనా",
-      "ఫిజియోథెరపీ, స్పీచ్ థెరపీ మరియు పునరావాసం"
+      "అనూరిజమ్ సర్జరీ (స్ట్రోక్ నివారణ & క్లిప్పింగ్)",
+      "ఆర్టీరియోవీనస్ మాల్‌ఫార్మేషన్ (AVM) సర్జరీ",
+      "బ్రెయిన్ హెమరేజ్ సర్జరీ / బర్ హోల్ సర్జరీ"
     ],
     patientEducationEn: "The Golden Hour in stroke care is the first 4.5 hours from symptom onset. Every minute of delay destroys millions of neurons. If you suspect stroke, reach a stroke-ready center immediately. Never wait for symptoms to disappear.",
     patientEducationTe: "స్ట్రోక్ వచ్చిన మొదటి 4.5 గంటల సమయాన్ని 'గోల్డెన్ అవర్' అంటారు. ఈ సమయంలో సరైన చికిత్స అందితే పక్షవాతం నుండి పూర్తిగా కోలుకునే అవకాశాలు ఉంటాయి. లక్షణాలు కనిపించిన వెంటనే ఆసుపత్రికి చేరాలి.",
@@ -463,19 +497,28 @@ export const initialSpecialities = [
       "వెస్టిబ్యులర్ ష్వాన్నోమా (వినికిడి నరాల కణితులు)",
       "శరీరంలోని ఇతర భాగాల నుండి మెదడుకు వ్యాపించిన కణితులు"
     ],
+    treatmentsList: treatmentsBySpeciality["brain-tumour-care"] || [],
     treatmentsEn: [
-      "Fluorescence-guided microsurgical tumour resection",
-      "Intraoperative neuro-monitoring (IONM) to safeguard speech & movement",
-      "Endoscopic endonasal pituitary tumour removal",
-      "Stereotactic biopsy for deep-seated lesions",
-      "Multidisciplinary neuro-oncology coordination"
+      "Brain Tumor Surgery",
+      "Glioma Surgery",
+      "Meningioma Surgery",
+      "Pituitary Adenoma Surgery",
+      "Acoustic Neuroma Surgery",
+      "Spinal Tumor Surgery",
+      "Endoscopic Tumor Resection",
+      "Pediatric Brain Tumor Surgery",
+      "Awake Craniotomy"
     ],
     treatmentsTe: [
-      "ఫ్లోరోసెన్స్ ఆధారిత మైక్రోసర్జికల్ కణితి తొలగింపు",
-      "మాట మరియు కదలికలను కాపాడే ఇంట్రాఆపరేటివ్ న్యూరో-మానిటరింగ్",
-      "ముక్కు ద్వారా పిట్యూటరీ కణితి తొలగించే ఎండోస్కోపిక్ సర్జరీ",
-      "లోతైన కణితుల కొరకు స్టీరియోటాక్టిక్ బయాప్సీ",
-      "న్యూరో-ఆంకాలజీ నిపుణుల సమన్వయ సంరక్షణ"
+      "బ్రెయిన్ ట్యూమర్ సర్జరీ (మెదడు కణితి సంరక్షణ)",
+      "గ్లియోమా సర్జరీ (ఆస్ట్రోసైటోమా & గ్లియోబ్లాస్టోమా)",
+      "మెనింజియోమా సర్జరీ (మెదడు పొరల కణితి)",
+      "పిట్యూటరీ ఎడినోమా సర్జరీ",
+      "ఎకౌస్టిక్ న్యూరోమా సర్జరీ (వెస్టిబ్యులర్ ష్వాన్నోమా)",
+      "స్పైనల్ ట్యూమర్ సర్జరీ (వెన్నెముక కణితి తొలగింపు)",
+      "ఎండోస్కోపిక్ ట్యూమర్ రిసెక్షన్",
+      "పీడియాట్రిక్ బ్రెయిన్ ట్యూమర్ సర్జరీ",
+      "అవేక్ క్రేనియోటమీ"
     ],
     patientEducationEn: "Not all brain tumours are cancerous. Many tumours like meningiomas and schwannomas are benign and completely curable with surgical excision. Accurate pathological staging and molecular profiling dictate the safest long-term path.",
     patientEducationTe: "అన్ని బ్రెయిన్ ట్యూమర్లు క్యాన్సర్లు కావు. చాలా కణితులు సాధారణమైనవి (బినైన్), వీటిని ఆపరేషన్ ద్వారా పూర్తిగా తొలగించి రోగి సాధారణ జీవితం గడిపేలా చేయవచ్చు.",
@@ -511,19 +554,12 @@ export const initialSpecialities = [
       "మందులకు లొంగని మొండి మూర్ఛ వ్యాధి",
       "తల గాయాల తర్వాత వచ్చే ఫిట్స్"
     ],
+    treatmentsList: treatmentsBySpeciality["epilepsy"] || [],
     treatmentsEn: [
-      "High-density Digital Video-EEG evaluation",
-      "Precision Anti-Seizure Medication (ASM) tailoring",
-      "Ketogenic dietary therapy medical guidance",
-      "Vagus Nerve Stimulation (VNS) surgical assessment",
-      "Epilepsy surgery pre-surgical workup (lesionectomy)"
+      "Epilepsy Surgery"
     ],
     treatmentsTe: [
-      "హై-డెఫినిషన్ డిజిటల్ వీడియో-ఈఈజీ పరీక్ష",
-      "రోగికి సరిపడే సరైన ఫిట్స్ మందుల ఎంపిక",
-      "కీటోజెనిక్ డైట్ వైద్య మార్గదర్శకత్వం",
-      "వేగస్ నెర్వ్ స్టిమ్యులేషన్ (VNS) పరిశీలన",
-      "శస్త్రచికిత్స ద్వారా మూర్ఛ మూలాన్ని తొలగించే ప్రక్రియ"
+      "ఎపిలెప్సీ సర్జరీ (మూర్ఛ & ఫిట్స్ నివారణ శస్త్రచికిత్స)"
     ],
     patientEducationEn: "During a seizure: Turn the person gently onto their side, protect their head with something soft, and loosen tight collar clothing. Never put spoons, keys, or fingers in the patient's mouth. Most seizures stop spontaneously within 2 minutes.",
     patientEducationTe: "ఫిట్స్ వచ్చినప్పుడు: రోగిని నెమ్మదిగా ఒక వైపుకు తిప్పండి (రికవరీ పొజిషన్), తల కింద మెత్తటి గుడ్డ ఉంచండి. నోట్లో తాళాలు, చెంచాలు లేదా చేతులు ఎట్టిపరిస్థితుల్లోనూ పెట్టకూడదు.",
@@ -559,19 +595,24 @@ export const initialSpecialities = [
       "హెర్పెస్/షింగిల్స్ తర్వాత వచ్చే తీవ్రమైన నరాల నొప్పి",
       "దీర్ఘకాలిక కాంప్లెక్స్ రీజినల్ పెయిన్ సిండ్రోమ్ (CRPS)"
     ],
+    treatmentsList: treatmentsBySpeciality["nerve-pain-care"] || [],
     treatmentsEn: [
-      "Nerve conduction velocity (NCV) and electromyography (EMG)",
-      "Ultrasound-guided targeted peripheral nerve blocks",
-      "Carpal tunnel endoscopic release evaluation",
-      "Radiofrequency ablation for facet and trigeminal pain",
-      "Neuropathic pain modulation pharmacology"
+      "Carpal Tunnel Release",
+      "Ulnar Nerve Decompression",
+      "Radial Nerve Repair",
+      "Brachial Plexus Surgery",
+      "Trigeminal Neuralgia Surgery",
+      "Spinal Cord Stimulation (SCS)",
+      "Baclofen Pump Implantation"
     ],
     treatmentsTe: [
-      "నెర్వ్ కండక్షన్ వెలాసిటీ (NCV) మరియు ఈఎమ్‌జీ పరీక్షలు",
-      "అల్ట్రాసౌండ్ గైడెడ్ పెరిఫెరల్ నెర్వ్ బ్లాక్ ఇంజెక్షన్లు",
-      "కార్పల్ టన్నెల్ ఎండోస్కోపిక్ రిలీజ్ ప్రక్రియ",
-      "రేడియోఫ్రీక్వెన్సీ అబ్లేషన్ పెయిన్ మేనేజ్‌మెంట్",
-      "నరాల నొప్పి నివారణ ప్రత్యేక ఔషధ చికిత్స"
+      "కార్పల్ టన్నెల్ రిలీజ్ (చేతి మణికట్టు నరం సర్జరీ)",
+      "అల్నార్ నెర్వ్ డీకంప్రెషన్ (మోచేతి నరం సర్జరీ)",
+      "రేడియల్ నెర్వ్ రిపేర్ (రిస్ట్ డ్రాప్ సర్జరీ)",
+      "బ్రేకియల్ ప్లెక్సస్ సర్జరీ (భుజం & చేతి నరాల పునర్నిర్మాణం)",
+      "ట్రైజెమినల్ న్యూరాల్జియా సర్జరీ (ముఖం తీవ్ర నొప్పి నివారణ)",
+      "స్పైనల్ కార్డ్ స్టిమ్యులేషన్ (SCS - నొప్పి నివారణ పేస్‌మేకర్)",
+      "బాక్లోఫెన్ పంప్ ఇంప్లాంటేషన్ (తీవ్ర కండరాల బిగుతు నివారణ)"
     ],
     patientEducationEn: "Nerve pain often feels like burning, electric shocks, tingling, or extreme sensitivity to light touch. Because damaged nerves fire abnormal signals, standard painkillers are often ineffective; specialized neuropathic medications are required.",
     patientEducationTe: "నరాల నొప్పి సాధారణ నొప్పిలా కాకుండా మంట, కరెంట్ షాక్ కొట్టినట్లు లేదా మొద్దుబారినట్లు ఉంటుంది. దీనికి సాధారణ పెయిన్ కిల్లర్స్ పనిచేయవు; నరాల కోసం ప్రత్యేకంగా రూపొందించిన మందులు మాత్రమే ఉపశమనం ఇస్తాయి.",
