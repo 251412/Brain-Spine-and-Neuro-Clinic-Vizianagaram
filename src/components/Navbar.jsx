@@ -34,21 +34,15 @@ export const Navbar = () => {
       {/* Top Utility Micro-bar - Strictly ONE straight line on mobile & desktop */}
       <div className="bg-[#060d1a] text-slate-200 text-xs py-1.5 sm:py-2 px-3 sm:px-6 lg:px-10 xl:px-14 border-b border-amber-500/20 w-full">
         <div className="w-full flex items-center justify-between gap-2 flex-nowrap">
-          {/* Emergency Helpline - strictly on 1 line */}
-          <div className="flex items-center gap-2 sm:gap-4 shrink min-w-0">
+          {/* Emergency Helpline - hidden on mobile, displayed on desktop/tablet */}
+          <div className="hidden sm:flex items-center gap-2 sm:gap-4 shrink min-w-0">
             <a 
               href={`tel:${settings.emergencyPhone ? settings.emergencyPhone.split('/')[0].trim().replace(/[^0-9+]/g, '') : '9908981669'}`}
-              className="inline-flex items-center gap-1.5 text-rose-300 font-semibold hover:text-white transition-colors whitespace-nowrap text-[11px] sm:text-xs shrink-0"
+              className="inline-flex items-center gap-1.5 text-rose-300 font-semibold hover:text-white transition-colors whitespace-nowrap text-xs shrink-0"
               title="Emergency Helpline"
             >
-              <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-rose-500 animate-ping shrink-0" />
-              {/* Desktop Full Text */}
-              <span className="hidden sm:inline">{t.nav.emergencyHelpline}</span>
-              {/* Mobile Compact Text - strictly fitting on one line */}
-              <span className="sm:hidden inline-flex items-center gap-1">
-                <span className="font-bold text-rose-400">{language === 'te' ? 'అత్యవసరం:' : '24/7:'}</span>
-                <span className="font-extrabold text-white tracking-wide">9908981669</span>
-              </span>
+              <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping shrink-0" />
+              <span>{t.nav.emergencyHelpline}</span>
             </a>
 
             <span className="hidden md:inline-flex items-center gap-1.5 text-amber-200/80 whitespace-nowrap">
@@ -58,7 +52,7 @@ export const Navbar = () => {
 
             <a
               href={`tel:${settings.phone.replace(/[^0-9+]/g, '')}`}
-              className="hidden sm:inline-flex items-center gap-1.5 text-amber-300 hover:text-white font-semibold transition-colors whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 text-amber-300 hover:text-white font-semibold transition-colors whitespace-nowrap"
               title="Call Clinic Reception"
             >
               <PhoneCall className="w-3.5 h-3.5 text-amber-400 shrink-0" />
@@ -168,31 +162,28 @@ export const Navbar = () => {
             </Link>
           </div>
 
-          {/* Mobile menu trigger with Radiant Glowing Buttons */}
-          <div className="flex items-center gap-2 lg:hidden">
+          {/* Mobile menu trigger with Compact Emergency Care & Enlarged Hamburger */}
+          <div className="flex items-center gap-1.5 min-[360px]:gap-2 lg:hidden">
             <Link
               to="/emergency"
-              className="sm:hidden inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-rose-50 to-rose-100/90 text-rose-700 border border-rose-300 mobile-glow-rose active:scale-95 whitespace-nowrap"
+              className="sm:hidden inline-flex items-center gap-1 px-2 py-1 min-[360px]:px-2.5 min-[360px]:py-1.5 rounded-lg text-[11px] font-bold bg-gradient-to-r from-rose-50 to-rose-100/90 text-rose-700 border border-rose-300/90 mobile-glow-rose active:scale-95 whitespace-nowrap shadow-2xs"
             >
-              <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping shadow-[0_0_8px_#f43f5e]" />
-              <span>{language === 'te' ? 'అత్యవసరం' : '24/7'}</span>
-            </Link>
-
-            <Link
-              to="/appointment"
-              className="sm:hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 text-slate-950 border border-amber-300/80 mobile-glow-gold active:scale-95 whitespace-nowrap"
-            >
-              <Calendar className="w-3.5 h-3.5 text-slate-950" />
-              <span>{language === 'te' ? 'బుకింగ్' : 'Book'}</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-ping shadow-[0_0_6px_#f43f5e] shrink-0" />
+              <PhoneCall className="w-3 h-3 text-rose-600 shrink-0" />
+              <span>{language === 'te' ? 'అత్యవసర సంరక్షణ' : 'Emergency Care'}</span>
             </Link>
 
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl text-slate-800 bg-amber-50/70 border border-amber-200/80 shadow-[0_0_10px_rgba(201,149,36,0.2)] active:scale-95 focus:outline-none focus:ring-2 focus:ring-amber-500"
+              className="p-2 rounded-xl text-slate-800 bg-amber-50/80 hover:bg-amber-100/80 border border-amber-300/90 shadow-[0_0_10px_rgba(201,149,36,0.2)] active:scale-95 focus:outline-none focus:ring-2 focus:ring-amber-500"
               aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6 text-amber-700" /> : <Menu className="w-6 h-6 text-slate-800" />}
+              {mobileMenuOpen ? (
+                <X className="w-[26px] h-[26px] text-amber-700" strokeWidth={2.1} />
+              ) : (
+                <Menu className="w-[26px] h-[26px] text-slate-800" strokeWidth={2.1} />
+              )}
             </button>
           </div>
         </div>
@@ -233,7 +224,7 @@ export const Navbar = () => {
               <Link
                 to="/appointment"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-center py-3 px-4 rounded-xl text-sm font-black bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 text-slate-950 shadow-[0_0_20px_rgba(201,149,36,0.45)] border border-amber-300/80 flex items-center justify-center gap-2 active:scale-98"
+                className="hidden sm:flex w-full text-center py-3 px-4 rounded-xl text-sm font-black bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 text-slate-950 shadow-[0_0_20px_rgba(201,149,36,0.45)] border border-amber-300/80 items-center justify-center gap-2 active:scale-98"
               >
                 <Calendar className="w-4 h-4 text-slate-950" />
                 <span>{t.nav.bookNow}</span>

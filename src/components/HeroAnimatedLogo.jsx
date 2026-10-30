@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
-import { VerificationBadge } from './VerificationBadge';
 import { useLanguage } from '../context/LanguageContext';
 
 export const HeroAnimatedLogo = () => {
@@ -247,7 +246,6 @@ export const HeroAnimatedLogo = () => {
           <span className="text-xs font-black tracking-wide text-amber-950 uppercase">
             Care • Compassion • Cure
           </span>
-          <VerificationBadge isVerified={true} variant="compact" />
         </div>
         <p className="text-[11px] sm:text-xs font-semibold text-slate-500">
           {language === 'te' 

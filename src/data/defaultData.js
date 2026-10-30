@@ -29,6 +29,7 @@ export const initialClinicSettings = {
   emailVerified: true,
   facebookUrl: "https://www.facebook.com/drsankararao99",
   instagramUrl: "https://www.instagram.com/drreddisankararao99/?hl=en",
+  youtubeUrl: "https://www.youtube.com/@reddisankararao99",
   consultingHours: "Gumchi Junction: 24×7 Emergency Available | Bobbili Branch: Tue & Fri: 4 PM – 9 PM",
   consultingHoursEn: "Gumchi Junction: 24×7 Emergency Available • Bobbili Branch: Tue & Fri: 4 PM – 9 PM",
   consultingHoursTe: "గుమ్చి జంక్షన్: 24×7 అత్యవసరం అందుబాటులో ఉంది • బొబ్బిలి బ్రాంచ్: మంగళ & శుక్ర: సాయంత్రం 4 – 9 గంటలు",

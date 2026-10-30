@@ -114,47 +114,8 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* Specialities Section */}
-      <section className="py-16 sm:py-24 bg-white border-y border-slate-200">
-        <div className="w-full px-4 sm:px-6 lg:px-10 xl:px-14">
-          <ScrollReveal direction="up" distance={24}>
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-              <div className="max-w-2xl">
-                <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-800 uppercase tracking-wider mb-2">
-                  <Activity className="w-4 h-4 text-amber-600" />
-                  <span>{language === 'te' ? 'వైద్య విభాగాలు' : 'Clinical Departments'}</span>
-                </div>
-                <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-                  {t.home.specialitiesHeading}
-                </h2>
-                <p className="text-slate-600 text-sm sm:text-base mt-2">
-                  {t.home.specialitiesSubheading}
-                </p>
-              </div>
-
-              <Link
-                to="/specialities"
-                className="inline-flex items-center gap-2 text-sm font-bold text-amber-800 hover:text-amber-950 self-start md:self-end"
-              >
-                <span>{t.common.viewAll}</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </ScrollReveal>
-
-          {/* Speciality Grid (Strictly 3 Cards on Home Page per user request) */}
-          <ScrollStagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.12}>
-            {specialities.slice(0, 3).map((spec) => (
-              <ScrollStaggerItem key={spec.id} direction="up" distance={28}>
-                <SpecialityCard speciality={spec} />
-              </ScrollStaggerItem>
-            ))}
-          </ScrollStagger>
-        </div>
-      </section>
-
-      {/* Founder & Chief Neurosurgeon Prestige Showcase - Consistent Gold & White Theme */}
-      <section className="py-12 sm:py-20 bg-[#FCFAF5]">
+      {/* Founder & Chief Neurosurgeon Prestige Showcase - Directly Below Hero */}
+      <section className="py-12 sm:py-20 bg-[#FCFAF5] border-b border-[#E8D6A5]/60">
         <div className="w-full px-4 sm:px-6 lg:px-10 xl:px-14">
           
           {/* Subtle Top Category Header */}
@@ -297,6 +258,45 @@ export const Home = () => {
 
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Specialities Section */}
+      <section className="py-16 sm:py-24 bg-white border-y border-slate-200">
+        <div className="w-full px-4 sm:px-6 lg:px-10 xl:px-14">
+          <ScrollReveal direction="up" distance={24}>
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+              <div className="max-w-2xl">
+                <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-800 uppercase tracking-wider mb-2">
+                  <Activity className="w-4 h-4 text-amber-600" />
+                  <span>{language === 'te' ? 'వైద్య విభాగాలు' : 'Clinical Departments'}</span>
+                </div>
+                <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                  {t.home.specialitiesHeading}
+                </h2>
+                <p className="text-slate-600 text-sm sm:text-base mt-2">
+                  {t.home.specialitiesSubheading}
+                </p>
+              </div>
+
+              <Link
+                to="/specialities"
+                className="inline-flex items-center gap-2 text-sm font-bold text-amber-800 hover:text-amber-950 self-start md:self-end"
+              >
+                <span>{t.common.viewAll}</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </ScrollReveal>
+
+          {/* Speciality Grid (Strictly 3 Cards on Home Page per user request) */}
+          <ScrollStagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.12}>
+            {specialities.slice(0, 3).map((spec) => (
+              <ScrollStaggerItem key={spec.id} direction="up" distance={28}>
+                <SpecialityCard speciality={spec} />
+              </ScrollStaggerItem>
+            ))}
+          </ScrollStagger>
         </div>
       </section>
 
