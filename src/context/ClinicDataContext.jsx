@@ -99,6 +99,7 @@ export const ClinicDataProvider = ({ children }) => {
     const gal2Update = {
       titleEn: "Equipment images",
       titleTe: "ఎక్విప్‌మెంట్ ఇమేజెస్",
+      category: "facilities",
       image: "/images/equipment-ot-1.jpg",
       images: [
         "/images/equipment-ot-1.jpg",
@@ -110,14 +111,39 @@ export const ClinicDataProvider = ({ children }) => {
       isDemo: false
     };
 
+    const gal3Update = {
+      id: "gal-3",
+      titleEn: "Specialities & Treatments images",
+      titleTe: "స్పెషాలిటీస్ & ట్రీట్‌మెంట్స్ ఇమేజెస్",
+      category: "facilities",
+      image: "/images/speciality-treatment-1.jpg",
+      images: [
+        "/images/speciality-treatment-1.jpg",
+        "/images/speciality-treatment-2.jpg",
+        "/images/speciality-treatment-3.jpg",
+        "/images/speciality-treatment-4.jpg"
+      ],
+      captionEn: "Comprehensive brain tumor, spine, pediatric, and epilepsy neurosurgical treatment procedures.",
+      captionTe: "మెదడు కణతులు, వెన్నెముక, పీడియాట్రిక్ మరియు ఎపిలెప్సీ సంక్లిష్ట నాడీ చికిత్సా విధానాలు.",
+      isDemo: false
+    };
+
     const normalizeGallery = (items) => {
-      return items
-        .filter(g => g.id !== 'gal-3')
-        .map(g => {
-          if (g.id === 'gal-1') return { ...g, ...gal1Update };
-          if (g.id === 'gal-2') return { ...g, ...gal2Update };
-          return { ...g, isDemo: false };
-        });
+      let list = items.slice();
+      if (!list.some(g => g.id === 'gal-3')) {
+        const gal2Idx = list.findIndex(g => g.id === 'gal-2');
+        if (gal2Idx >= 0) {
+          list.splice(gal2Idx + 1, 0, gal3Update);
+        } else {
+          list.push(gal3Update);
+        }
+      }
+      return list.map(g => {
+        if (g.id === 'gal-1') return { ...g, ...gal1Update };
+        if (g.id === 'gal-2') return { ...g, ...gal2Update };
+        if (g.id === 'gal-3') return { ...g, ...gal3Update };
+        return { ...g, isDemo: false };
+      });
     };
 
     const saved = localStorage.getItem(STORAGE_KEYS.GALLERY);

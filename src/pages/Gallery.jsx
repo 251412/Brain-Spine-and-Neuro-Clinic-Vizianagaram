@@ -54,6 +54,14 @@ export const Gallery = () => {
         '/images/equipment-ot-3.jpg'
       ];
     }
+    if (item.id === 'gal-3') {
+      return [
+        '/images/speciality-treatment-1.jpg',
+        '/images/speciality-treatment-2.jpg',
+        '/images/speciality-treatment-3.jpg',
+        '/images/speciality-treatment-4.jpg'
+      ];
+    }
     if (item.images && item.images.length > 0) return item.images;
 
     const categoryExtras = {
@@ -168,7 +176,9 @@ export const Gallery = () => {
                           ? (language === 'te' ? 'క్లినిక్ ఇమేజ్' : 'Clinic image') 
                           : item.id === 'gal-2'
                             ? (language === 'te' ? 'ఎక్విప్‌మెంట్ ఇమేజెస్' : 'Equipment images')
-                            : (language === 'te' ? item.titleTe : item.titleEn)}
+                            : item.id === 'gal-3'
+                              ? (language === 'te' ? 'స్పెషాలిటీస్ & ట్రీట్‌మెంట్స్ ఇమేజెస్' : 'Specialities & Treatments images')
+                              : (language === 'te' ? item.titleTe : item.titleEn)}
                       </h3>
                       <p className="text-xs sm:text-sm text-slate-600 mt-2 line-clamp-3 leading-relaxed">
                         {language === 'te' ? item.captionTe : item.captionEn}

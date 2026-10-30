@@ -689,6 +689,22 @@ export const initialGallery = [
     captionTe: "అధునాతన న్యూరోసర్జికల్ ఆపరేటివ్ మైక్రోస్కోప్, ఇంట్రాఆపరేటివ్ నావిగేషన్ మరియు మైక్రోసర్జికల్ పరికరాలు."
   },
   {
+    id: "gal-3",
+    titleEn: "Specialities & Treatments images",
+    titleTe: "స్పెషాలిటీస్ & ట్రీట్‌మెంట్స్ ఇమేజెస్",
+    category: "facilities",
+    image: "/images/speciality-treatment-1.jpg",
+    images: [
+      "/images/speciality-treatment-1.jpg",
+      "/images/speciality-treatment-2.jpg",
+      "/images/speciality-treatment-3.jpg",
+      "/images/speciality-treatment-4.jpg"
+    ],
+    isDemo: false,
+    captionEn: "Comprehensive brain tumor, spine, pediatric, and epilepsy neurosurgical treatment procedures.",
+    captionTe: "మెదడు కణతులు, వెన్నెముక, పీడియాట్రిక్ మరియు ఎపిలెప్సీ సంక్లిష్ట నాడీ చికిత్సా విధానాలు."
+  },
+  {
     id: "gal-4",
     titleEn: "Community Neurological & Spine Awareness Camp",
     titleTe: "సమాజ న్యూరో మరియు వెన్నెముక అవగాహన శిబిరం",

@@ -39,7 +39,14 @@ export const Lightbox = ({
       ? ['/images/clinic-exterior-pks.jpg', '/images/clinic-interior-reception.jpg']
       : currentItem?.id === 'gal-2'
         ? ['/images/equipment-ot-1.jpg', '/images/equipment-ot-2.jpg', '/images/equipment-ot-3.jpg']
-        : [currentItem?.image]);
+        : currentItem?.id === 'gal-3'
+          ? [
+              '/images/speciality-treatment-1.jpg',
+              '/images/speciality-treatment-2.jpg',
+              '/images/speciality-treatment-3.jpg',
+              '/images/speciality-treatment-4.jpg'
+            ]
+          : [currentItem?.image]);
 
   const [subIdx, setSubIdx] = React.useState(0);
 
@@ -52,7 +59,9 @@ export const Lightbox = ({
     ? (language === 'te' ? 'క్లినిక్ ఇమేజ్' : 'Clinic image')
     : currentItem?.id === 'gal-2'
       ? (language === 'te' ? 'ఎక్విప్‌మెంట్ ఇమేజెస్' : 'Equipment images')
-      : (language === 'te' ? currentItem?.titleTe : currentItem?.titleEn);
+      : currentItem?.id === 'gal-3'
+        ? (language === 'te' ? 'స్పెషాలిటీస్ & ట్రీట్‌మెంట్స్ ఇమేజెస్' : 'Specialities & Treatments images')
+        : (language === 'te' ? currentItem?.titleTe : currentItem?.titleEn);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-md p-4 sm:p-6 animate-in fade-in duration-200">
