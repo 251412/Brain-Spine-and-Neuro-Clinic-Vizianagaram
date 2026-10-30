@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Image as ImageIcon, Eye } from 'lucide-react';
+import { Image as ImageIcon } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useClinicData } from '../context/ClinicDataContext';
 import { SeoHelmet } from '../components/SeoHelmet';
@@ -146,10 +146,6 @@ export const Gallery = () => {
                       <div className="flex items-center justify-between gap-2 mb-2">
                         <span className="capitalize text-amber-800 font-extrabold text-[11px] px-2.5 py-0.5 rounded-full bg-amber-50 border border-amber-200">
                           {item.category}
-                        </span>
-                        <span className="text-[11px] font-semibold text-slate-400 flex items-center gap-1 group-hover:text-amber-700 transition-colors">
-                          <Eye className="w-3.5 h-3.5 text-amber-500" />
-                          <span>Click to Expand</span>
                         </span>
                       </div>
 
