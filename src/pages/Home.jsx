@@ -10,7 +10,8 @@ import {
   Clock, 
   PhoneCall,
   Sparkles,
-  GraduationCap
+  GraduationCap,
+  User
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
@@ -422,7 +423,10 @@ export const Home = () => {
                   </div>
 
                   <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
-                    <span className="text-slate-500 font-medium">By {article.author}</span>
+                    <span className="text-slate-700 font-semibold flex items-center gap-1.5">
+                      <User className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                      <span>By {article.author || 'Dr. Reddi Sankara Rao'}</span>
+                    </span>
                     <Link
                       to={`/blog/${article.slug}`}
                       className="font-bold text-amber-800 hover:text-amber-950 inline-flex items-center gap-1"

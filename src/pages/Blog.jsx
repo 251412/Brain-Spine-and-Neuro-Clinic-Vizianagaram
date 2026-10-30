@@ -215,9 +215,9 @@ export const Blog = () => {
 
                     <div className="mt-6 pt-4 border-t border-slate-100 space-y-3">
                       <div className="flex items-center justify-between text-xs text-slate-500">
-                        <span className="flex items-center gap-1 font-medium">
+                        <span className="flex items-center gap-1.5 font-semibold text-slate-700">
                           <User className="w-3.5 h-3.5 text-amber-600" />
-                          <span>{article.author}</span>
+                          <span>By {article.author || 'Dr. Reddi Sankara Rao'}</span>
                         </span>
                         <span className="flex items-center gap-1">
                           <Clock className="w-3.5 h-3.5" />

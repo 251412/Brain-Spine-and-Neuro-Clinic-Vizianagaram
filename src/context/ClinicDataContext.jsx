@@ -97,12 +97,12 @@ export const ClinicDataProvider = ({ children }) => {
 
   const [blogArticles, setBlogArticlesState] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEYS.BLOG);
-    if (!saved) return initialBlogArticles.map(a => ({ ...a, status: 'approved' }));
+    if (!saved) return initialBlogArticles.map(a => ({ ...a, author: 'Dr. Reddi Sankara Rao', status: 'approved' }));
     try {
       const parsed = JSON.parse(saved);
-      return parsed.map(a => ({ ...a, status: 'approved' }));
+      return parsed.map(a => ({ ...a, author: 'Dr. Reddi Sankara Rao', status: 'approved' }));
     } catch {
-      return initialBlogArticles.map(a => ({ ...a, status: 'approved' }));
+      return initialBlogArticles.map(a => ({ ...a, author: 'Dr. Reddi Sankara Rao', status: 'approved' }));
     }
   });
 
