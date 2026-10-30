@@ -17,12 +17,10 @@ import { useLanguage } from '../context/LanguageContext';
 import { useClinicData } from '../context/ClinicDataContext';
 import { SeoHelmet } from '../components/SeoHelmet';
 import { SpecialityCard } from '../components/SpecialityCard';
-import { VerificationBadge } from '../components/VerificationBadge';
 import { OurLocationsSection } from '../components/OurLocationsSection';
 import { GoogleReviewsSection } from '../components/GoogleReviewsSection';
 import { HeroAnimatedLogo } from '../components/HeroAnimatedLogo';
 import { ScrollReveal, ScrollStagger, ScrollStaggerItem } from '../components/ScrollReveal';
-import { CardImageSlideshow } from '../components/CardImageSlideshow';
 
 export const Home = () => {
   const { language, t } = useLanguage();
@@ -315,51 +313,39 @@ export const Home = () => {
           </ScrollReveal>
 
           <ScrollStagger className="grid grid-cols-1 md:grid-cols-3 gap-8" staggerDelay={0.12}>
-            {facilities.map((facility, fIdx) => {
-              const facilityImages = {
-                'fac-1': ['/images/facility-mri.jpg', '/images/speciality-neurology.jpg', '/images/speciality-brain-tumour.jpg'],
-                'fac-2': ['/images/facility-ot.jpg', '/images/speciality-neurosurgery.jpg', '/images/speciality-spine-care.jpg'],
-                'fac-3': ['/images/clinic-reception.jpg', '/images/clinic-gumchi-exterior.jpg', '/images/hero.jpg']
-              }[facility.id] || [facility.image];
-
-              return (
-                <ScrollStaggerItem key={facility.id} direction="up" distance={28} className="h-full">
-                  <div 
-                    className="group rounded-3xl overflow-hidden bg-white border-2 border-amber-300/80 shadow-md shadow-amber-500/10 hover:shadow-2xl hover:shadow-amber-500/30 hover:border-amber-500 transition-all duration-300 flex flex-col justify-between h-full"
-                  >
-                    <div className="relative">
-                      <CardImageSlideshow
-                        images={facilityImages}
-                        alt={language === 'te' ? facility.nameTe : facility.nameEn}
-                        cardIndex={fIdx}
-                        intervalMs={3800}
-                        className="h-56 sm:h-60"
-                      />
-                      <div className="absolute top-3 right-3 z-20">
-                        <VerificationBadge isVerified={facility.verified} variant="compact" />
-                      </div>
+            {facilities.map((facility) => (
+              <ScrollStaggerItem key={facility.id} direction="up" distance={28} className="h-full">
+                <div 
+                  className="group rounded-3xl overflow-hidden bg-white border-2 border-amber-300/80 shadow-md shadow-amber-500/10 hover:shadow-2xl hover:shadow-amber-500/30 hover:border-amber-500 transition-all duration-300 flex flex-col justify-between h-full"
+                >
+                  <div className="relative h-56 sm:h-60 overflow-hidden bg-slate-900">
+                    <img
+                      src={facility.image}
+                      alt={language === 'te' ? facility.nameTe : facility.nameEn}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="p-6 sm:p-7 space-y-2 flex-1 flex flex-col justify-between">
+                    <div>
+                      <h3 className="font-extrabold text-slate-900 text-base sm:text-lg mb-2 group-hover:text-amber-800 transition-colors">
+                        {language === 'te' ? facility.nameTe : facility.nameEn}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        {language === 'te' ? facility.descTe : facility.descEn}
+                      </p>
                     </div>
-                    <div className="p-6 sm:p-7 space-y-2 flex-1 flex flex-col justify-between">
-                      <div>
-                        <h3 className="font-extrabold text-slate-900 text-base sm:text-lg mb-2 group-hover:text-amber-800 transition-colors">
-                          {language === 'te' ? facility.nameTe : facility.nameEn}
-                        </h3>
-                        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                          {language === 'te' ? facility.descTe : facility.descEn}
-                        </p>
-                      </div>
-                      <div className="pt-3 border-t border-amber-100 flex items-center justify-between text-xs">
-                        <span className="text-[11px] font-bold text-amber-700">Advanced Neuro Care</span>
-                        <Link to="/gallery" className="text-amber-800 font-extrabold hover:text-amber-950 inline-flex items-center gap-1">
-                          <span>Tour Space</span>
-                          <span>→</span>
-                        </Link>
-                      </div>
+                    <div className="pt-3 border-t border-amber-100 flex items-center justify-between text-xs">
+                      <span className="text-[11px] font-bold text-amber-700">Advanced Neuro Care</span>
+                      <Link to="/gallery" className="text-amber-800 font-extrabold hover:text-amber-950 inline-flex items-center gap-1">
+                        <span>Tour Space</span>
+                        <span>→</span>
+                      </Link>
                     </div>
                   </div>
-                </ScrollStaggerItem>
-              );
-            })}
+                </div>
+              </ScrollStaggerItem>
+            ))}
           </ScrollStagger>
         </div>
       </section>
