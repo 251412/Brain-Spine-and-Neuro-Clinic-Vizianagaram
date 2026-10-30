@@ -319,7 +319,7 @@ export const Home = () => {
               const facilityImages = {
                 'fac-1': ['/images/facility-mri.jpg', '/images/speciality-neurology.jpg', '/images/speciality-brain-tumour.jpg'],
                 'fac-2': ['/images/facility-ot.jpg', '/images/speciality-neurosurgery.jpg', '/images/speciality-spine-care.jpg'],
-                'fac-3': ['/images/clinic-reception.jpg', '/images/clinic-gumchi-exterior.jpg', '/images/hero.jpg']
+                'fac-3': ['/images/clinic-exterior-pks.jpg', '/images/clinic-interior-reception.jpg']
               }[facility.id] || [facility.image];
 
               return (

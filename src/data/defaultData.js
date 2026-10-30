@@ -661,10 +661,14 @@ export const initialFacilities = [
 export const initialGallery = [
   {
     id: "gal-1",
-    titleEn: "Modern Clinic Consultation & Reception Lounge",
-    titleTe: "ఆధునిక క్లినిక్ రిసెప్షన్ మరియు వెయిటింగ్ లాంజ్",
+    titleEn: "Clinic image",
+    titleTe: "క్లినిక్ ఇమేజ్",
     category: "interiors",
-    image: "/images/clinic-reception.jpg",
+    image: "/images/clinic-exterior-pks.jpg",
+    images: [
+      "/images/clinic-exterior-pks.jpg",
+      "/images/clinic-interior-reception.jpg"
+    ],
     isDemo: false,
     captionEn: "Spacious, natural-light waiting environment designed to minimize patient anxiety.",
     captionTe: "రోగులకు మానసిక ప్రశాంతతను అందించేలా ఆహ్లాదకరమైన రిసెప్షన్ మరియు వెయిటింగ్ ప్రాంతం."

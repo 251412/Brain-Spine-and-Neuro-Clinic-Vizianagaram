@@ -33,6 +33,22 @@ export const Lightbox = ({
   if (!isOpen || images.length === 0) return null;
 
   const currentItem = images[currentIndex];
+  const itemImages = (currentItem?.images && currentItem.images.length > 0)
+    ? currentItem.images
+    : (currentItem?.id === 'gal-1'
+      ? ['/images/clinic-exterior-pks.jpg', '/images/clinic-interior-reception.jpg']
+      : [currentItem?.image]);
+
+  const [subIdx, setSubIdx] = React.useState(0);
+
+  React.useEffect(() => {
+    setSubIdx(0);
+  }, [currentIndex]);
+
+  const activeImage = itemImages[subIdx] || currentItem?.image;
+  const displayTitle = currentItem?.id === 'gal-1'
+    ? (language === 'te' ? 'క్లినిక్ ఇమేజ్' : 'Clinic image')
+    : (language === 'te' ? currentItem?.titleTe : currentItem?.titleEn);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-md p-4 sm:p-6 animate-in fade-in duration-200">
@@ -74,22 +90,41 @@ export const Lightbox = ({
       <div className="max-w-5xl max-h-[90vh] flex flex-col items-center justify-center">
         <div className="relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 shadow-2xl">
           <img
-            src={currentItem.image}
-            alt={language === 'te' ? currentItem.titleTe : currentItem.titleEn}
-            className="max-h-[70vh] w-auto object-contain mx-auto"
+            src={activeImage}
+            alt={displayTitle}
+            className="max-h-[70vh] w-auto object-contain mx-auto transition-all duration-300"
           />
+
+          {/* Sub-image Switcher for cards with multiple images */}
+          {itemImages.length > 1 && (
+            <div className="absolute bottom-3 inset-x-0 flex items-center justify-center gap-2 z-10">
+              {itemImages.map((_, dotIdx) => (
+                <button
+                  key={dotIdx}
+                  type="button"
+                  onClick={() => setSubIdx(dotIdx)}
+                  className={`h-2 rounded-full transition-all ${
+                    subIdx === dotIdx
+                      ? 'w-6 bg-amber-400 shadow-[0_0_8px_#C99524]'
+                      : 'w-2 bg-white/60 hover:bg-white'
+                  }`}
+                  aria-label={`Switch to image ${dotIdx + 1}`}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Caption */}
         <div className="mt-4 text-center max-w-2xl px-4">
           <h4 className="text-white font-bold text-base sm:text-lg">
-            {language === 'te' ? currentItem.titleTe : currentItem.titleEn}
+            {displayTitle}
           </h4>
           <p className="text-slate-300 text-xs sm:text-sm mt-1">
-            {language === 'te' ? currentItem.captionTe : currentItem.captionEn}
+            {language === 'te' ? currentItem?.captionTe : currentItem?.captionEn}
           </p>
           <div className="mt-2 text-xs text-slate-400">
-            {currentIndex + 1} / {images.length}
+            {currentIndex + 1} / {images.length} {itemImages.length > 1 ? `(Photo ${subIdx + 1} of ${itemImages.length})` : ''}
           </div>
         </div>
       </div>

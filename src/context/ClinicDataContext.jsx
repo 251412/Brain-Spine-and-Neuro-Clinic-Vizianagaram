@@ -85,13 +85,24 @@ export const ClinicDataProvider = ({ children }) => {
   });
 
   const [gallery, setGalleryState] = useState(() => {
+    const gal1Update = {
+      titleEn: "Clinic image",
+      titleTe: "క్లినిక్ ఇమేజ్",
+      image: "/images/clinic-exterior-pks.jpg",
+      images: [
+        "/images/clinic-exterior-pks.jpg",
+        "/images/clinic-interior-reception.jpg"
+      ],
+      isDemo: false
+    };
+
     const saved = localStorage.getItem(STORAGE_KEYS.GALLERY);
-    if (!saved) return initialGallery.map(g => ({ ...g, isDemo: false }));
+    if (!saved) return initialGallery.map(g => (g.id === 'gal-1' ? { ...g, ...gal1Update } : { ...g, isDemo: false }));
     try {
       const parsed = JSON.parse(saved);
-      return parsed.map(g => ({ ...g, isDemo: false }));
+      return parsed.map(g => (g.id === 'gal-1' ? { ...g, ...gal1Update } : { ...g, isDemo: false }));
     } catch {
-      return initialGallery.map(g => ({ ...g, isDemo: false }));
+      return initialGallery.map(g => (g.id === 'gal-1' ? { ...g, ...gal1Update } : { ...g, isDemo: false }));
     }
   });
 
