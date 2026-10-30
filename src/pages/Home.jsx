@@ -325,34 +325,15 @@ export const Home = () => {
               return (
                 <ScrollStaggerItem key={facility.id} direction="up" distance={28} className="h-full">
                   <div 
-                    className="group rounded-3xl overflow-hidden bg-white border-2 border-amber-300/80 shadow-md shadow-amber-500/10 hover:shadow-2xl hover:shadow-amber-500/30 hover:border-amber-500 transition-all duration-300 flex flex-col justify-between h-full"
+                    className="group rounded-3xl overflow-hidden bg-slate-950 border-2 border-amber-300/80 shadow-md shadow-amber-500/10 hover:shadow-2xl hover:shadow-amber-500/30 hover:border-amber-500 transition-all duration-300"
                   >
-                    <div className="relative">
-                      <CardImageSlideshow
-                        images={facilityImages}
-                        alt={language === 'te' ? facility.nameTe : facility.nameEn}
-                        cardIndex={fIdx}
-                        intervalMs={3800}
-                        className="h-56 sm:h-60"
-                      />
-                    </div>
-                    <div className="p-6 sm:p-7 space-y-2 flex-1 flex flex-col justify-between">
-                      <div>
-                        <h3 className="font-extrabold text-slate-900 text-base sm:text-lg mb-2 group-hover:text-amber-800 transition-colors">
-                          {language === 'te' ? facility.nameTe : facility.nameEn}
-                        </h3>
-                        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                          {language === 'te' ? facility.descTe : facility.descEn}
-                        </p>
-                      </div>
-                      <div className="pt-3 border-t border-amber-100 flex items-center justify-between text-xs">
-                        <span className="text-[11px] font-bold text-amber-700">Advanced Neuro Care</span>
-                        <Link to="/gallery" className="text-amber-800 font-extrabold hover:text-amber-950 inline-flex items-center gap-1">
-                          <span>Tour Space</span>
-                          <span>→</span>
-                        </Link>
-                      </div>
-                    </div>
+                    <CardImageSlideshow
+                      images={facilityImages}
+                      alt={language === 'te' ? facility.nameTe : facility.nameEn}
+                      cardIndex={fIdx}
+                      intervalMs={3800}
+                      className="h-72 sm:h-80 lg:h-96 w-full"
+                    />
                   </div>
                 </ScrollStaggerItem>
               );
