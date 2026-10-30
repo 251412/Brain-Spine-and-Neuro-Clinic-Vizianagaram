@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Calendar, 
@@ -11,7 +11,8 @@ import {
   PhoneCall,
   Sparkles,
   GraduationCap,
-  User
+  User,
+  Image as ImageIcon
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
@@ -23,11 +24,115 @@ import { GoogleReviewsSection } from '../components/GoogleReviewsSection';
 import { HeroAnimatedLogo } from '../components/HeroAnimatedLogo';
 import { ScrollReveal, ScrollStagger, ScrollStaggerItem } from '../components/ScrollReveal';
 import { CardImageSlideshow } from '../components/CardImageSlideshow';
+import { Lightbox } from '../components/Lightbox';
 
 export const Home = () => {
   const { language, t } = useLanguage();
-  const { settings, doctors, specialities, facilities, blogArticles } = useClinicData();
+  const { settings, doctors, specialities, gallery, blogArticles } = useClinicData();
   const leadDoctor = doctors[0] || {};
+  const [lightboxIndex, setLightboxIndex] = useState(-1);
+
+  // Curated 3 featured cards from Our Facilities & Gallery:
+  // 1. Clinic image (gal-1)
+  // 2. Equipment images (gal-2)
+  // 3. Specialities & Treatments images (gal-3)
+  const homeGalleryCards = [
+    gallery?.find((g) => g.id === 'gal-1') || {
+      id: 'gal-1',
+      titleEn: 'Clinic image',
+      titleTe: 'క్లినిక్ ఇమేజ్',
+      category: 'interiors',
+      image: '/images/clinic-exterior-pks.jpg',
+      images: [
+        '/images/clinic-exterior-pks.jpg',
+        '/images/clinic-interior-reception.jpg'
+      ],
+      captionEn: 'Spacious, natural-light waiting environment designed to minimize patient anxiety.',
+      captionTe: 'రోగులకు మానసిక ప్రశాంతతను అందించేలా ఆహ్లాదకరమైన రిసెప్షన్ మరియు వెయిటింగ్ ప్రాంతం.'
+    },
+    gallery?.find((g) => g.id === 'gal-2') || {
+      id: 'gal-2',
+      titleEn: 'Equipment images',
+      titleTe: 'ఎక్విప్‌మెంట్ ఇమేజెస్',
+      category: 'facilities',
+      image: '/images/equipment-ot-1.jpg',
+      images: [
+        '/images/equipment-ot-1.jpg',
+        '/images/equipment-ot-2.jpg',
+        '/images/equipment-ot-3.jpg'
+      ],
+      captionEn: 'Advanced robotic neurosurgical operative microscope, intraoperative navigation, and microsurgical instrumentation.',
+      captionTe: 'అధునాతన న్యూరోసర్జికల్ ఆపరేటివ్ మైక్రోస్కోప్, ఇంట్రాఆపరేటివ్ నావిగేషన్ మరియు మైక్రోసర్జికల్ పరికరాలు.'
+    },
+    gallery?.find((g) => g.id === 'gal-3') || {
+      id: 'gal-3',
+      titleEn: 'Specialities & Treatments images',
+      titleTe: 'స్పెషాలిటీస్ & ట్రీట్‌మెంట్స్ ఇమేజెస్',
+      category: 'facilities',
+      image: '/images/speciality-treatment-1.jpg',
+      images: [
+        '/images/speciality-treatment-1.jpg',
+        '/images/speciality-treatment-2.jpg',
+        '/images/speciality-treatment-3.jpg',
+        '/images/speciality-treatment-4.jpg'
+      ],
+      captionEn: 'Comprehensive brain tumor, spine, pediatric, and epilepsy neurosurgical treatment procedures.',
+      captionTe: 'మెదడు కణతులు, వెన్నెముక, పీడియాట్రిక్ మరియు ఎపిలెప్సీ సంక్లిష్ట నాడీ చికిత్సా విధానాలు.'
+    }
+  ];
+
+  const getCardImages = (item) => {
+    if (item.id === 'gal-1') {
+      return ['/images/clinic-exterior-pks.jpg', '/images/clinic-interior-reception.jpg'];
+    }
+    if (item.id === 'gal-2') {
+      return [
+        '/images/equipment-ot-1.jpg',
+        '/images/equipment-ot-2.jpg',
+        '/images/equipment-ot-3.jpg'
+      ];
+    }
+    if (item.id === 'gal-3') {
+      return [
+        '/images/speciality-treatment-1.jpg',
+        '/images/speciality-treatment-2.jpg',
+        '/images/speciality-treatment-3.jpg',
+        '/images/speciality-treatment-4.jpg'
+      ];
+    }
+    if (item.images && item.images.length > 0) return item.images;
+    return [item.image];
+  };
+
+  const getCardTitle = (item) => {
+    if (item.id === 'gal-1') return language === 'te' ? 'క్లినిక్ ఇమేజ్' : 'Clinic image';
+    if (item.id === 'gal-2') return language === 'te' ? 'ఎక్విప్‌మెంట్ ఇమేజెస్' : 'Equipment images';
+    if (item.id === 'gal-3') return language === 'te' ? 'స్పెషాలిటీస్ & ట్రీట్‌మెంట్స్ ఇమేజెస్' : 'Specialities & Treatments images';
+    return language === 'te' ? item.titleTe : item.titleEn;
+  };
+
+  const getCategoryLabel = (category, itemId) => {
+    if (itemId === 'gal-1') return language === 'te' ? 'క్లినిక్ ఇంటీరియర్స్' : 'Clinic Interiors';
+    if (itemId === 'gal-2') return language === 'te' ? 'వైద్య సదుపాయాలు & ఎక్విప్‌మెంట్' : 'Equipment & OT Suite';
+    if (itemId === 'gal-3') return language === 'te' ? 'స్పెషాలిటీస్ & ట్రీట్‌మెంట్స్' : 'Specialities & Treatments';
+    return category;
+  };
+
+  const handleOpenLightbox = (index) => {
+    setLightboxIndex(index);
+  };
+
+  const handleCloseLightbox = () => {
+    setLightboxIndex(-1);
+  };
+
+  const handlePrevLightbox = () => {
+    setLightboxIndex((prev) => (prev > 0 ? prev - 1 : homeGalleryCards.length - 1));
+  };
+
+  const handleNextLightbox = () => {
+    setLightboxIndex((prev) => (prev < homeGalleryCards.length - 1 ? prev + 1 : 0));
+  };
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -300,57 +405,84 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* Facilities & Equipment Section */}
+      {/* Advanced Facilities & Equipment / Gallery Section */}
       <section className="py-16 sm:py-24 bg-white border-y border-slate-200">
         <div className="w-full px-4 sm:px-6 lg:px-10 xl:px-14">
           <ScrollReveal direction="up" distance={24}>
-            <div className="text-center max-w-2xl mx-auto mb-14">
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-                {t.home.facilitiesHeading}
-              </h2>
-              <p className="text-slate-600 text-sm sm:text-base mt-2">
-                {t.home.facilitiesSubheading}
-              </p>
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+              <div className="max-w-2xl">
+                <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-800 uppercase tracking-wider mb-2">
+                  <ImageIcon className="w-4 h-4 text-amber-600" />
+                  <span>{language === 'te' ? 'మా సదుపాయాలు & గ్యాలరీ' : 'Our Facilities & Gallery'}</span>
+                </div>
+                <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                  {t.home.facilitiesHeading}
+                </h2>
+                <p className="text-slate-600 text-sm sm:text-base mt-2">
+                  {t.home.facilitiesSubheading}
+                </p>
+              </div>
+
+              <Link
+                to="/gallery"
+                className="inline-flex items-center gap-2 text-sm font-bold text-amber-800 hover:text-amber-950 self-start md:self-end group"
+              >
+                <span>{language === 'te' ? 'పూర్తి గ్యాలరీ చూడండి' : 'Explore Full Gallery'}</span>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Link>
             </div>
           </ScrollReveal>
 
+          {/* 3 Gallery Cards: Clinic image, Equipment images, Specialities & Treatments images */}
           <ScrollStagger className="grid grid-cols-1 md:grid-cols-3 gap-8" staggerDelay={0.12}>
-            {facilities.map((facility, fIdx) => {
-              const facilityImages = {
-                'fac-1': ['/images/facility-mri.jpg', '/images/speciality-neurology.jpg', '/images/speciality-brain-tumour.jpg'],
-                'fac-2': ['/images/equipment-ot-1.jpg', '/images/equipment-ot-2.jpg', '/images/equipment-ot-3.jpg'],
-                'fac-3': ['/images/clinic-exterior-pks.jpg', '/images/clinic-interior-reception.jpg']
-              }[facility.id] || [facility.image];
-
+            {homeGalleryCards.map((item, idx) => {
+              const cardImgs = getCardImages(item);
               return (
-                <ScrollStaggerItem key={facility.id} direction="up" distance={28} className="h-full">
+                <ScrollStaggerItem key={item.id} direction="up" distance={28} className="h-full">
                   <div 
                     className="group rounded-3xl overflow-hidden bg-white border-2 border-amber-300/80 shadow-md shadow-amber-500/10 hover:shadow-2xl hover:shadow-amber-500/30 hover:border-amber-500 transition-all duration-300 flex flex-col justify-between h-full"
                   >
+                    {/* Multi-angle In-Card Slideshow with Click-to-enlarge */}
                     <div className="relative">
                       <CardImageSlideshow
-                        images={facilityImages}
-                        alt={language === 'te' ? facility.nameTe : facility.nameEn}
-                        cardIndex={fIdx}
-                        intervalMs={3800}
-                        className="h-56 sm:h-60"
+                        images={cardImgs}
+                        alt={getCardTitle(item)}
+                        onOpenLightbox={() => handleOpenLightbox(idx)}
+                        cardIndex={idx}
+                        intervalMs={3800 + idx * 400}
+                        className="h-60 sm:h-64 cursor-pointer"
                       />
                     </div>
-                    <div className="p-6 sm:p-7 space-y-2 flex-1 flex flex-col justify-between">
+
+                    {/* Card Content & Details */}
+                    <div className="p-6 sm:p-7 space-y-3 flex-1 flex flex-col justify-between">
                       <div>
-                        <h3 className="font-extrabold text-slate-900 text-base sm:text-lg mb-2 group-hover:text-amber-800 transition-colors">
-                          {language === 'te' ? facility.nameTe : facility.nameEn}
+                        <div className="flex items-center justify-between gap-2 mb-2.5">
+                          <span className="capitalize text-amber-800 font-extrabold text-[11px] px-2.5 py-0.5 rounded-full bg-amber-50 border border-amber-200">
+                            {getCategoryLabel(item.category, item.id)}
+                          </span>
+                        </div>
+
+                        <h3 className="font-extrabold text-slate-900 text-base sm:text-lg group-hover:text-amber-800 transition-colors leading-snug">
+                          {getCardTitle(item)}
                         </h3>
-                        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                          {language === 'te' ? facility.descTe : facility.descEn}
+                        <p className="text-xs sm:text-sm text-slate-600 mt-2 line-clamp-3 leading-relaxed">
+                          {language === 'te' ? item.captionTe : item.captionEn}
                         </p>
                       </div>
-                      <div className="pt-3 border-t border-amber-100 flex items-center justify-between text-xs">
-                        <span className="text-[11px] font-bold text-amber-700">Advanced Neuro Care</span>
-                        <Link to="/gallery" className="text-amber-800 font-extrabold hover:text-amber-950 inline-flex items-center gap-1">
-                          <span>Tour Space</span>
-                          <span>→</span>
-                        </Link>
+
+                      <div className="pt-4 border-t border-amber-100 flex items-center justify-between text-xs">
+                        <span className="text-[11px] font-bold text-slate-500">
+                          Dr. Reddi Sankara Rao Clinic
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => handleOpenLightbox(idx)}
+                          className="text-amber-700 font-bold hover:text-amber-950 text-xs flex items-center gap-1 group/btn cursor-pointer"
+                        >
+                          <span>{language === 'te' ? 'చిత్రాలు చూడండి' : 'View Photos'}</span>
+                          <span className="transform group-hover/btn:translate-x-1 transition-transform">→</span>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -478,6 +610,16 @@ export const Home = () => {
           </div>
         </section>
       </ScrollReveal>
+
+      {/* Lightbox Modal for Facility & Equipment Images */}
+      <Lightbox
+        isOpen={lightboxIndex >= 0}
+        images={homeGalleryCards}
+        currentIndex={lightboxIndex >= 0 ? lightboxIndex : 0}
+        onClose={handleCloseLightbox}
+        onPrev={handlePrevLightbox}
+        onNext={handleNextLightbox}
+      />
     </div>
   );
 };
