@@ -12,11 +12,11 @@ export const CardImageSlideshow = ({
 }) => {
   const slideImages = images.length > 0 ? images : ['/images/facility-ot.jpg'];
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
 
   // Stagger initial rotation based on cardIndex so cards don't rotate simultaneously
+  // Auto-slide continues seamlessly
   useEffect(() => {
-    if (slideImages.length <= 1 || isHovered) return;
+    if (slideImages.length <= 1) return;
 
     const initialDelay = (cardIndex % 4) * 800;
     let timer;
@@ -31,7 +31,7 @@ export const CardImageSlideshow = ({
       clearTimeout(startTimer);
       if (timer) clearInterval(timer);
     };
-  }, [slideImages.length, isHovered, cardIndex, intervalMs]);
+  }, [slideImages.length, cardIndex, intervalMs]);
 
   const handlePrev = (e) => {
     e.stopPropagation();
@@ -46,8 +46,6 @@ export const CardImageSlideshow = ({
   return (
     <div
       className={`relative w-full overflow-hidden bg-slate-950 group select-none ${className}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
       onClick={() => onOpenLightbox && onOpenLightbox(currentIndex)}
     >
       {/* Smooth Cross-fading Slides */}
@@ -117,16 +115,6 @@ export const CardImageSlideshow = ({
               aria-label={`Jump to slide ${dotIdx + 1}`}
             />
           ))}
-        </div>
-      )}
-
-      {/* Auto-Slide Badge with Glowing Beacon */}
-      {slideImages.length > 1 && (
-        <div className="absolute top-2.5 left-2.5 z-20">
-          <span className="px-2.5 py-0.5 rounded-full bg-black/65 backdrop-blur-md text-[10px] font-bold text-amber-300 border border-amber-400/50 shadow-[0_0_10px_rgba(201,149,36,0.4)] flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping shadow-[0_0_6px_#C99524]" />
-            <span>Auto Slide</span>
-          </span>
         </div>
       )}
     </div>
