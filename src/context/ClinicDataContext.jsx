@@ -96,13 +96,37 @@ export const ClinicDataProvider = ({ children }) => {
       isDemo: false
     };
 
+    const gal2Update = {
+      titleEn: "Equipment images",
+      titleTe: "ఎక్విప్‌మెంట్ ఇమేజెస్",
+      image: "/images/equipment-ot-1.jpg",
+      images: [
+        "/images/equipment-ot-1.jpg",
+        "/images/equipment-ot-2.jpg",
+        "/images/equipment-ot-3.jpg"
+      ],
+      captionEn: "Advanced robotic neurosurgical operative microscope, intraoperative navigation, and microsurgical instrumentation.",
+      captionTe: "అధునాతన న్యూరోసర్జికల్ ఆపరేటివ్ మైక్రోస్కోప్, ఇంట్రాఆపరేటివ్ నావిగేషన్ మరియు మైక్రోసర్జికల్ పరికరాలు.",
+      isDemo: false
+    };
+
+    const normalizeGallery = (items) => {
+      return items
+        .filter(g => g.id !== 'gal-3')
+        .map(g => {
+          if (g.id === 'gal-1') return { ...g, ...gal1Update };
+          if (g.id === 'gal-2') return { ...g, ...gal2Update };
+          return { ...g, isDemo: false };
+        });
+    };
+
     const saved = localStorage.getItem(STORAGE_KEYS.GALLERY);
-    if (!saved) return initialGallery.map(g => (g.id === 'gal-1' ? { ...g, ...gal1Update } : { ...g, isDemo: false }));
+    if (!saved) return normalizeGallery(initialGallery);
     try {
       const parsed = JSON.parse(saved);
-      return parsed.map(g => (g.id === 'gal-1' ? { ...g, ...gal1Update } : { ...g, isDemo: false }));
+      return normalizeGallery(parsed);
     } catch {
-      return initialGallery.map(g => (g.id === 'gal-1' ? { ...g, ...gal1Update } : { ...g, isDemo: false }));
+      return normalizeGallery(initialGallery);
     }
   });
 

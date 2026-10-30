@@ -318,7 +318,7 @@ export const Home = () => {
             {facilities.map((facility, fIdx) => {
               const facilityImages = {
                 'fac-1': ['/images/facility-mri.jpg', '/images/speciality-neurology.jpg', '/images/speciality-brain-tumour.jpg'],
-                'fac-2': ['/images/facility-ot.jpg', '/images/speciality-neurosurgery.jpg', '/images/speciality-spine-care.jpg'],
+                'fac-2': ['/images/equipment-ot-1.jpg', '/images/equipment-ot-2.jpg', '/images/equipment-ot-3.jpg'],
                 'fac-3': ['/images/clinic-exterior-pks.jpg', '/images/clinic-interior-reception.jpg']
               }[facility.id] || [facility.image];
 

@@ -47,16 +47,27 @@ export const Gallery = () => {
     if (item.id === 'gal-1') {
       return ['/images/clinic-exterior-pks.jpg', '/images/clinic-interior-reception.jpg'];
     }
+    if (item.id === 'gal-2') {
+      return [
+        '/images/equipment-ot-1.jpg',
+        '/images/equipment-ot-2.jpg',
+        '/images/equipment-ot-3.jpg'
+      ];
+    }
     if (item.images && item.images.length > 0) return item.images;
 
     const categoryExtras = {
       interiors: ['/images/clinic-exterior-pks.jpg', '/images/clinic-interior-reception.jpg'],
-      facilities: ['/images/facility-mri.jpg', '/images/facility-ot.jpg', '/images/speciality-neurology.jpg'],
+      facilities: [
+        '/images/equipment-ot-1.jpg',
+        '/images/equipment-ot-2.jpg',
+        '/images/equipment-ot-3.jpg'
+      ],
       camps: ['/images/health-camp.jpg', '/images/clinic-bobbili-exterior.jpg', '/images/dr-reddi-sankara-rao.jpg'],
       events: ['/images/health-camp.jpg', '/images/clinic-exterior-pks.jpg', '/images/doctor-banner.png']
     };
 
-    const pool = categoryExtras[item.category] || ['/images/facility-mri.jpg', '/images/facility-ot.jpg', '/images/clinic-interior-reception.jpg'];
+    const pool = categoryExtras[item.category] || ['/images/equipment-ot-1.jpg', '/images/equipment-ot-2.jpg', '/images/equipment-ot-3.jpg'];
     return [item.image, ...pool.filter((img) => img !== item.image)].slice(0, 4);
   };
 
@@ -153,7 +164,11 @@ export const Gallery = () => {
                       </div>
 
                       <h3 className="font-extrabold text-slate-900 text-base sm:text-lg group-hover:text-amber-800 transition-colors leading-snug">
-                        {item.id === 'gal-1' ? (language === 'te' ? 'క్లినిక్ ఇమేజ్' : 'Clinic image') : (language === 'te' ? item.titleTe : item.titleEn)}
+                        {item.id === 'gal-1' 
+                          ? (language === 'te' ? 'క్లినిక్ ఇమేజ్' : 'Clinic image') 
+                          : item.id === 'gal-2'
+                            ? (language === 'te' ? 'ఎక్విప్‌మెంట్ ఇమేజెస్' : 'Equipment images')
+                            : (language === 'te' ? item.titleTe : item.titleEn)}
                       </h3>
                       <p className="text-xs sm:text-sm text-slate-600 mt-2 line-clamp-3 leading-relaxed">
                         {language === 'te' ? item.captionTe : item.captionEn}

@@ -675,23 +675,18 @@ export const initialGallery = [
   },
   {
     id: "gal-2",
-    titleEn: "Diagnostic 3T MRI Neuro-Radiology Suite",
-    titleTe: "3T ఎంఆర్ఐ న్యూరో రేడియాలజీ ల్యాబ్",
+    titleEn: "Equipment images",
+    titleTe: "ఎక్విప్‌మెంట్ ఇమేజెస్",
     category: "facilities",
-    image: "/images/facility-mri.jpg",
+    image: "/images/equipment-ot-1.jpg",
+    images: [
+      "/images/equipment-ot-1.jpg",
+      "/images/equipment-ot-2.jpg",
+      "/images/equipment-ot-3.jpg"
+    ],
     isDemo: false,
-    captionEn: "Advanced imaging protocols designed specifically for stroke, epilepsy, and spinal nerve compression.",
-    captionTe: "స్ట్రోక్, ఎపిలెప్సీ మరియు వెన్నెముక నరాల సమస్యలను ఖచ్చితంగా గుర్తించే అధునాతన స్కానర్."
-  },
-  {
-    id: "gal-3",
-    titleEn: "Microsurgical Neuro & Spine Operating Theatre",
-    titleTe: "మైక్రోసర్జికల్ న్యూరో & స్పైన్ ఆపరేషన్ థియేటర్",
-    category: "facilities",
-    image: "/images/facility-ot.jpg",
-    isDemo: false,
-    captionEn: "Stereotactic navigation and intraoperative nerve monitoring for delicate cranial and spinal procedures.",
-    captionTe: "సున్నితమైన మెదడు మరియు వెన్నెముక శస్త్రచికిత్సలకు అత్యాధునిక రక్షణ పరికరాలు."
+    captionEn: "Advanced robotic neurosurgical operative microscope, intraoperative navigation, and microsurgical instrumentation.",
+    captionTe: "అధునాతన న్యూరోసర్జికల్ ఆపరేటివ్ మైక్రోస్కోప్, ఇంట్రాఆపరేటివ్ నావిగేషన్ మరియు మైక్రోసర్జికల్ పరికరాలు."
   },
   {
     id: "gal-4",

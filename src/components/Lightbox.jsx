@@ -37,7 +37,9 @@ export const Lightbox = ({
     ? currentItem.images
     : (currentItem?.id === 'gal-1'
       ? ['/images/clinic-exterior-pks.jpg', '/images/clinic-interior-reception.jpg']
-      : [currentItem?.image]);
+      : currentItem?.id === 'gal-2'
+        ? ['/images/equipment-ot-1.jpg', '/images/equipment-ot-2.jpg', '/images/equipment-ot-3.jpg']
+        : [currentItem?.image]);
 
   const [subIdx, setSubIdx] = React.useState(0);
 
@@ -48,7 +50,9 @@ export const Lightbox = ({
   const activeImage = itemImages[subIdx] || currentItem?.image;
   const displayTitle = currentItem?.id === 'gal-1'
     ? (language === 'te' ? 'క్లినిక్ ఇమేజ్' : 'Clinic image')
-    : (language === 'te' ? currentItem?.titleTe : currentItem?.titleEn);
+    : currentItem?.id === 'gal-2'
+      ? (language === 'te' ? 'ఎక్విప్‌మెంట్ ఇమేజెస్' : 'Equipment images')
+      : (language === 'te' ? currentItem?.titleTe : currentItem?.titleEn);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-md p-4 sm:p-6 animate-in fade-in duration-200">
