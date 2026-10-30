@@ -7,8 +7,7 @@ import {
   Zap, 
   ShieldAlert, 
   HeartPulse, 
-  ArrowRight,
-  Sparkles
+  ArrowRight
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -52,13 +51,6 @@ export const SpecialityCard = ({ speciality }) => {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-black/30 pointer-events-none" />
 
-          {/* Clinical Focus Tag on top left */}
-          <div className="absolute top-3.5 left-3.5 z-10">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950/85 backdrop-blur-md text-[11px] font-bold tracking-wide uppercase text-amber-300 border border-amber-400/60 shadow-[0_0_12px_rgba(201,149,36,0.35)]">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400 drop-shadow-[0_0_6px_rgba(201,149,36,0.8)]" />
-              <span>{language === 'te' ? 'క్లినికల్ విభాగం' : 'Clinical Focus'}</span>
-            </span>
-          </div>
 
           {/* Treatment Count Badge on top right */}
           {treatmentCount > 0 && (
