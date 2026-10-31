@@ -166,7 +166,7 @@ export const GoogleReviewsSection = ({ className = '', id = 'reviews' }) => {
                 </div>
               </div>
               <span className="text-xs text-slate-500 font-bold mt-1 group-hover:text-amber-700 transition-colors inline-flex items-center gap-1">
-                <span>100+ Patient Reviews</span>
+                <span>{language === 'te' ? '544 రోగుల సమీక్షలు' : '544 Patient Reviews'}</span>
                 <ExternalLink className="w-3 h-3" />
               </span>
             </a>
