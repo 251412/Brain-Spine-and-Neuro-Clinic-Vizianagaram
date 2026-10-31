@@ -317,7 +317,7 @@ export const Home = () => {
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-2.5 mt-4 pt-3.5 border-t border-[#E8D6A5]/80 text-xs">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white font-semibold text-[#242424] border border-[#E8D6A5] shadow-2xs hover:border-[#C99524] transition-all">
                   <ShieldCheck className="w-3.5 h-3.5 text-[#C99524]" />
-                  <span>APMC / 48219 Verified</span>
+                  <span>APMC / 85415 Verified</span>
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white font-semibold text-[#242424] border border-[#E8D6A5] shadow-2xs hover:border-[#C99524] transition-all">
                   <GraduationCap className="w-3.5 h-3.5 text-[#C99524]" />

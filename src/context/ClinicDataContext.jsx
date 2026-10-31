@@ -14,7 +14,7 @@ const ClinicDataContext = createContext(null);
 
 const STORAGE_KEYS = {
   SETTINGS: 'bsn_clinic_settings_v6',
-  DOCTORS: 'bsn_clinic_doctors_v1',
+  DOCTORS: 'bsn_clinic_doctors_v2',
   SPECIALITIES: 'bsn_clinic_specialities_v3',
   GALLERY: 'bsn_clinic_gallery_v2',
   BLOG: 'bsn_clinic_blog_v2',
@@ -50,13 +50,14 @@ export const ClinicDataProvider = ({ children }) => {
   });
 
   const [doctors, setDoctorsState] = useState(() => {
+    try { localStorage.removeItem('bsn_clinic_doctors_v1'); } catch (_) {}
     const saved = localStorage.getItem(STORAGE_KEYS.DOCTORS);
     if (!saved) return initialDoctors;
     try {
       const parsed = JSON.parse(saved);
-      // Ensure only Dr. Reddi Sankara Rao is loaded
+      // Ensure only Dr. Reddi Sankara Rao is loaded with latest verified registration
       const sankara = parsed.find(d => d.id === 'doc-1') || initialDoctors[0];
-      return [{ ...initialDoctors[0], ...sankara }];
+      return [{ ...initialDoctors[0], ...sankara, councilReg: initialDoctors[0].councilReg }];
     } catch {
       return initialDoctors;
     }

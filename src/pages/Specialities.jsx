@@ -6,6 +6,7 @@ import { SeoHelmet } from '../components/SeoHelmet';
 import { SpecialityCard } from '../components/SpecialityCard';
 import { PageHero } from '../components/PageHero';
 import { ScrollReveal, ScrollStagger, ScrollStaggerItem } from '../components/ScrollReveal';
+import { EndoscopicDiscectomySection } from '../components/EndoscopicDiscectomySection';
 
 export const Specialities = () => {
   const { language, t } = useLanguage();
@@ -65,6 +66,9 @@ export const Specialities = () => {
             </ScrollStaggerItem>
           ))}
         </ScrollStagger>
+
+        {/* Featured Procedure: Endoscopic Lumbar Discectomy (Keyhole / Stitchless) */}
+        <EndoscopicDiscectomySection />
 
         {/* Bottom 24/7 Helpline Banner */}
         <ScrollReveal direction="up" delay={0.12}>

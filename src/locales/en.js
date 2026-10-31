@@ -242,8 +242,8 @@ export const en = {
     formPhone: "Your Phone Number",
     formSubject: "Subject / Query Topic",
     formMessage: "Message / Clinical Query",
-    sendBtn: "Send Message (Demo Only)",
-    messageSentSuccess: "Thank you! Your demo message has been received in the browser storage.",
+    sendBtn: "Send Message",
+    messageSentSuccess: "Thank you! Your message has been received.",
     callNotice: "Direct phone call and WhatsApp enquiry links will be enabled as soon as verified clinic telephone numbers are confirmed by management."
   }
 };

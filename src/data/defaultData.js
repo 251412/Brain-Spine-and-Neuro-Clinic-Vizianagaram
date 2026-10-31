@@ -220,7 +220,7 @@ export const initialDoctors = [
     roleEn: "Chief Neurosurgeon & Spine Care Specialist",
     roleTe: "చీఫ్ న్యూరో సర్జన్ & వెన్నెముక చికిత్సా నిపుణులు",
     qualifications: "MBBS, MS, MCh (Neurosurgery) - Narayana Hrudayalaya, Bengaluru",
-    councilReg: "APMC / 48219 (Andhra Pradesh Medical Council - Verified)",
+    councilReg: "APMC / 85415 (Andhra Pradesh Medical Council - Verified)",
     experienceYears: 11,
     isVerified: true,
     verificationNoteEn: "Narayana Hrudayalaya Bengaluru Fellowship & APMC Verified Specialist",

@@ -158,7 +158,7 @@ export const GoogleReviewsSection = ({ className = '', id = 'reviews' }) => {
                 <GoogleWordmark className="text-2xl" />
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">4.9</span>
+                <span className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">5.0</span>
                 <div className="flex items-center text-amber-400 text-base">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />

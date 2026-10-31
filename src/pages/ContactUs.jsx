@@ -239,7 +239,9 @@ export const ContactUs = () => {
                   {t.contact.getInTouchTitle}
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                  Have a clinical question or require a second opinion? Send us a message (Frontend Demo).
+                  {language === 'te' 
+                    ? 'వైద్య సందేహం ఉందా లేదా సెకండ్ ఒపీనియన్ కావాలా? మాకు సందేశం పంపండి.' 
+                    : 'Have a clinical question or require a second opinion? Send us a message.'}
                 </p>
               </div>
 
@@ -324,7 +326,7 @@ export const ContactUs = () => {
                   className="w-full sm:w-auto px-8 py-3.5 rounded-xl font-black text-sm bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 shadow-lg shadow-amber-500/25 flex items-center justify-center gap-2 transition-all active:scale-95 disabled:opacity-50"
                 >
                   {isSending ? (
-                    <span>Sending Demo Message...</span>
+                    <span>{language === 'te' ? 'సందేశం పంపబడుతోంది...' : 'Sending Message...'}</span>
                   ) : (
                     <>
                       <Send className="w-4 h-4" />

@@ -84,7 +84,7 @@ export const AboutUs = () => {
                 <div>
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 text-amber-800 text-xs font-bold border border-amber-300 mb-2">
                     <ShieldCheck className="w-4 h-4 text-amber-600" />
-                    <span>APMC / 48219 (Andhra Pradesh Medical Council Verified)</span>
+                    <span>APMC / 85415 (Andhra Pradesh Medical Council Verified)</span>
                   </div>
 
                   <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">

@@ -15,7 +15,8 @@ import {
   AlertTriangle, 
   X, 
   MapPin,
-  ExternalLink
+  ExternalLink,
+  Sparkles
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useClinicData } from '../context/ClinicDataContext';
@@ -46,11 +47,17 @@ export const BookAppointment = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedAppointment, setSubmittedAppointment] = useState(null);
 
+  const treatParam = searchParams.get('treatment');
+  const isDiscectomy = treatParam && (
+    treatParam.toLowerCase().includes('discectomy') || 
+    treatParam.toLowerCase().includes('endoscopic')
+  );
+
   // Check URL query params for pre-selection
   useEffect(() => {
     const docParam = searchParams.get('doctor');
     const specParam = searchParams.get('speciality');
-    const treatParam = searchParams.get('treatment');
+    const treat = searchParams.get('treatment');
 
     setFormData((prev) => {
       let nextDoctor = prev.selectedDoctor || 'Dr. Reddi Sankara Rao';
@@ -63,10 +70,12 @@ export const BookAppointment = () => {
       if (specParam) {
         nextDept = specParam;
       }
-      if (treatParam) {
-        nextReason = nextReason || `Consultation request for ${treatParam}`;
-        if (specParam) {
-          nextDept = specParam;
+      if (treat) {
+        if (treat.toLowerCase().includes('discectomy') || treat.toLowerCase().includes('endoscopic')) {
+          nextDept = 'Spine Care';
+          nextReason = `Consultation for Endoscopic Lumbar Discectomy (Keyhole / Stitchless - ₹50,000 All-Inclusive Package)`;
+        } else {
+          nextReason = nextReason || `Consultation request for ${treat}`;
         }
       }
 
@@ -238,6 +247,32 @@ Please confirm the appointment slot availability. Thank you!`;
               <span>{t.appointment.formCardTitle}</span>
               <VerificationBadge isVerified={true} customLabelEn="Official Clinic Desk" customLabelTe="అధికారిక క్లినిక్ డెస్క్" />
             </h2>
+
+            {/* Specialized Procedure Pre-Fill Banner */}
+            {isDiscectomy && (
+              <div className="mb-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-amber-500/10 via-yellow-500/10 to-amber-500/10 border-2 border-amber-400/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[11px] font-bold">
+                    <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+                    <span>{language === 'te' ? 'ఎంపిక చేసిన ప్రత్యేక సర్జరీ ప్యాకేజీ' : 'Specialized Surgery Package'}</span>
+                  </div>
+                  <h3 className="text-base sm:text-lg font-black text-slate-900">
+                    Endoscopic Lumbar Discectomy (Keyhole / Stitchless)
+                  </h3>
+                  <p className="text-xs text-slate-600">
+                    {language === 'te' 
+                      ? 'కేవలం 8 మి.మీ కోత • 6 గంటల్లో నడక • డా. రెడ్డి శంకర రావు ఆధ్వర్యంలో సమగ్ర సంరక్షణ' 
+                      : '8mm keyhole incision • Walk in 6 hours • Consultation with Dr. Reddi Sankara Rao'}
+                  </p>
+                </div>
+                <div className="text-left sm:text-right shrink-0 bg-white px-4 py-2.5 rounded-xl border border-amber-300 shadow-xs">
+                  <span className="text-[10px] text-slate-500 font-bold block uppercase tracking-wider">
+                    {language === 'te' ? 'ప్యాకేజీ ప్రారంభం' : 'All-Inclusive Package'}
+                  </span>
+                  <span className="text-2xl font-black text-amber-600">₹50,000</span>
+                </div>
+              </div>
+            )}
 
           <form onSubmit={handleSubmit} noValidate className="space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
