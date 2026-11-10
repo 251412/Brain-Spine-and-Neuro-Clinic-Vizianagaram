@@ -234,30 +234,71 @@ export const LocationBobbili = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-xs sm:text-sm text-slate-800">
-            <div className="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200 flex items-center gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-amber-700 shrink-0" />
-              <span>Sciatica & Lower Back Pain</span>
-            </div>
-            <div className="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200 flex items-center gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-amber-700 shrink-0" />
-              <span>Slip Disc (Lumbar & Cervical)</span>
-            </div>
-            <div className="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200 flex items-center gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-amber-700 shrink-0" />
-              <span>Cervical Spondylosis & Neck Pain</span>
-            </div>
-            <div className="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200 flex items-center gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-amber-700 shrink-0" />
-              <span>Brain Tumour Diagnosis & Second Opinions</span>
-            </div>
-            <div className="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200 flex items-center gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-amber-700 shrink-0" />
-              <span>Trigeminal Neuralgia Facial Pain</span>
-            </div>
-            <div className="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200 flex items-center gap-2.5">
-              <CheckCircle2 className="w-4 h-4 text-amber-700 shrink-0" />
-              <span>Stroke Follow-up & Epilepsy Care</span>
-            </div>
+            <Link 
+              to="/sciatica-treatment-in-vizianagaram/"
+              className="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200 hover:border-amber-400 hover:bg-amber-100/70 hover:shadow-sm transition-all flex items-center justify-between group"
+            >
+              <div className="flex items-center gap-2.5">
+                <CheckCircle2 className="w-4 h-4 text-amber-700 shrink-0" />
+                <span className="font-semibold group-hover:text-amber-900 transition-colors">Sciatica & Lower Back Pain</span>
+              </div>
+              <span className="text-amber-700 text-xs font-bold group-hover:translate-x-0.5 transition-transform">→</span>
+            </Link>
+
+            <Link 
+              to="/slip-disc-treatment-in-vizianagaram/"
+              className="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200 hover:border-amber-400 hover:bg-amber-100/70 hover:shadow-sm transition-all flex items-center justify-between group"
+            >
+              <div className="flex items-center gap-2.5">
+                <CheckCircle2 className="w-4 h-4 text-amber-700 shrink-0" />
+                <span className="font-semibold group-hover:text-amber-900 transition-colors">Slip Disc (Lumbar & Cervical)</span>
+              </div>
+              <span className="text-amber-700 text-xs font-bold group-hover:translate-x-0.5 transition-transform">→</span>
+            </Link>
+
+            <Link 
+              to="/cervical-spondylosis-treatment/"
+              className="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200 hover:border-amber-400 hover:bg-amber-100/70 hover:shadow-sm transition-all flex items-center justify-between group"
+            >
+              <div className="flex items-center gap-2.5">
+                <CheckCircle2 className="w-4 h-4 text-amber-700 shrink-0" />
+                <span className="font-semibold group-hover:text-amber-900 transition-colors">Cervical Spondylosis & Neck Pain</span>
+              </div>
+              <span className="text-amber-700 text-xs font-bold group-hover:translate-x-0.5 transition-transform">→</span>
+            </Link>
+
+            <Link 
+              to="/brain-tumor-surgery-in-vizianagaram/"
+              className="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200 hover:border-amber-400 hover:bg-amber-100/70 hover:shadow-sm transition-all flex items-center justify-between group"
+            >
+              <div className="flex items-center gap-2.5">
+                <CheckCircle2 className="w-4 h-4 text-amber-700 shrink-0" />
+                <span className="font-semibold group-hover:text-amber-900 transition-colors">Brain Tumour Diagnosis & Second Opinions</span>
+              </div>
+              <span className="text-amber-700 text-xs font-bold group-hover:translate-x-0.5 transition-transform">→</span>
+            </Link>
+
+            <Link 
+              to="/trigeminal-neuralgia-treatment/"
+              className="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200 hover:border-amber-400 hover:bg-amber-100/70 hover:shadow-sm transition-all flex items-center justify-between group"
+            >
+              <div className="flex items-center gap-2.5">
+                <CheckCircle2 className="w-4 h-4 text-amber-700 shrink-0" />
+                <span className="font-semibold group-hover:text-amber-900 transition-colors">Trigeminal Neuralgia Facial Pain</span>
+              </div>
+              <span className="text-amber-700 text-xs font-bold group-hover:translate-x-0.5 transition-transform">→</span>
+            </Link>
+
+            <Link 
+              to="/stroke-management/"
+              className="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200 hover:border-amber-400 hover:bg-amber-100/70 hover:shadow-sm transition-all flex items-center justify-between group"
+            >
+              <div className="flex items-center gap-2.5">
+                <CheckCircle2 className="w-4 h-4 text-amber-700 shrink-0" />
+                <span className="font-semibold group-hover:text-amber-900 transition-colors">Stroke Follow-up & Epilepsy Care</span>
+              </div>
+              <span className="text-amber-700 text-xs font-bold group-hover:translate-x-0.5 transition-transform">→</span>
+            </Link>
           </div>
         </div>
 
