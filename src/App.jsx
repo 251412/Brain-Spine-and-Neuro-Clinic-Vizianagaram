@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Navbar } from './components/Navbar';
@@ -9,26 +9,35 @@ import { MobileStickyActionBar } from './components/MobileStickyActionBar';
 import { IntroAnimation } from './components/IntroAnimation';
 import { PageTransition } from './components/PageTransition';
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, Loader2 } from 'lucide-react';
 
-// Core pages
+// Always-eager: core shell pages (small, needed immediately)
 import { Home } from './pages/Home';
-import { AboutUs } from './pages/AboutUs';
-import { Specialities } from './pages/Specialities';
-import { SpecialityDetail } from './pages/SpecialityDetail';
-import { Doctors } from './pages/Doctors';
-import { DoctorProfile } from './pages/DoctorProfile';
-import { LocationVizianagaram } from './pages/LocationVizianagaram';
-import { LocationBobbili } from './pages/LocationBobbili';
-import { ServicePage } from './pages/ServicePage';
-import { BookAppointment } from './pages/BookAppointment';
-import { EmergencyCare } from './pages/EmergencyCare';
-import { Gallery } from './pages/Gallery';
-import { Blog } from './pages/Blog';
-import { BlogPost } from './pages/BlogPost';
-import { ContactUs } from './pages/ContactUs';
-import { AdminPortal } from './pages/AdminPortal';
 import { seoServices } from './data/seoServicesData';
+
+// Lazy-loaded: heavy or infrequently visited pages
+const AboutUs            = lazy(() => import('./pages/AboutUs').then(m => ({ default: m.AboutUs })));
+const Specialities       = lazy(() => import('./pages/Specialities').then(m => ({ default: m.Specialities })));
+const SpecialityDetail   = lazy(() => import('./pages/SpecialityDetail').then(m => ({ default: m.SpecialityDetail })));
+const Doctors            = lazy(() => import('./pages/Doctors').then(m => ({ default: m.Doctors })));
+const DoctorProfile      = lazy(() => import('./pages/DoctorProfile').then(m => ({ default: m.DoctorProfile })));
+const LocationVizianagaram = lazy(() => import('./pages/LocationVizianagaram').then(m => ({ default: m.LocationVizianagaram })));
+const LocationBobbili    = lazy(() => import('./pages/LocationBobbili').then(m => ({ default: m.LocationBobbili })));
+const ServicePage        = lazy(() => import('./pages/ServicePage').then(m => ({ default: m.ServicePage })));
+const BookAppointment    = lazy(() => import('./pages/BookAppointment').then(m => ({ default: m.BookAppointment })));
+const EmergencyCare      = lazy(() => import('./pages/EmergencyCare').then(m => ({ default: m.EmergencyCare })));
+const Gallery            = lazy(() => import('./pages/Gallery').then(m => ({ default: m.Gallery })));
+const Blog               = lazy(() => import('./pages/Blog').then(m => ({ default: m.Blog })));
+const BlogPost           = lazy(() => import('./pages/BlogPost').then(m => ({ default: m.BlogPost })));
+const ContactUs          = lazy(() => import('./pages/ContactUs').then(m => ({ default: m.ContactUs })));
+const AdminPortal        = lazy(() => import('./pages/AdminPortal').then(m => ({ default: m.AdminPortal })));
+
+// Shared page-level loading fallback
+const PageLoader = () => (
+  <div className="min-h-[60vh] flex items-center justify-center">
+    <Loader2 className="w-8 h-8 text-[#C99524] animate-spin" />
+  </div>
+);
 
 const NotFound = () => (
   <div className="min-h-[70vh] flex items-center justify-center bg-[#FCFAF5] p-6 text-center">
@@ -47,6 +56,7 @@ const NotFound = () => (
     </div>
   </div>
 );
+
 
 function AppRoutes() {
   const location = useLocation();
@@ -72,53 +82,53 @@ function AppRoutes() {
             <Route path="/" element={<Home />} />
 
             {/* Core General Pages */}
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/about/" element={<AboutUs />} />
-            <Route path="/specialities" element={<Specialities />} />
-            <Route path="/specialities/" element={<Specialities />} />
-            <Route path="/specialities/:id" element={<SpecialityDetail />} />
-            <Route path="/doctors" element={<Doctors />} />
-            <Route path="/doctors/" element={<Doctors />} />
+            <Route path="/about" element={<Suspense fallback={<PageLoader />}><AboutUs /></Suspense>} />
+            <Route path="/about/" element={<Suspense fallback={<PageLoader />}><AboutUs /></Suspense>} />
+            <Route path="/specialities" element={<Suspense fallback={<PageLoader />}><Specialities /></Suspense>} />
+            <Route path="/specialities/" element={<Suspense fallback={<PageLoader />}><Specialities /></Suspense>} />
+            <Route path="/specialities/:id" element={<Suspense fallback={<PageLoader />}><SpecialityDetail /></Suspense>} />
+            <Route path="/doctors" element={<Suspense fallback={<PageLoader />}><Doctors /></Suspense>} />
+            <Route path="/doctors/" element={<Suspense fallback={<PageLoader />}><Doctors /></Suspense>} />
 
             {/* Doctor Profile Page */}
-            <Route path="/dr-reddi-sankara-rao" element={<DoctorProfile />} />
-            <Route path="/dr-reddi-sankara-rao/" element={<DoctorProfile />} />
+            <Route path="/dr-reddi-sankara-rao" element={<Suspense fallback={<PageLoader />}><DoctorProfile /></Suspense>} />
+            <Route path="/dr-reddi-sankara-rao/" element={<Suspense fallback={<PageLoader />}><DoctorProfile /></Suspense>} />
 
             {/* Location Pages */}
-            <Route path="/neurosurgeon-in-vizianagaram" element={<LocationVizianagaram />} />
-            <Route path="/neurosurgeon-in-vizianagaram/" element={<LocationVizianagaram />} />
-            <Route path="/neurosurgeon-in-bobbili" element={<LocationBobbili />} />
-            <Route path="/neurosurgeon-in-bobbili/" element={<LocationBobbili />} />
+            <Route path="/neurosurgeon-in-vizianagaram" element={<Suspense fallback={<PageLoader />}><LocationVizianagaram /></Suspense>} />
+            <Route path="/neurosurgeon-in-vizianagaram/" element={<Suspense fallback={<PageLoader />}><LocationVizianagaram /></Suspense>} />
+            <Route path="/neurosurgeon-in-bobbili" element={<Suspense fallback={<PageLoader />}><LocationBobbili /></Suspense>} />
+            <Route path="/neurosurgeon-in-bobbili/" element={<Suspense fallback={<PageLoader />}><LocationBobbili /></Suspense>} />
 
             {/* Explicit 18 Service / Condition Pages */}
             {seoServices.map((svc) => (
               <React.Fragment key={svc.slug}>
-                <Route path={`/${svc.slug}`} element={<ServicePage />} />
-                <Route path={`/${svc.slug}/`} element={<ServicePage />} />
+                <Route path={`/${svc.slug}`} element={<Suspense fallback={<PageLoader />}><ServicePage /></Suspense>} />
+                <Route path={`/${svc.slug}/`} element={<Suspense fallback={<PageLoader />}><ServicePage /></Suspense>} />
               </React.Fragment>
             ))}
 
             {/* Clinical & Appointment Actions */}
-            <Route path="/appointment" element={<BookAppointment />} />
-            <Route path="/appointment/" element={<BookAppointment />} />
-            <Route path="/emergency" element={<EmergencyCare />} />
-            <Route path="/emergency/" element={<EmergencyCare />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/gallery/" element={<Gallery />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/contact" element={<ContactUs />} />
-            <Route path="/contact/" element={<ContactUs />} />
-            <Route path="/locations" element={<ContactUs />} />
-            <Route path="/locations/" element={<ContactUs />} />
+            <Route path="/appointment" element={<Suspense fallback={<PageLoader />}><BookAppointment /></Suspense>} />
+            <Route path="/appointment/" element={<Suspense fallback={<PageLoader />}><BookAppointment /></Suspense>} />
+            <Route path="/emergency" element={<Suspense fallback={<PageLoader />}><EmergencyCare /></Suspense>} />
+            <Route path="/emergency/" element={<Suspense fallback={<PageLoader />}><EmergencyCare /></Suspense>} />
+            <Route path="/gallery" element={<Suspense fallback={<PageLoader />}><Gallery /></Suspense>} />
+            <Route path="/gallery/" element={<Suspense fallback={<PageLoader />}><Gallery /></Suspense>} />
+            <Route path="/blog" element={<Suspense fallback={<PageLoader />}><Blog /></Suspense>} />
+            <Route path="/blog/" element={<Suspense fallback={<PageLoader />}><Blog /></Suspense>} />
+            <Route path="/blog/:slug" element={<Suspense fallback={<PageLoader />}><BlogPost /></Suspense>} />
+            <Route path="/contact" element={<Suspense fallback={<PageLoader />}><ContactUs /></Suspense>} />
+            <Route path="/contact/" element={<Suspense fallback={<PageLoader />}><ContactUs /></Suspense>} />
+            <Route path="/locations" element={<Suspense fallback={<PageLoader />}><ContactUs /></Suspense>} />
+            <Route path="/locations/" element={<Suspense fallback={<PageLoader />}><ContactUs /></Suspense>} />
 
             {/* Admin Management */}
-            <Route path="/admin" element={<AdminPortal />} />
-            <Route path="/admin/" element={<AdminPortal />} />
+            <Route path="/admin" element={<Suspense fallback={<PageLoader />}><AdminPortal /></Suspense>} />
+            <Route path="/admin/" element={<Suspense fallback={<PageLoader />}><AdminPortal /></Suspense>} />
 
             {/* Dynamic slug fallback for any additional treatments */}
-            <Route path="/:slug" element={<ServicePage />} />
+            <Route path="/:slug" element={<Suspense fallback={<PageLoader />}><ServicePage /></Suspense>} />
 
             {/* 404 Catch-All */}
             <Route path="*" element={<NotFound />} />
