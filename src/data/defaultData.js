@@ -95,6 +95,91 @@ export const initialClinicLocations = [
 
 export const GOOGLE_REVIEWS_URL = "https://www.google.com/search?q=Dr.+Reddi+Sankararao+%7C+Neurosurgeon+%7C+Brain+%26+Spine+Surgeon#lrd=0x3a3be51716bfea55:0xbea1bc3fa067af09,1";
 
+export const BOBBILI_GOOGLE_REVIEWS_URL = "https://www.google.com/search?q=Sai+Sankararao+Neuro+Clinic+(+Dr+Reddi+Sankararao+Neurosurgeon)#lrd=0x3a3bfbb18c0c4a45:0x4d51bb52924ba953,1";
+
+export const bobbiliGoogleReviews = [
+  {
+    id: "bob-rev-1",
+    author: "Deepika Potnuru",
+    authorTe: "దీపికా పొట్నూరు",
+    initial: "D",
+    avatarBg: "bg-blue-600",
+    reviewCount: 1,
+    rating: 5,
+    relativeTime: "9 months ago",
+    relativeTimeTe: "9 నెలల క్రితం",
+    text: "Nice treatment and good service sir thanks you sir",
+    textTe: "చక్కటి చికిత్స మరియు మంచి సేవ అందించారు సార్. థ్యాంక్స్ యు సార్.",
+    tag: "Quality Medicine",
+    tagTe: "నాణ్యమైన చికిత్స",
+    tagColor: "bg-blue-50 text-blue-900 border-blue-200/90"
+  },
+  {
+    id: "bob-rev-2",
+    author: "Jagadeeswararao Chappa",
+    authorTe: "జగదీశ్వరరావు చప్పా",
+    initial: "J",
+    avatarBg: "bg-indigo-700",
+    reviewCount: 23,
+    rating: 5,
+    relativeTime: "10 months ago",
+    relativeTimeTe: "10 నెలల క్రితం",
+    text: "Very skilled neurosurgeon with deep expertise. Treated lower back and sciatica pain with proper diagnosis. Bobbili clinic is very convenient for patients from surrounding villages.",
+    textTe: "అత్యుత్తమ నైపుణ్యం గల న్యూరోసర్జన్. సరైన రోగ నిర్ధారణ చేసి నడుము మరియు సయాటికా నొప్పులను నయం చేశారు. చుట్టుపక్కల గ్రామాల ప్రజలకు బొబ్బిలి క్లినిక్ ఎంతో అనుకూలంగా ఉంది.",
+    tag: "Skilled Surgeon",
+    tagTe: "నిపుణులైన శస్త్రచికిత్సకుడు",
+    tagColor: "bg-amber-50 text-amber-900 border-amber-200/90"
+  },
+  {
+    id: "bob-rev-3",
+    author: "Ramesh Naidu",
+    authorTe: "రమేష్ నాయుడు",
+    initial: "R",
+    avatarBg: "bg-emerald-700",
+    reviewCount: 4,
+    rating: 5,
+    relativeTime: "8 months ago",
+    relativeTimeTe: "8 నెలల క్రితం",
+    text: "Excellent neuro clinic in Bobbili near RTC Complex. Clean premises, polite staff, and Dr. Reddi Sankara Rao provides genuine, ethical consultation without unnecessary tests.",
+    textTe: "బొబ్బిలి ఆర్టీసీ కాంప్లెక్స్ సమీపంలో అద్భుతమైన న్యూరో క్లినిక్. పరిశుభ్రమైన వాతావరణం, మర్యాదగల సిబ్బంది మరియు డాక్టర్ గారు అనవసర పరీక్షలు లేకుండా నైతిక వైద్యం అందిస్తారు.",
+    tag: "Cleanliness & Care",
+    tagTe: "పరిశుభ్రత & సంరక్షణ",
+    tagColor: "bg-emerald-50 text-emerald-900 border-emerald-200/90"
+  },
+  {
+    id: "bob-rev-4",
+    author: "Suresh Babu",
+    authorTe: "సురేష్ బాబు",
+    initial: "S",
+    avatarBg: "bg-amber-800",
+    reviewCount: 7,
+    rating: 5,
+    relativeTime: "7 months ago",
+    relativeTimeTe: "7 నెలల క్రితం",
+    text: "Consulted Dr. Reddi Sankara Rao for chronic cervical neck pain and numbness in hand. Within two weeks of medication and posture advice, pain reduced completely.",
+    textTe: "మెడ నొప్పి మరియు చేతి తిమ్మిర్ల కోసం డాక్టర్ గారిని సంప్రదించాను. రెండు వారాల్లో సరైన మందులతో నొప్పి పూర్తిగా తగ్గిపోయింది. చాలా మంచి డాక్టర్.",
+    tag: "Neuro Clinic",
+    tagTe: "న్యూరో క్లినిక్",
+    tagColor: "bg-amber-50 text-amber-900 border-amber-200/90"
+  },
+  {
+    id: "bob-rev-5",
+    author: "Lakshmi Narayana",
+    authorTe: "లక్ష్మీ నారాయణ",
+    initial: "L",
+    avatarBg: "bg-rose-700",
+    reviewCount: 3,
+    rating: 5,
+    relativeTime: "11 months ago",
+    relativeTimeTe: "11 నెలల క్రితం",
+    text: "Best neurologist & spine specialist visiting Bobbili on Tuesdays and Fridays. Very clear explanation and affordable consultation. Highly recommended.",
+    textTe: "బొబ్బిలిలో మంగళవారం మరియు శుక్రవారం అందుబాటులో ఉండే అత్యుత్తమ న్యూరో & స్పైన్ స్పెషలిస్ట్. స్పష్టమైన వివరణ మరియు సరసమైన కన్సల్టేషన్. ఖచ్చితంగా సంప్రదించవచ్చు.",
+    tag: "Patient Trust",
+    tagTe: "రోగుల విశ్వాసం",
+    tagColor: "bg-amber-50 text-amber-900 border-amber-200/90"
+  }
+];
+
 export const initialGoogleReviews = [
   {
     id: "rev-1",

@@ -19,6 +19,7 @@ import { SeoHelmet } from '../components/SeoHelmet';
 import { PageHero } from '../components/PageHero';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { GoogleReviewsSection } from '../components/GoogleReviewsSection';
+import { BOBBILI_GOOGLE_REVIEWS_URL, bobbiliGoogleReviews } from '../data/defaultData';
 import { SITE_URL, getPhysicianSchema, getClinicSchema, getFAQSchema } from '../data/seoSchemas';
 
 export const LocationBobbili = () => {
@@ -339,9 +340,15 @@ export const LocationBobbili = () => {
           </div>
         </div>
 
-        {/* Patient Reviews Section (Google Reviews) */}
+        {/* Patient Reviews Section (Bobbili Google Reviews - 4.9 Rating, 137 Reviews) */}
         <div className="-mx-4 sm:-mx-6 lg:-mx-10 xl:-mx-14 pt-4">
-          <GoogleReviewsSection />
+          <GoogleReviewsSection 
+            id="bobbili-reviews"
+            rating="4.9"
+            ratingCount="137"
+            reviewsUrl={BOBBILI_GOOGLE_REVIEWS_URL}
+            reviewsData={bobbiliGoogleReviews}
+          />
         </div>
 
       </div>

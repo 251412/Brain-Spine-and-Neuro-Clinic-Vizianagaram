@@ -46,13 +46,23 @@ export const GoogleWordmark = ({ className = "text-xl" }) => (
   </span>
 );
 
-export const GoogleReviewsSection = ({ className = '', id = 'reviews' }) => {
+export const GoogleReviewsSection = ({ 
+  className = '', 
+  id = 'reviews',
+  reviewsData = null,
+  rating = "5.0",
+  ratingCount = "544",
+  reviewsUrl = null,
+  clinicName = null,
+  clinicAddress = null
+}) => {
   const { language } = useLanguage();
   const [isPaused, setIsPaused] = useState(false);
   const [activePageIndex, setActivePageIndex] = useState(0);
   const scrollContainerRef = useRef(null);
 
-  const reviews = initialGoogleReviews;
+  const reviews = reviewsData || initialGoogleReviews;
+  const targetUrl = reviewsUrl || GOOGLE_REVIEWS_URL;
 
   // Manual nudge navigation for circular arrow controls
   const handleManualScroll = (direction) => {
@@ -148,17 +158,17 @@ export const GoogleReviewsSection = ({ className = '', id = 'reviews' }) => {
 
             {/* Right: Google Rating Card (As in Reference Screenshot) */}
             <a
-              href={GOOGLE_REVIEWS_URL}
+              href={targetUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex flex-col items-center justify-center px-6 py-4 rounded-3xl bg-white border border-amber-200/80 shadow-md shadow-amber-500/5 hover:shadow-xl hover:border-amber-400 transition-all text-center group shrink-0"
-              title="Open Dr. Reddi Sankara Rao Google Reviews"
+              title="Open Google Reviews"
             >
               <div className="flex items-center gap-1.5 mb-1">
                 <GoogleWordmark className="text-2xl" />
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">5.0</span>
+                <span className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">{rating}</span>
                 <div className="flex items-center text-amber-400 text-base">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
@@ -166,7 +176,7 @@ export const GoogleReviewsSection = ({ className = '', id = 'reviews' }) => {
                 </div>
               </div>
               <span className="text-xs text-slate-500 font-bold mt-1 group-hover:text-amber-700 transition-colors inline-flex items-center gap-1">
-                <span>{language === 'te' ? '544 రోగుల సమీక్షలు' : '544 Patient Reviews'}</span>
+                <span>{language === 'te' ? `${ratingCount} రోగుల సమీక్షలు` : `${ratingCount} Patient Reviews`}</span>
                 <ExternalLink className="w-3 h-3" />
               </span>
             </a>
