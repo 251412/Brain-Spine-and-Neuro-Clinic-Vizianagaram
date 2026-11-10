@@ -112,8 +112,34 @@ const routes = [
       <section>
         <h1>Neurosurgeon in Bobbili – Dr. Reddi Sankara Rao</h1>
         <p>Outpatient Consultation Branch: Opp RTC Complex Ingate, beside Choudhary Bar & Restaurant, Bobbili – 535558.</p>
-        <p>Consultations: Tuesday & Friday (04:00 PM – 09:00 PM). Phone: +91 99511 42275.</p>
+        <p>Consultations: Tuesday & Friday (04:00 PM – 09:00 PM). Phone: +91 99089 81669.</p>
         <p>Note: Bobbili is a specialized outpatient consultation clinic; surgical procedures are operated at the main Vizianagaram hospital.</p>
+      </section>
+    `
+  },
+
+  // 4b. Common Branches Landing Page
+  {
+    path: '/branches',
+    title: 'Brain Spine & Neuro Clinic – Our Branches | Dr. Reddi Sankara Rao',
+    description: 'Visit Dr. Reddi Sankara Rao at Brain Spine & Neuro Clinic branches in Vizianagaram (Gumchi Junction) and Bobbili (Opp RTC Complex). Comprehensive brain, spine and neuro consultations.',
+    h1: 'Brain Spine & Neuro Clinic Branches – Vizianagaram & Bobbili',
+    schema: [
+      getClinicSchema(),
+      getPhysicianSchema(leadDoctor)
+    ],
+    contentSnippet: `
+      <section>
+        <h1>Brain Spine & Neuro Clinic Branches – Vizianagaram & Bobbili</h1>
+        <p>Consult Senior Neurosurgeon Dr. Reddi Sankara Rao at two accessible clinic locations:</p>
+        <div>
+          <h2>Vizianagaram Main Branch (Gumchi Junction)</h2>
+          <p>Full 24x7 surgical hospital: Gumchi Junction, Sankaramatam Road, Vizianagaram – 535002. Phone: +91 99089 81669.</p>
+        </div>
+        <div>
+          <h2>Bobbili Consultation Branch (Opp RTC Complex)</h2>
+          <p>Specialized outpatient OPD clinic: Opp RTC Complex Ingate, Bobbili – 535558. Tuesdays & Fridays 4 PM – 9 PM.</p>
+        </div>
       </section>
     `
   },

@@ -72,10 +72,15 @@ export const Footer = () => {
                 <Link to="/about" className="text-slate-300 hover:text-amber-300 transition-colors">{t.nav.about}</Link>
               </li>
               <li>
-                <Link to="/neurosurgeon-in-vizianagaram/" className="text-slate-300 hover:text-amber-300 transition-colors">Vizianagaram Clinic</Link>
+                <Link to="/branches/" className="text-amber-300 hover:text-white font-semibold transition-colors">
+                  {language === 'te' ? 'మా శాఖలు (విజయనగరం & బొబ్బిలి)' : 'Our Branches (Vizianagaram & Bobbili)'}
+                </Link>
               </li>
               <li>
-                <Link to="/neurosurgeon-in-bobbili/" className="text-slate-300 hover:text-amber-300 transition-colors">Bobbili Branch</Link>
+                <Link to="/neurosurgeon-in-vizianagaram/" className="text-slate-300 hover:text-amber-300 transition-colors">Vizianagaram Clinic (Main Center)</Link>
+              </li>
+              <li>
+                <Link to="/neurosurgeon-in-bobbili/" className="text-slate-300 hover:text-amber-300 transition-colors">Bobbili Branch (OPD Clinic)</Link>
               </li>
               <li>
                 <Link to="/specialities" className="text-slate-300 hover:text-amber-300 transition-colors">{t.nav.specialities}</Link>

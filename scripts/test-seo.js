@@ -32,6 +32,7 @@ if (fs.existsSync(sitemapPath)) {
 const checkPaths = [
   '',
   'dr-reddi-sankara-rao',
+  'branches',
   'neurosurgeon-in-vizianagaram',
   'neurosurgeon-in-bobbili',
   'sciatica-treatment-in-vizianagaram',

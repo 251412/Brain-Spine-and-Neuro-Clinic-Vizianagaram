@@ -23,6 +23,7 @@ const Doctors            = lazy(() => import('./pages/Doctors').then(m => ({ def
 const DoctorProfile      = lazy(() => import('./pages/DoctorProfile').then(m => ({ default: m.DoctorProfile })));
 const LocationVizianagaram = lazy(() => import('./pages/LocationVizianagaram').then(m => ({ default: m.LocationVizianagaram })));
 const LocationBobbili    = lazy(() => import('./pages/LocationBobbili').then(m => ({ default: m.LocationBobbili })));
+const Branches           = lazy(() => import('./pages/Branches').then(m => ({ default: m.Branches })));
 const ServicePage        = lazy(() => import('./pages/ServicePage').then(m => ({ default: m.ServicePage })));
 const BookAppointment    = lazy(() => import('./pages/BookAppointment').then(m => ({ default: m.BookAppointment })));
 const EmergencyCare      = lazy(() => import('./pages/EmergencyCare').then(m => ({ default: m.EmergencyCare })));
@@ -94,7 +95,9 @@ function AppRoutes() {
             <Route path="/dr-reddi-sankara-rao" element={<Suspense fallback={<PageLoader />}><DoctorProfile /></Suspense>} />
             <Route path="/dr-reddi-sankara-rao/" element={<Suspense fallback={<PageLoader />}><DoctorProfile /></Suspense>} />
 
-            {/* Location Pages */}
+            {/* Location & Branches Pages */}
+            <Route path="/branches" element={<Suspense fallback={<PageLoader />}><Branches /></Suspense>} />
+            <Route path="/branches/" element={<Suspense fallback={<PageLoader />}><Branches /></Suspense>} />
             <Route path="/neurosurgeon-in-vizianagaram" element={<Suspense fallback={<PageLoader />}><LocationVizianagaram /></Suspense>} />
             <Route path="/neurosurgeon-in-vizianagaram/" element={<Suspense fallback={<PageLoader />}><LocationVizianagaram /></Suspense>} />
             <Route path="/neurosurgeon-in-bobbili" element={<Suspense fallback={<PageLoader />}><LocationBobbili /></Suspense>} />

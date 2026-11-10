@@ -46,6 +46,17 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.drreddisankararao.com/neurosurgeon-in-bobbili/"/>
   </url>
 
+  <!-- 4b. Common Branches Landing Page -->
+  <url>
+    <loc>https://www.drreddisankararao.com/branches/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.92</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/branches/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/branches/?lang=te"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.drreddisankararao.com/branches/"/>
+  </url>
+
   <!-- 5. 18 Dedicated Condition & Service Pages -->
   <url>
     <loc>https://www.drreddisankararao.com/sciatica-treatment-in-vizianagaram/</loc>
