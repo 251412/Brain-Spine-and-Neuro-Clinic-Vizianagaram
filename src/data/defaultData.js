@@ -93,7 +93,7 @@ export const initialClinicLocations = [
   }
 ];
 
-export const GOOGLE_REVIEWS_URL = "https://www.google.com/search?q=dr+reddi+sankara+rao+vizianagaram#lrd=0x3a3be51716bfea55:0xbea1bc3fa067af09,1";
+export const GOOGLE_REVIEWS_URL = "https://www.google.com/search?q=Dr.+Reddi+Sankararao+%7C+Neurosurgeon+%7C+Brain+%26+Spine+Surgeon#lrd=0x3a3be51716bfea55:0xbea1bc3fa067af09,1";
 
 export const initialGoogleReviews = [
   {
