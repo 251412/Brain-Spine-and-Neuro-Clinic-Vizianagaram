@@ -22,6 +22,7 @@ import { useClinicData } from '../context/ClinicDataContext';
 import { SeoHelmet } from '../components/SeoHelmet';
 import { PageHero } from '../components/PageHero';
 import { ScrollReveal, ScrollStagger, ScrollStaggerItem } from '../components/ScrollReveal';
+import { GoogleReviewsSection } from '../components/GoogleReviewsSection';
 import { SITE_URL, getPhysicianSchema, getClinicSchema, getFAQSchema } from '../data/seoSchemas';
 import { seoServices } from '../data/seoServicesData';
 
@@ -289,6 +290,11 @@ export const LocationVizianagaram = () => {
               );
             })}
           </div>
+        </div>
+
+        {/* Patient Reviews Section (Google Reviews) */}
+        <div className="-mx-4 sm:-mx-6 lg:-mx-10 xl:-mx-14 pt-4">
+          <GoogleReviewsSection />
         </div>
 
       </div>
