@@ -1,0 +1,11 @@
+# Robots.txt for Dr. Reddi Sankara Rao - Brain Spine & Neuro Clinic
+# Target Domain: https://www.drreddisankararao.com/
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+
+# Sitemaps
+Sitemap: https://www.drreddisankararao.com/sitemap.xml
+

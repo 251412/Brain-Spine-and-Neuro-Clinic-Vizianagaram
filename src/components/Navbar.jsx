@@ -22,9 +22,10 @@ export const Navbar = () => {
   // Navigation headers - clicking each navigates immediately to the next page
   const navLinks = [
     { to: '/', label: t.nav.home },
-    { to: '/about', label: t.nav.about },
+    { to: '/dr-reddi-sankara-rao/', label: language === 'te' ? 'డాక్టర్ ప్రొఫైల్' : 'Dr. Reddi Sankara Rao' },
     { to: '/specialities', label: t.nav.specialities },
-    { to: '/gallery', label: t.nav.gallery },
+    { to: '/neurosurgeon-in-vizianagaram/', label: language === 'te' ? 'విజయనగరం' : 'Vizianagaram' },
+    { to: '/neurosurgeon-in-bobbili/', label: language === 'te' ? 'బొబ్బిలి' : 'Bobbili' },
     { to: '/blog', label: t.nav.blog },
     { to: '/contact', label: t.nav.contact },
   ];

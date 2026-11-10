@@ -196,6 +196,17 @@ Please confirm the appointment slot availability. Thank you!`;
       window.open(waUrl, '_blank', 'noopener,noreferrer');
     }
 
+    // Conversion event tracking for Google Analytics 4 (GA4) / Google Ads
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'generate_lead', {
+        event_category: 'Appointment',
+        event_label: 'Online Consultation Form',
+        value: 1,
+        doctor: createdRecord.selectedDoctor || 'Dr. Reddi Sankara Rao',
+        department: createdRecord.department
+      });
+    }
+
     setIsSubmitting(false);
     setSubmittedAppointment({
       ...createdRecord,

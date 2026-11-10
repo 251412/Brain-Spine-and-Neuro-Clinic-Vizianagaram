@@ -61,12 +61,21 @@ export const Footer = () => {
             <h3 className="text-amber-400 font-bold text-xs mb-4 tracking-wider uppercase flex items-center gap-1.5">
               <span>{language === 'te' ? 'ముఖ్యమైన లింకులు' : 'Quick Navigation'}</span>
             </h3>
-            <ul className="space-y-2.5 text-xs">
+            <ul className="space-y-2 text-xs">
               <li>
                 <Link to="/" className="text-slate-300 hover:text-amber-300 transition-colors">{t.nav.home}</Link>
               </li>
               <li>
+                <Link to="/dr-reddi-sankara-rao/" className="text-amber-300 hover:text-white font-semibold transition-colors">Dr. Reddi Sankara Rao</Link>
+              </li>
+              <li>
                 <Link to="/about" className="text-slate-300 hover:text-amber-300 transition-colors">{t.nav.about}</Link>
+              </li>
+              <li>
+                <Link to="/neurosurgeon-in-vizianagaram/" className="text-slate-300 hover:text-amber-300 transition-colors">Vizianagaram Clinic</Link>
+              </li>
+              <li>
+                <Link to="/neurosurgeon-in-bobbili/" className="text-slate-300 hover:text-amber-300 transition-colors">Bobbili Branch</Link>
               </li>
               <li>
                 <Link to="/specialities" className="text-slate-300 hover:text-amber-300 transition-colors">{t.nav.specialities}</Link>
@@ -80,7 +89,6 @@ export const Footer = () => {
               <li>
                 <Link to="/contact" className="text-slate-300 hover:text-amber-300 transition-colors">{t.nav.contact}</Link>
               </li>
-              {/* Emergency Care placed directly on top of Book Appointment */}
               <li>
                 <Link to="/emergency" className="text-rose-400 hover:text-rose-300 font-semibold transition-colors flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse shrink-0" />
@@ -96,22 +104,57 @@ export const Footer = () => {
             </ul>
           </ScrollStaggerItem>
 
-          {/* Clinical Focus Areas */}
+          {/* Clinical Focus Areas & SEO Treatments */}
           <ScrollStaggerItem className="lg:col-span-3">
             <h3 className="text-amber-400 font-bold text-xs mb-4 tracking-wider uppercase">
-              {language === 'te' ? 'స్పెషాలిటీ విభాగాలు' : 'Specialities & Care'}
+              {language === 'te' ? 'కీలక చికిత్సా విభాగాలు' : 'Treatments & Surgeries'}
             </h3>
-            <ul className="space-y-2.5 text-xs">
-              {specialities.slice(0, 6).map((spec) => (
-                <li key={spec.id}>
-                  <Link
-                    to={`/specialities/${spec.id}`}
-                    className="text-slate-300 hover:text-amber-300 transition-colors flex items-center justify-between group"
-                  >
-                    <span>{language === 'te' ? spec.nameTe : spec.nameEn}</span>
-                  </Link>
-                </li>
-              ))}
+            <ul className="space-y-2 text-xs">
+              <li>
+                <Link to="/sciatica-treatment-in-vizianagaram/" className="text-slate-300 hover:text-amber-300 transition-colors">
+                  Sciatica Treatment
+                </Link>
+              </li>
+              <li>
+                <Link to="/slip-disc-treatment-in-vizianagaram/" className="text-slate-300 hover:text-amber-300 transition-colors">
+                  Slip Disc Treatment
+                </Link>
+              </li>
+              <li>
+                <Link to="/endoscopic-lumbar-discectomy-in-vizianagaram/" className="text-slate-300 hover:text-amber-300 transition-colors font-semibold text-amber-200">
+                  Endoscopic Spine Surgery
+                </Link>
+              </li>
+              <li>
+                <Link to="/lower-back-pain-treatment-in-vizianagaram/" className="text-slate-300 hover:text-amber-300 transition-colors">
+                  Lower Back Pain Care
+                </Link>
+              </li>
+              <li>
+                <Link to="/cervical-spondylosis-treatment/" className="text-slate-300 hover:text-amber-300 transition-colors">
+                  Cervical Spondylosis & Neck Pain
+                </Link>
+              </li>
+              <li>
+                <Link to="/brain-tumor-surgery-in-vizianagaram/" className="text-slate-300 hover:text-amber-300 transition-colors">
+                  Brain Tumor Surgery
+                </Link>
+              </li>
+              <li>
+                <Link to="/trigeminal-neuralgia-treatment/" className="text-slate-300 hover:text-amber-300 transition-colors">
+                  Trigeminal Neuralgia (MVD)
+                </Link>
+              </li>
+              <li>
+                <Link to="/stroke-management/" className="text-slate-300 hover:text-amber-300 transition-colors">
+                  Stroke Management
+                </Link>
+              </li>
+              <li>
+                <Link to="/minimally-invasive-spine-surgery/" className="text-slate-300 hover:text-amber-300 transition-colors">
+                  Minimally Invasive Spine Surgery
+                </Link>
+              </li>
             </ul>
           </ScrollStaggerItem>
 

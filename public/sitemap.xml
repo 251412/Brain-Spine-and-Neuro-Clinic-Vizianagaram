@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- 1. Homepage -->
+  <url>
+    <loc>https://www.drreddisankararao.com/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/?lang=te"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.drreddisankararao.com/"/>
+  </url>
+
+  <!-- 2. Doctor Biography & Credentials -->
+  <url>
+    <loc>https://www.drreddisankararao.com/dr-reddi-sankara-rao/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/dr-reddi-sankara-rao/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/dr-reddi-sankara-rao/?lang=te"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.drreddisankararao.com/dr-reddi-sankara-rao/"/>
+  </url>
+
+  <!-- 3. Dedicated Location Page: Vizianagaram -->
+  <url>
+    <loc>https://www.drreddisankararao.com/neurosurgeon-in-vizianagaram/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/neurosurgeon-in-vizianagaram/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/neurosurgeon-in-vizianagaram/?lang=te"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.drreddisankararao.com/neurosurgeon-in-vizianagaram/"/>
+  </url>
+
+  <!-- 4. Dedicated Location Page: Bobbili -->
+  <url>
+    <loc>https://www.drreddisankararao.com/neurosurgeon-in-bobbili/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/neurosurgeon-in-bobbili/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/neurosurgeon-in-bobbili/?lang=te"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.drreddisankararao.com/neurosurgeon-in-bobbili/"/>
+  </url>
+
+  <!-- 5. 18 Dedicated Condition & Service Pages -->
+  <url>
+    <loc>https://www.drreddisankararao.com/sciatica-treatment-in-vizianagaram/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/sciatica-treatment-in-vizianagaram/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/sciatica-treatment-in-vizianagaram/?lang=te"/>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/slip-disc-treatment-in-vizianagaram/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/slip-disc-treatment-in-vizianagaram/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/slip-disc-treatment-in-vizianagaram/?lang=te"/>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/endoscopic-lumbar-discectomy-in-vizianagaram/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/endoscopic-lumbar-discectomy-in-vizianagaram/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/endoscopic-lumbar-discectomy-in-vizianagaram/?lang=te"/>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/lower-back-pain-treatment-in-vizianagaram/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/lower-back-pain-treatment-in-vizianagaram/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/lower-back-pain-treatment-in-vizianagaram/?lang=te"/>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/cervical-spondylosis-treatment/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/cervical-spondylosis-treatment/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/cervical-spondylosis-treatment/?lang=te"/>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/neck-pain-treatment/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/neck-pain-treatment/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/neck-pain-treatment/?lang=te"/>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/lumbar-disc-herniation-treatment/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/lumbar-disc-herniation-treatment/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/lumbar-disc-herniation-treatment/?lang=te"/>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/spinal-stenosis-treatment/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/spinal-stenosis-treatment/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/spinal-stenosis-treatment/?lang=te"/>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/spine-surgery-in-vizianagaram/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/spine-surgery-in-vizianagaram/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/spine-surgery-in-vizianagaram/?lang=te"/>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/brain-tumor-surgery-in-vizianagaram/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/brain-tumor-surgery-in-vizianagaram/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/brain-tumor-surgery-in-vizianagaram/?lang=te"/>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/head-injury-treatment/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/head-injury-treatment/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/head-injury-treatment/?lang=te"/>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/hydrocephalus-treatment/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/hydrocephalus-treatment/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/hydrocephalus-treatment/?lang=te"/>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/stroke-management/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/stroke-management/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/stroke-management/?lang=te"/>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/epilepsy-evaluation-and-treatment/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/epilepsy-evaluation-and-treatment/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/epilepsy-evaluation-and-treatment/?lang=te"/>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/trigeminal-neuralgia-treatment/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/trigeminal-neuralgia-treatment/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/trigeminal-neuralgia-treatment/?lang=te"/>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/brain-and-spine-disorders/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/brain-and-spine-disorders/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/brain-and-spine-disorders/?lang=te"/>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/nerve-compression-treatment/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/nerve-compression-treatment/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/nerve-compression-treatment/?lang=te"/>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/minimally-invasive-spine-surgery/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.drreddisankararao.com/minimally-invasive-spine-surgery/"/>
+    <xhtml:link rel="alternate" hreflang="te" href="https://www.drreddisankararao.com/minimally-invasive-spine-surgery/?lang=te"/>
+  </url>
+
+  <!-- 6. General Clinical Pages -->
+  <url>
+    <loc>https://www.drreddisankararao.com/about/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/specialities/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/doctors/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/appointment/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/emergency/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/contact/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/gallery/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <!-- 7. Health Blog & Educational Articles -->
+  <url>
+    <loc>https://www.drreddisankararao.com/blog/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/blog/recognizing-hidden-signs-of-stroke-be-fast/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/blog/endoscopic-lumbar-discectomy-vs-traditional-open-spine-surgery/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://www.drreddisankararao.com/blog/understanding-sciatica-root-causes-myths-vs-realities/</loc>
+    <lastmod>2026-11-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+</urlset>
+

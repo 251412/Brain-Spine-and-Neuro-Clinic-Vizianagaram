@@ -26,11 +26,28 @@ import { ScrollReveal, ScrollStagger, ScrollStaggerItem } from '../components/Sc
 import { CardImageSlideshow } from '../components/CardImageSlideshow';
 import { Lightbox } from '../components/Lightbox';
 
+import { HomeFaqSection, homeFaqs } from '../components/HomeFaqSection';
+import { seoServices } from '../data/seoServicesData';
+import { 
+  SITE_URL, 
+  getWebSiteSchema, 
+  getPhysicianSchema, 
+  getClinicSchema, 
+  getFAQSchema 
+} from '../data/seoSchemas';
+
 export const Home = () => {
   const { language, t } = useLanguage();
   const { settings, doctors, specialities, gallery, blogArticles } = useClinicData();
   const leadDoctor = doctors[0] || {};
   const [lightboxIndex, setLightboxIndex] = useState(-1);
+
+  const homeSchemas = [
+    getWebSiteSchema(),
+    getClinicSchema(),
+    getPhysicianSchema(leadDoctor),
+    getFAQSchema(homeFaqs.map(f => ({ question: f.qEn, answer: f.aEn })))
+  ];
 
   // Curated 3 featured cards from Our Facilities & Gallery:
   // 1. Clinic image (gal-1)
@@ -137,8 +154,14 @@ export const Home = () => {
   return (
     <div className="min-h-screen bg-slate-50">
       <SeoHelmet 
-        title={language === 'te' ? 'హోమ్ - అత్యాధునిక న్యూరో & స్పైన్ క్లినిక్' : 'Home - Advanced Brain, Spine & Neurological Care'}
-        description="Brain Spine & Neuro Clinic provides precision neurological diagnostics, spine surgery, stroke protocols, and pain care with patient-first ethics."
+        title={language === 'te' 
+          ? 'డా. రెడ్డి శంకర రావు – విజయనగరంలో న్యూరోసర్జన్ | బ్రెయిన్ & స్పైన్ సర్జన్' 
+          : 'Dr. Reddi Sankara Rao – Neurosurgeon in Vizianagaram | Brain & Spine Surgeon'}
+        description={language === 'te'
+          ? 'విజయనగరంలో ప్రముఖ న్యూరోసర్జన్ మరియు బ్రెయిన్ & స్పైన్ సర్జన్ డా. రెడ్డి శంకర రావు గారిని సంప్రదించండి. మెదడు, వెన్నెముక మరియు నరాల సమస్యలకు నిపుణుల సంప్రదింపులు.'
+          : 'Consult Dr. Reddi Sankara Rao, Neurosurgeon and Brain & Spine Surgeon in Vizianagaram. Expert consultation for brain, spine and neurological conditions.'}
+        canonicalUrl={`${SITE_URL}/`}
+        schema={homeSchemas}
       />
 
       {/* Hero Section */}
@@ -157,15 +180,20 @@ export const Home = () => {
             >
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-100/95 to-amber-50 text-amber-950 text-xs font-bold border border-amber-300 shadow-[0_0_15px_rgba(201,149,36,0.3)]">
                 <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping shadow-[0_0_6px_#C99524]" />
-                <span>{language === 'te' ? 'అత్యాధునిక బ్రెయిన్, స్పైన్ & న్యూరో కేర్ సెంటర్ • విజయనగరం' : 'Brain, Spine & Neuro Center • Vizianagaram'}</span>
+                <span>{language === 'te' ? 'అత్యాధునిక బ్రెయిన్, స్పైన్ & న్యూరో కేర్ సెంటర్ • విజయనగరం & బొబ్బిలి' : 'Brain, Spine & Neuro Center • Vizianagaram & Bobbili'}</span>
               </div>
 
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
-                {t.home.heroTitle}
+              {/* Single Clear H1 Heading as required */}
+              <h1 className="text-3xl sm:text-5xl lg:text-5.5xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
+                {language === 'te' 
+                  ? 'డా. రెడ్డి శంకర రావు – విజయనగరంలో న్యూరోసర్జన్ | బ్రెయిన్ & స్పైన్ సర్జన్'
+                  : 'Dr. Reddi Sankara Rao – Neurosurgeon in Vizianagaram | Brain & Spine Surgeon'}
               </h1>
 
               <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
-                {t.home.heroSubtitle}
+                {language === 'te'
+                  ? 'విజయనగరం మరియు బొబ్బిలి ప్రాంత ప్రజలకు నారాయణ హృదయాలయ నిపుణుల ఆధ్వర్యంలో అత్యాధునిక మెదడు శస్త్రచికిత్సలు, కుట్లు లేని కీహోల్ ఎండోస్కోపిక్ స్పైన్ సర్జరీ, సయాటికా మరియు స్లిప్ డిస్క్ చికిత్సలు.'
+                  : 'Expert neurosurgical care for brain, spine, and neurological conditions in Vizianagaram. Specializing in microscopic brain surgeries, stitchless endoscopic lumbar discectomy, slip disc, and sciatica treatment.'}
               </p>
 
               {/* CTAs */}
@@ -178,13 +206,13 @@ export const Home = () => {
                   <span>{t.home.heroCtaPrimary}</span>
                 </Link>
 
-                <Link
-                  to="/specialities"
+                <a
+                  href={`tel:${settings.phone.replace(/[^0-9+]/g, '')}`}
                   className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold text-sm bg-white hover:bg-amber-50/80 text-slate-900 border-2 border-amber-400/70 hover:border-amber-600 shadow-sm shadow-amber-500/10 transition-all"
                 >
-                  <span>{t.home.heroCtaSecondary}</span>
-                  <ArrowRight className="w-4 h-4 text-amber-700" />
-                </Link>
+                  <PhoneCall className="w-4 h-4 text-amber-700" />
+                  <span>Call: +91 {settings.phone}</span>
+                </a>
               </div>
 
               {/* Trust & Clinical Transparency Indicators */}
@@ -573,6 +601,81 @@ export const Home = () => {
           </ScrollStagger>
         </div>
       </section>
+
+      {/* Advanced Procedures & Specialized Treatments Section */}
+      <section className="py-16 sm:py-24 bg-[#FCFAF5] border-y border-amber-200/60" id="treatments">
+        <div className="w-full px-4 sm:px-6 lg:px-10 xl:px-14">
+          <ScrollReveal direction="up" distance={24}>
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+              <div className="max-w-2xl">
+                <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-800 uppercase tracking-wider mb-2">
+                  <Activity className="w-4 h-4 text-amber-600" />
+                  <span>{language === 'te' ? 'ప్రత్యేక శస్త్రచికిత్సలు & వైద్య సేవలు' : 'Specialized Procedures & Treatments'}</span>
+                </div>
+                <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+                  {language === 'te' ? 'మెదడు మరియు వెన్నెముక ప్రత్యేక చికిత్సా విభాగాలు' : 'Dedicated Brain, Spine & Neurological Services'}
+                </h2>
+                <p className="text-slate-600 text-sm sm:text-base mt-2">
+                  {language === 'te' 
+                    ? 'విజయనగరం మరియు బొబ్బిలి కేంద్రాలలో డాక్టర్ రెడ్డి శంకర రావు గారి ఆధ్వర్యంలో అందించబడే ప్రత్యేక వైద్య సేవలు.' 
+                    : 'Evidence-based surgical and non-surgical treatments for sciatica, slip disc, brain tumors, and spinal stenosis in Vizianagaram.'}
+                </p>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <Link
+                  to="/specialities"
+                  className="inline-flex items-center gap-2 text-sm font-bold text-amber-800 hover:text-amber-950"
+                >
+                  <span>{language === 'te' ? 'అన్ని విభాగాలు' : 'View All Disciplines'}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* Grid of Specialized SEO Treatment Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {seoServices.slice(0, 12).map((svc) => (
+              <Link
+                key={svc.slug}
+                to={`/${svc.slug}/`}
+                className="p-5 rounded-2xl bg-white border border-amber-200/90 hover:border-amber-400 hover:shadow-lg transition-all group flex flex-col justify-between"
+              >
+                <div>
+                  <span className="text-[10px] font-bold text-amber-800 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200 block w-fit mb-2.5">
+                    {svc.category}
+                  </span>
+                  <h3 className="font-extrabold text-slate-900 text-sm sm:text-base group-hover:text-amber-800 transition-colors leading-snug">
+                    {language === 'te' ? svc.titleTe : svc.titleEn}
+                  </h3>
+                  <p className="text-xs text-slate-600 mt-2 line-clamp-2 leading-relaxed">
+                    {language === 'te' ? svc.introTe : svc.introEn}
+                  </p>
+                </div>
+
+                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-amber-700">
+                  <span>{language === 'te' ? 'చికిత్సా వివరాలు' : 'Read Treatment Guide'}</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-8 text-center">
+            <Link
+              to="/specialities"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white hover:bg-amber-50 text-slate-900 font-bold text-xs sm:text-sm border-2 border-amber-300 shadow-xs transition-all"
+            >
+              <span>{language === 'te' ? 'అన్ని 18 ప్రత్యేక చికిత్సా మార్గదర్శకాలను చూడండి' : 'Explore All 18 Medical Treatment Guides & Specialities'}</span>
+              <ArrowRight className="w-4 h-4 text-amber-700" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Patient Frequently Asked Questions (Neurosurgery & Spine Care) with Schema */}
+      <HomeFaqSection />
 
       {/* Our Locations Section (Gumchi Junction & Bobbili Branch with Interactive Map) */}
       <ScrollReveal direction="up" distance={28}>

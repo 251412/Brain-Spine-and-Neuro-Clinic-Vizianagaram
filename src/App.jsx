@@ -5,23 +5,30 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
 import { WhatsAppWidget } from './components/WhatsAppWidget';
+import { MobileStickyActionBar } from './components/MobileStickyActionBar';
 import { IntroAnimation } from './components/IntroAnimation';
 import { PageTransition } from './components/PageTransition';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { AlertCircle } from 'lucide-react';
 
-// Direct imports for instant rendering and perfectly synchronized page transitions
+// Core pages
 import { Home } from './pages/Home';
 import { AboutUs } from './pages/AboutUs';
 import { Specialities } from './pages/Specialities';
 import { SpecialityDetail } from './pages/SpecialityDetail';
 import { Doctors } from './pages/Doctors';
+import { DoctorProfile } from './pages/DoctorProfile';
+import { LocationVizianagaram } from './pages/LocationVizianagaram';
+import { LocationBobbili } from './pages/LocationBobbili';
+import { ServicePage } from './pages/ServicePage';
 import { BookAppointment } from './pages/BookAppointment';
 import { EmergencyCare } from './pages/EmergencyCare';
 import { Gallery } from './pages/Gallery';
 import { Blog } from './pages/Blog';
 import { BlogPost } from './pages/BlogPost';
 import { ContactUs } from './pages/ContactUs';
+import { AdminPortal } from './pages/AdminPortal';
+import { seoServices } from './data/seoServicesData';
 
 const NotFound = () => (
   <div className="min-h-[70vh] flex items-center justify-center bg-[#FCFAF5] p-6 text-center">
@@ -46,10 +53,8 @@ function AppRoutes() {
 
   return (
     <>
-      {/* Brain, Spine & Neuro Element Cinematic Page Transition (Only on route navigation) */}
       <PageTransition />
 
-      {/* 3. Smooth Cinematic Page Container Transition */}
       <AnimatePresence mode="wait">
         <motion.div
           key={location.pathname}
@@ -63,18 +68,59 @@ function AppRoutes() {
           className="w-full min-w-0"
         >
           <Routes location={location}>
+            {/* Homepage */}
             <Route path="/" element={<Home />} />
+
+            {/* Core General Pages */}
             <Route path="/about" element={<AboutUs />} />
+            <Route path="/about/" element={<AboutUs />} />
             <Route path="/specialities" element={<Specialities />} />
+            <Route path="/specialities/" element={<Specialities />} />
             <Route path="/specialities/:id" element={<SpecialityDetail />} />
             <Route path="/doctors" element={<Doctors />} />
+            <Route path="/doctors/" element={<Doctors />} />
+
+            {/* Doctor Profile Page */}
+            <Route path="/dr-reddi-sankara-rao" element={<DoctorProfile />} />
+            <Route path="/dr-reddi-sankara-rao/" element={<DoctorProfile />} />
+
+            {/* Location Pages */}
+            <Route path="/neurosurgeon-in-vizianagaram" element={<LocationVizianagaram />} />
+            <Route path="/neurosurgeon-in-vizianagaram/" element={<LocationVizianagaram />} />
+            <Route path="/neurosurgeon-in-bobbili" element={<LocationBobbili />} />
+            <Route path="/neurosurgeon-in-bobbili/" element={<LocationBobbili />} />
+
+            {/* Explicit 18 Service / Condition Pages */}
+            {seoServices.map((svc) => (
+              <React.Fragment key={svc.slug}>
+                <Route path={`/${svc.slug}`} element={<ServicePage />} />
+                <Route path={`/${svc.slug}/`} element={<ServicePage />} />
+              </React.Fragment>
+            ))}
+
+            {/* Clinical & Appointment Actions */}
             <Route path="/appointment" element={<BookAppointment />} />
+            <Route path="/appointment/" element={<BookAppointment />} />
             <Route path="/emergency" element={<EmergencyCare />} />
+            <Route path="/emergency/" element={<EmergencyCare />} />
             <Route path="/gallery" element={<Gallery />} />
+            <Route path="/gallery/" element={<Gallery />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/contact" element={<ContactUs />} />
+            <Route path="/contact/" element={<ContactUs />} />
             <Route path="/locations" element={<ContactUs />} />
+            <Route path="/locations/" element={<ContactUs />} />
+
+            {/* Admin Management */}
+            <Route path="/admin" element={<AdminPortal />} />
+            <Route path="/admin/" element={<AdminPortal />} />
+
+            {/* Dynamic slug fallback for any additional treatments */}
+            <Route path="/:slug" element={<ServicePage />} />
+
+            {/* 404 Catch-All */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </motion.div>
@@ -88,7 +134,7 @@ export function App() {
     <Router>
       <IntroAnimation />
       <ScrollToTop />
-      <div className="flex flex-col min-h-screen w-full min-w-0 overflow-x-clip bg-[#FCFAF5]">
+      <div className="flex flex-col min-h-screen w-full min-w-0 overflow-x-clip bg-[#FCFAF5] pb-16 lg:pb-0">
         <Navbar />
         <main className="flex-1 w-full min-w-0">
           <ErrorBoundary>
@@ -97,10 +143,10 @@ export function App() {
         </main>
         <Footer />
         <WhatsAppWidget />
+        <MobileStickyActionBar />
       </div>
     </Router>
   );
 }
 
 export default App;
-

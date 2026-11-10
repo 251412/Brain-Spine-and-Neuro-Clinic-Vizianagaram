@@ -76,8 +76,8 @@ export const WhatsAppWidget = () => {
 
   return (
     <>
-      {/* Floating Action Buttons Container (Bottom-Right, safe area offset) */}
-      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end gap-3 select-none pb-[env(safe-area-inset-bottom)] pr-[env(safe-area-inset-right)]">
+      {/* Floating Action Buttons Container (Bottom-Right, safe area offset above mobile sticky bar) */}
+      <div className="fixed bottom-[72px] sm:bottom-6 right-4 sm:right-6 z-50 flex flex-col items-end gap-3 select-none pb-[env(safe-area-inset-bottom)] pr-[env(safe-area-inset-right)]">
         {/* WhatsApp Main Floating Button with Radiant Emerald Glow */}
         <button
           type="button"
@@ -103,7 +103,7 @@ export const WhatsAppWidget = () => {
 
       {/* WhatsApp Quick Chat Modal Popup */}
       {isOpen && (
-        <div className="fixed bottom-20 sm:bottom-24 right-3 sm:right-6 z-50 w-[94vw] sm:w-[380px] max-w-[420px] bg-white rounded-3xl shadow-2xl border-2 border-[#E8D6A5] overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200">
+        <div className="fixed bottom-[76px] sm:bottom-24 right-3 sm:right-6 z-50 w-[94vw] sm:w-[380px] max-w-[420px] bg-white rounded-3xl shadow-2xl border-2 border-[#E8D6A5] overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-200">
           
           {/* Header */}
           <div className="bg-[#060D1A] p-4 text-white relative border-b border-[#E8D6A5]/40">

@@ -9,7 +9,7 @@ import { ScrollReveal, ScrollStagger, ScrollStaggerItem } from '../components/Sc
 import { EndoscopicDiscectomySection } from '../components/EndoscopicDiscectomySection';
 
 export const Specialities = () => {
-  const { language, t } = useLanguage();
+  const { language } = useLanguage();
   const { specialities } = useClinicData();
 
   return (
