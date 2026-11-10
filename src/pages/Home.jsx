@@ -183,11 +183,21 @@ export const Home = () => {
                 <span>{language === 'te' ? 'అత్యాధునిక బ్రెయిన్, స్పైన్ & న్యూరో కేర్ సెంటర్ • విజయనగరం & బొబ్బిలి' : 'Brain, Spine & Neuro Center • Vizianagaram & Bobbili'}</span>
               </div>
 
-              {/* Single Clear H1 Heading as required */}
+              {/* Single Clear H1 Heading formatted into 3 balanced lines */}
               <h1 className="text-3xl sm:text-5xl lg:text-5.5xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
-                {language === 'te' 
-                  ? 'డా. రెడ్డి శంకర రావు – విజయనగరంలో న్యూరోసర్జన్ | బ్రెయిన్ & స్పైన్ సర్జన్'
-                  : 'Dr. Reddi Sankara Rao – Neurosurgeon in Vizianagaram | Brain & Spine Surgeon'}
+                {language === 'te' ? (
+                  <>
+                    <span className="block">డా. రెడ్డి శంకర రావు –</span>
+                    <span className="block">విజయనగరంలో న్యూరోసర్జన్</span>
+                    <span className="block text-amber-900">బ్రెయిన్ & స్పైన్ సర్జన్</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="block">Dr. Reddi Sankara Rao –</span>
+                    <span className="block">Neurosurgeon in Vizianagaram</span>
+                    <span className="block text-slate-900">Brain & Spine Surgeon</span>
+                  </>
+                )}
               </h1>
 
               <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
